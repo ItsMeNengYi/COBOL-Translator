@@ -30,7 +30,14 @@
       "false_branch": [],
       "business_category": "program_control",
       "translation_hint": "python_if_statement",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R002",
@@ -54,7 +61,14 @@
       "false_branch": [],
       "business_category": "program_control",
       "translation_hint": "python_if_statement",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R003",
@@ -92,7 +106,14 @@
       ],
       "business_category": "program_control",
       "translation_hint": "python_match_or_if_elif",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R004",
@@ -102,7 +123,14 @@
       "file": "USERDATA",
       "business_category": "program_control",
       "translation_hint": "file_open_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R005",
@@ -112,7 +140,14 @@
       "file": "USERDATA",
       "business_category": "program_control",
       "translation_hint": "file_open_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R006",
@@ -121,7 +156,14 @@
       "file": "USERDATA",
       "business_category": "program_control",
       "translation_hint": "file_close_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R007",
@@ -131,7 +173,14 @@
       "file": "USERDATA",
       "business_category": "program_control",
       "translation_hint": "file_open_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R008",
@@ -141,7 +190,14 @@
       "target": "WS-MAIN-CHOICE",
       "business_category": "program_control",
       "translation_hint": "python_assignment",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R009",
@@ -150,7 +206,14 @@
       "value": " ",
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R010",
@@ -159,7 +222,14 @@
       "value": "===== ATM SYSTEM =====",
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R011",
@@ -168,7 +238,14 @@
       "value": "1 - CREATE ACCOUNT",
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R012",
@@ -177,7 +254,14 @@
       "value": "2 - LOGIN",
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R013",
@@ -186,7 +270,14 @@
       "value": "3 - EXIT",
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R014",
@@ -195,7 +286,14 @@
       "value": "ENTER CHOICE:",
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R015",
@@ -204,7 +302,14 @@
       "target": "WS-MAIN-CHOICE",
       "business_category": "program_control",
       "translation_hint": "input_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R016",
@@ -213,7 +318,14 @@
       "value": "INVALID CHOICE",
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R017",
@@ -222,7 +334,14 @@
       "value": "PLEASE ENTER 1, 2, OR 3",
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R018",
@@ -231,7 +350,14 @@
       "target": "CREATE-ACCOUNT",
       "business_category": "program_control",
       "translation_hint": "python_function_call",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R019",
@@ -240,7 +366,14 @@
       "target": "LOGIN",
       "business_category": "program_control",
       "translation_hint": "python_function_call",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R020",
@@ -249,7 +382,14 @@
       "value": "GOODBYE",
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R021",
@@ -258,7 +398,14 @@
       "file": "USERDATA",
       "business_category": "program_control",
       "translation_hint": "file_close_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R022",
@@ -266,7 +413,14 @@
       "type": "STOP_RUN",
       "business_category": "program_control",
       "translation_hint": "program_exit",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R023",
@@ -289,7 +443,14 @@
       "false_branch": [],
       "business_category": "account_onboarding",
       "translation_hint": "python_if_statement",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R024",
@@ -312,7 +473,14 @@
       "false_branch": [],
       "business_category": "account_onboarding",
       "translation_hint": "python_if_statement",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R025",
@@ -332,7 +500,14 @@
       "false_branch": [],
       "business_category": "account_onboarding",
       "translation_hint": "python_if_statement",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R026",
@@ -361,7 +536,14 @@
       ],
       "business_category": "account_onboarding",
       "translation_hint": "file_create_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R027",
@@ -371,7 +553,14 @@
       "target": "F-NAME",
       "business_category": "account_onboarding",
       "translation_hint": "python_assignment",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R028",
@@ -381,7 +570,14 @@
       "target": "F-AGE",
       "business_category": "account_onboarding",
       "translation_hint": "python_assignment",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R029",
@@ -391,7 +587,14 @@
       "target": "F-PIN",
       "business_category": "account_onboarding",
       "translation_hint": "python_assignment",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R030",
@@ -400,7 +603,14 @@
       "value": "ENTER NAME:",
       "business_category": "account_onboarding",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R031",
@@ -409,7 +619,14 @@
       "target": "F-NAME",
       "business_category": "account_onboarding",
       "translation_hint": "input_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R032",
@@ -418,7 +635,14 @@
       "value": "NAME CANNOT BE EMPTY",
       "business_category": "account_onboarding",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R033",
@@ -426,7 +650,14 @@
       "type": "EXIT_PARAGRAPH",
       "business_category": "account_onboarding",
       "translation_hint": "manual_review",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R034",
@@ -435,7 +666,14 @@
       "value": "ENTER AGE:",
       "business_category": "account_onboarding",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R035",
@@ -444,7 +682,14 @@
       "target": "F-AGE",
       "business_category": "account_onboarding",
       "translation_hint": "input_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R036",
@@ -453,7 +698,14 @@
       "value": "YOU MUST BE AT LEAST 18 YEARS OLD",
       "business_category": "account_onboarding",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R037",
@@ -461,7 +713,14 @@
       "type": "EXIT_PARAGRAPH",
       "business_category": "account_onboarding",
       "translation_hint": "manual_review",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R038",
@@ -470,7 +729,14 @@
       "value": "CREATE 6-DIGIT PIN:",
       "business_category": "account_onboarding",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R039",
@@ -479,7 +745,14 @@
       "target": "F-PIN",
       "business_category": "account_onboarding",
       "translation_hint": "input_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R040",
@@ -488,7 +761,14 @@
       "value": "PIN MUST BE 6 DIGITS",
       "business_category": "account_onboarding",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R041",
@@ -497,7 +777,14 @@
       "target": "GENERATE-ACCOUNT",
       "business_category": "account_onboarding",
       "translation_hint": "python_function_call",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R042",
@@ -507,7 +794,14 @@
       "target": "F-BAL",
       "business_category": "account_onboarding",
       "translation_hint": "python_assignment",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R043",
@@ -516,7 +810,14 @@
       "value": "ACCOUNT CREATION FAILED",
       "business_category": "account_onboarding",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R044",
@@ -525,7 +826,14 @@
       "value": "ACCOUNT CREATED SUCCESSFULLY",
       "business_category": "account_onboarding",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R045",
@@ -534,7 +842,14 @@
       "value": "YOUR ACCOUNT NUMBER IS:",
       "business_category": "account_onboarding",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R046",
@@ -543,7 +858,14 @@
       "source": "F-ACCOUNT",
       "business_category": "account_onboarding",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R047",
@@ -551,7 +873,14 @@
       "type": "EXIT",
       "business_category": "account_onboarding",
       "translation_hint": "manual_review",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R048",
@@ -571,7 +900,14 @@
       ],
       "business_category": "account_onboarding",
       "translation_hint": "file_read_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R049",
@@ -579,7 +915,14 @@
       "type": "CONTINUE",
       "business_category": "account_onboarding",
       "translation_hint": "manual_review",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R050",
@@ -588,7 +931,14 @@
       "target": "GENERATE-ACCOUNT",
       "business_category": "account_onboarding",
       "translation_hint": "python_function_call",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R051",
@@ -596,7 +946,14 @@
       "type": "EXIT",
       "business_category": "account_onboarding",
       "translation_hint": "manual_review",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R052",
@@ -616,7 +973,14 @@
       "false_branch": [],
       "business_category": "authentication",
       "translation_hint": "python_if_statement",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R053",
@@ -682,7 +1046,14 @@
       ],
       "business_category": "authentication",
       "translation_hint": "python_if_statement",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R054",
@@ -705,7 +1076,14 @@
       ],
       "business_category": "authentication",
       "translation_hint": "file_read_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R055",
@@ -715,7 +1093,14 @@
       "target": "WS-FOUND",
       "business_category": "authentication",
       "translation_hint": "python_assignment",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R056",
@@ -725,7 +1110,14 @@
       "target": "WS-ACCOUNT",
       "business_category": "authentication",
       "translation_hint": "python_assignment",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R057",
@@ -735,7 +1127,14 @@
       "target": "WS-PIN",
       "business_category": "authentication",
       "translation_hint": "python_assignment",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R058",
@@ -744,7 +1143,14 @@
       "value": "ENTER ACCOUNT NUMBER:",
       "business_category": "authentication",
       "translation_hint": "output_operation",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R059",
@@ -753,7 +1159,14 @@
       "target": "WS-ACCOUNT",
       "business_category": "authentication",
       "translation_hint": "input_operation",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R060",
@@ -762,7 +1175,14 @@
       "value": "INVALID ACCOUNT NUMBER",
       "business_category": "authentication",
       "translation_hint": "output_operation",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R061",
@@ -772,7 +1192,14 @@
       "target": "F-ACCOUNT",
       "business_category": "authentication",
       "translation_hint": "python_assignment",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R062",
@@ -782,7 +1209,14 @@
       "target": "WS-FOUND",
       "business_category": "authentication",
       "translation_hint": "python_assignment",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R063",
@@ -792,7 +1226,14 @@
       "target": "WS-FOUND",
       "business_category": "authentication",
       "translation_hint": "python_assignment",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R064",
@@ -801,7 +1242,14 @@
       "value": "ACCOUNT NOT FOUND",
       "business_category": "authentication",
       "translation_hint": "output_operation",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R065",
@@ -810,7 +1258,14 @@
       "value": "ENTER PIN:",
       "business_category": "authentication",
       "translation_hint": "output_operation",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R066",
@@ -819,7 +1274,14 @@
       "target": "WS-PIN",
       "business_category": "authentication",
       "translation_hint": "input_operation",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R067",
@@ -828,7 +1290,14 @@
       "value": "PIN MUST BE 6 DIGITS",
       "business_category": "authentication",
       "translation_hint": "output_operation",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R068",
@@ -837,7 +1306,14 @@
       "value": "LOGIN SUCCESSFUL",
       "business_category": "authentication",
       "translation_hint": "output_operation",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R069",
@@ -849,7 +1325,14 @@
       ],
       "business_category": "authentication",
       "translation_hint": "output_operation",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R070",
@@ -859,7 +1342,14 @@
       "target": "WS-CHOICE",
       "business_category": "authentication",
       "translation_hint": "python_assignment",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R071",
@@ -873,7 +1363,14 @@
       },
       "business_category": "authentication",
       "translation_hint": "python_while_loop",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R072",
@@ -882,7 +1379,14 @@
       "value": "WRONG PIN",
       "business_category": "authentication",
       "translation_hint": "output_operation",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R073",
@@ -891,7 +1395,14 @@
       "value": "PLEASE TRY AGAIN",
       "business_category": "authentication",
       "translation_hint": "output_operation",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R074",
@@ -899,7 +1410,14 @@
       "type": "EXIT",
       "business_category": "authentication",
       "translation_hint": "manual_review",
-      "risk": "medium"
+      "risk": "medium",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R075",
@@ -923,7 +1441,14 @@
       "false_branch": [],
       "business_category": "program_control",
       "translation_hint": "python_if_statement",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R076",
@@ -970,7 +1495,14 @@
       ],
       "business_category": "program_control",
       "translation_hint": "python_match_or_if_elif",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R077",
@@ -980,7 +1512,14 @@
       "target": "WS-CHOICE",
       "business_category": "program_control",
       "translation_hint": "python_assignment",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R078",
@@ -989,7 +1528,14 @@
       "value": " ",
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R079",
@@ -998,7 +1544,14 @@
       "value": "===== ATM MENU =====",
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R080",
@@ -1010,7 +1563,14 @@
       ],
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R081",
@@ -1022,7 +1582,14 @@
       ],
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R082",
@@ -1031,7 +1598,14 @@
       "value": "1 - CHECK BALANCE",
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R083",
@@ -1040,7 +1614,14 @@
       "value": "2 - DEPOSIT",
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R084",
@@ -1049,7 +1630,14 @@
       "value": "3 - WITHDRAW",
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R085",
@@ -1058,7 +1646,14 @@
       "value": "4 - LOGOUT",
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R086",
@@ -1067,7 +1662,14 @@
       "value": "ENTER CHOICE:",
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R087",
@@ -1076,7 +1678,14 @@
       "target": "WS-CHOICE",
       "business_category": "program_control",
       "translation_hint": "input_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R088",
@@ -1085,7 +1694,14 @@
       "value": "INVALID CHOICE",
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R089",
@@ -1094,7 +1710,14 @@
       "value": "PLEASE ENTER 1, 2, 3, OR 4",
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R090",
@@ -1103,7 +1726,14 @@
       "target": "CHECK-BALANCE",
       "business_category": "program_control",
       "translation_hint": "python_function_call",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R091",
@@ -1112,7 +1742,14 @@
       "target": "DEPOSIT",
       "business_category": "program_control",
       "translation_hint": "python_function_call",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R092",
@@ -1121,7 +1758,14 @@
       "target": "WITHDRAW",
       "business_category": "program_control",
       "translation_hint": "python_function_call",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R093",
@@ -1130,7 +1774,14 @@
       "value": "LOGGING OUT",
       "business_category": "program_control",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R094",
@@ -1138,7 +1789,14 @@
       "type": "EXIT",
       "business_category": "program_control",
       "translation_hint": "manual_review",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R095",
@@ -1147,7 +1805,14 @@
       "value": "CURRENT BALANCE:",
       "business_category": "financial_transaction",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R096",
@@ -1156,7 +1821,14 @@
       "source": "F-BAL",
       "business_category": "financial_transaction",
       "translation_hint": "output_operation",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R097",
@@ -1164,7 +1836,14 @@
       "type": "EXIT",
       "business_category": "financial_transaction",
       "translation_hint": "manual_review",
-      "risk": "low"
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R098",
@@ -1188,7 +1867,14 @@
       "false_branch": [],
       "business_category": "financial_transaction",
       "translation_hint": "python_if_statement",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R099",
@@ -1217,7 +1903,14 @@
       ],
       "business_category": "financial_transaction",
       "translation_hint": "file_update_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R100",
@@ -1227,7 +1920,14 @@
       "target": "WS-AMOUNT",
       "business_category": "financial_transaction",
       "translation_hint": "python_assignment",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R101",
@@ -1236,7 +1936,14 @@
       "value": "ENTER DEPOSIT AMOUNT:",
       "business_category": "financial_transaction",
       "translation_hint": "output_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R102",
@@ -1245,7 +1952,14 @@
       "target": "WS-AMOUNT",
       "business_category": "financial_transaction",
       "translation_hint": "input_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R103",
@@ -1254,7 +1968,14 @@
       "value": "INVALID AMOUNT",
       "business_category": "financial_transaction",
       "translation_hint": "output_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R104",
@@ -1263,7 +1984,14 @@
       "value": "AMOUNT MUST BE POSITIVE",
       "business_category": "financial_transaction",
       "translation_hint": "output_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R105",
@@ -1273,7 +2001,14 @@
       "target": "F-BAL",
       "business_category": "financial_transaction",
       "translation_hint": "python_addition",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R106",
@@ -1282,7 +2017,14 @@
       "value": "UPDATE FAILED",
       "business_category": "financial_transaction",
       "translation_hint": "output_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R107",
@@ -1291,7 +2033,14 @@
       "value": "DEPOSIT SUCCESSFUL",
       "business_category": "financial_transaction",
       "translation_hint": "output_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R108",
@@ -1300,7 +2049,14 @@
       "value": "NEW BALANCE:",
       "business_category": "financial_transaction",
       "translation_hint": "output_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R109",
@@ -1309,7 +2065,14 @@
       "source": "F-BAL",
       "business_category": "financial_transaction",
       "translation_hint": "output_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R110",
@@ -1317,7 +2080,14 @@
       "type": "EXIT",
       "business_category": "financial_transaction",
       "translation_hint": "manual_review",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R111",
@@ -1341,7 +2111,14 @@
       "false_branch": [],
       "business_category": "financial_transaction",
       "translation_hint": "python_if_statement",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R112",
@@ -1387,7 +2164,14 @@
       ],
       "business_category": "financial_transaction",
       "translation_hint": "python_if_statement",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R113",
@@ -1416,7 +2200,14 @@
       ],
       "business_category": "financial_transaction",
       "translation_hint": "file_update_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R114",
@@ -1426,7 +2217,14 @@
       "target": "WS-AMOUNT",
       "business_category": "financial_transaction",
       "translation_hint": "python_assignment",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R115",
@@ -1435,7 +2233,14 @@
       "value": "ENTER WITHDRAW AMOUNT:",
       "business_category": "financial_transaction",
       "translation_hint": "output_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R116",
@@ -1444,7 +2249,14 @@
       "target": "WS-AMOUNT",
       "business_category": "financial_transaction",
       "translation_hint": "input_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R117",
@@ -1453,7 +2265,14 @@
       "value": "INVALID AMOUNT",
       "business_category": "financial_transaction",
       "translation_hint": "output_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R118",
@@ -1462,7 +2281,14 @@
       "value": "AMOUNT MUST BE POSITIVE",
       "business_category": "financial_transaction",
       "translation_hint": "output_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R119",
@@ -1471,7 +2297,14 @@
       "value": "INSUFFICIENT BALANCE",
       "business_category": "financial_transaction",
       "translation_hint": "output_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R120",
@@ -1481,7 +2314,14 @@
       "target": "F-BAL",
       "business_category": "financial_transaction",
       "translation_hint": "python_subtraction",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R121",
@@ -1490,7 +2330,14 @@
       "value": "UPDATE FAILED",
       "business_category": "financial_transaction",
       "translation_hint": "output_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R122",
@@ -1499,7 +2346,14 @@
       "value": "WITHDRAW SUCCESSFUL",
       "business_category": "financial_transaction",
       "translation_hint": "output_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R123",
@@ -1508,7 +2362,14 @@
       "value": "NEW BALANCE:",
       "business_category": "financial_transaction",
       "translation_hint": "output_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R124",
@@ -1517,7 +2378,14 @@
       "source": "F-BAL",
       "business_category": "financial_transaction",
       "translation_hint": "output_operation",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     },
     {
       "rule_id": "R125",
@@ -1525,7 +2393,14 @@
       "type": "EXIT",
       "business_category": "financial_transaction",
       "translation_hint": "manual_review",
-      "risk": "high"
+      "risk": "high",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
     }
   ]
 }

@@ -498,6 +498,13 @@ def add_rule_metadata(rule):
     else:
         rule["risk"] = "low"
 
+    rule["needs_ai_enrichment"] = True
+    rule["ai_enrichment_targets"] = [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+    ]
     return rule
 
 
