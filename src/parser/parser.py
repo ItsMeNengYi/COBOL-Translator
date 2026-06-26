@@ -1,67 +1,51 @@
-import re
+from structure import save_program_structure
+from symbol_table import save_symbol_table
+from paragraph_map import save_paragraph_map
+from control_flow import save_control_flow
+from data_layout import build_data_layout
+from rule_ir import save_rule_ir
+from summary import build_summary, write_summary
 
 
-def extract_variables(content):
-    variables = []
+def run_all():
+    cobol_path = "data/cobol/ATM.cob"
 
-    variable_pattern = r"^\s*(\d{2})\s+([A-Z0-9-]+)\s+PIC\s+([A-Z0-9()V.-]+)"
+    print("Running program structure extraction...")
+    save_program_structure(cobol_path, "outputs/program_structure.json")
 
-    for line in content.splitlines():
-        line_upper = line.upper()
+    print("Running symbol table extraction...")
+    save_symbol_table(cobol_path, "outputs/symbol_table.json")
 
-        match = re.search(variable_pattern, line_upper)
+    print("Running paragraph map extraction...")
+    save_paragraph_map(cobol_path, "outputs/paragraph_map.json")
 
-        if match:
-            level = match.group(1)
-            name = match.group(2)
-            picture = match.group(3).rstrip(".")
-            variables.append({
-                "level": level,
-                "name": name,
-                "picture": picture
-            })
-
-    return variables
-
-
-def parse_cobol(filepath):
-    with open(filepath, "r") as f:
-        content = f.read()
-
-    upper_content = content.upper()
-
-    result = {
-        "identification": "IDENTIFICATION DIVISION" in upper_content,
-        "data": "DATA DIVISION" in upper_content,
-        "working_storage": "WORKING-STORAGE SECTION" in upper_content,
-        "procedure": "PROCEDURE DIVISION" in upper_content,
-        "program_name": None,
-        "variables": extract_variables(content)
-    }
-
-    program_match = re.search(
-        r"PROGRAM-ID\.\s*([A-Z0-9-]+)",
-        upper_content
+    print("Running control flow extraction...")
+    save_control_flow(
+        cobol_path,
+        "outputs/paragraph_map.json",
+        "outputs/control_flow.json"
     )
 
-    if program_match:
-        result["program_name"] = program_match.group(1)
+    print("Running data layout extraction...")
+    build_data_layout(
+        "outputs/program_structure.json",
+        "outputs/symbol_table.json",
+        "outputs/data_layout.json"
+    )
 
-    return result
+    print("Running rule IR extraction...")
+    save_rule_ir(
+        cobol_path,
+        "outputs/paragraph_map.json",
+        "outputs/rule_ir.json"
+    )
+
+    print("Generating program summary...")
+    summary = build_summary()
+    write_summary("outputs/program_summary.md", summary)
+
+    print("All Person 1 outputs generated successfully.")
 
 
 if __name__ == "__main__":
-    filepath = "data/cobol/ATM.cob"
-
-    result = parse_cobol(filepath)
-
-    print("\n=== COBOL SUMMARY ===")
-    print(f"program_name: {result['program_name']}")
-    print(f"identification: {result['identification']}")
-    print(f"data: {result['data']}")
-    print(f"working_storage: {result['working_storage']}")
-    print(f"procedure: {result['procedure']}")
-
-    print("\n=== VARIABLES ===")
-    for var in result["variables"]:
-        print(f"{var['level']} {var['name']} PIC {var['picture']}")
+    run_all()

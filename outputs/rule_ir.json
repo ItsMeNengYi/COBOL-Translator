@@ -1,0 +1,1531 @@
+{
+  "program": "ATM-MACHINE",
+  "schema_version": "0.2",
+  "rules": [
+    {
+      "rule_id": "R001",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "IF",
+      "condition": {
+        "left": "WS-FILE-STATUS",
+        "operator": "==",
+        "right": "35"
+      },
+      "true_branch": [
+        {
+          "operation": "OPEN",
+          "mode": "OUTPUT",
+          "file": "USERDATA"
+        },
+        {
+          "operation": "CLOSE",
+          "file": "USERDATA"
+        },
+        {
+          "operation": "OPEN",
+          "mode": "I-O",
+          "file": "USERDATA"
+        }
+      ],
+      "false_branch": [],
+      "business_category": "program_control",
+      "translation_hint": "python_if_statement",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R002",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "IF",
+      "condition": {
+        "left": "WS-MAIN-CHOICE",
+        "operator": "<",
+        "right": "1"
+      },
+      "true_branch": [
+        {
+          "operation": "DISPLAY",
+          "value": "INVALID CHOICE"
+        },
+        {
+          "operation": "DISPLAY",
+          "value": "PLEASE ENTER 1, 2, OR 3"
+        }
+      ],
+      "false_branch": [],
+      "business_category": "program_control",
+      "translation_hint": "python_if_statement",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R003",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "EVALUATE",
+      "subject": "WS-MAIN-CHOICE",
+      "cases": [
+        {
+          "when": "1",
+          "actions": [
+            {
+              "operation": "PERFORM",
+              "target": "CREATE-ACCOUNT"
+            }
+          ]
+        },
+        {
+          "when": "2",
+          "actions": [
+            {
+              "operation": "PERFORM",
+              "target": "LOGIN"
+            }
+          ]
+        },
+        {
+          "when": "3",
+          "actions": [
+            {
+              "operation": "DISPLAY",
+              "value": "GOODBYE"
+            }
+          ]
+        }
+      ],
+      "business_category": "program_control",
+      "translation_hint": "python_match_or_if_elif",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R004",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "OPEN",
+      "mode": "I-O",
+      "file": "USERDATA",
+      "business_category": "program_control",
+      "translation_hint": "file_open_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R005",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "OPEN",
+      "mode": "OUTPUT",
+      "file": "USERDATA",
+      "business_category": "program_control",
+      "translation_hint": "file_open_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R006",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "CLOSE",
+      "file": "USERDATA",
+      "business_category": "program_control",
+      "translation_hint": "file_close_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R007",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "OPEN",
+      "mode": "I-O",
+      "file": "USERDATA",
+      "business_category": "program_control",
+      "translation_hint": "file_open_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R008",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "MOVE",
+      "source": "0",
+      "target": "WS-MAIN-CHOICE",
+      "business_category": "program_control",
+      "translation_hint": "python_assignment",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R009",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "DISPLAY",
+      "value": " ",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R010",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "DISPLAY",
+      "value": "===== ATM SYSTEM =====",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R011",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "DISPLAY",
+      "value": "1 - CREATE ACCOUNT",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R012",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "DISPLAY",
+      "value": "2 - LOGIN",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R013",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "DISPLAY",
+      "value": "3 - EXIT",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R014",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "DISPLAY",
+      "value": "ENTER CHOICE:",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R015",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "ACCEPT",
+      "target": "WS-MAIN-CHOICE",
+      "business_category": "program_control",
+      "translation_hint": "input_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R016",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "DISPLAY",
+      "value": "INVALID CHOICE",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R017",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "DISPLAY",
+      "value": "PLEASE ENTER 1, 2, OR 3",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R018",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "PERFORM",
+      "target": "CREATE-ACCOUNT",
+      "business_category": "program_control",
+      "translation_hint": "python_function_call",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R019",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "PERFORM",
+      "target": "LOGIN",
+      "business_category": "program_control",
+      "translation_hint": "python_function_call",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R020",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "DISPLAY",
+      "value": "GOODBYE",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R021",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "CLOSE",
+      "file": "USERDATA",
+      "business_category": "program_control",
+      "translation_hint": "file_close_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R022",
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "STOP_RUN",
+      "business_category": "program_control",
+      "translation_hint": "program_exit",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R023",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "IF",
+      "condition": {
+        "left": "F-NAME",
+        "operator": "==",
+        "right": "SPACES"
+      },
+      "true_branch": [
+        {
+          "operation": "DISPLAY",
+          "value": "NAME CANNOT BE EMPTY"
+        },
+        {
+          "operation": "EXIT_PARAGRAPH"
+        }
+      ],
+      "false_branch": [],
+      "business_category": "account_onboarding",
+      "translation_hint": "python_if_statement",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R024",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "IF",
+      "condition": {
+        "left": "F-AGE",
+        "operator": "<",
+        "right": "18"
+      },
+      "true_branch": [
+        {
+          "operation": "DISPLAY",
+          "value": "YOU MUST BE AT LEAST 18 YEARS OLD"
+        },
+        {
+          "operation": "EXIT_PARAGRAPH"
+        }
+      ],
+      "false_branch": [],
+      "business_category": "account_onboarding",
+      "translation_hint": "python_if_statement",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R025",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "IF",
+      "condition": {
+        "left": "F-PIN",
+        "operator": "<",
+        "right": "100000"
+      },
+      "true_branch": [
+        {
+          "operation": "DISPLAY",
+          "value": "PIN MUST BE 6 DIGITS"
+        }
+      ],
+      "false_branch": [],
+      "business_category": "account_onboarding",
+      "translation_hint": "python_if_statement",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R026",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "WRITE",
+      "record": "F-DATA",
+      "invalid_key": [
+        {
+          "operation": "DISPLAY",
+          "value": "ACCOUNT CREATION FAILED"
+        }
+      ],
+      "not_invalid_key": [
+        {
+          "operation": "DISPLAY",
+          "value": "ACCOUNT CREATED SUCCESSFULLY"
+        },
+        {
+          "operation": "DISPLAY",
+          "value": "YOUR ACCOUNT NUMBER IS:"
+        },
+        {
+          "operation": "DISPLAY",
+          "source": "F-ACCOUNT"
+        }
+      ],
+      "business_category": "account_onboarding",
+      "translation_hint": "file_create_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R027",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "MOVE",
+      "source": "SPACES",
+      "target": "F-NAME",
+      "business_category": "account_onboarding",
+      "translation_hint": "python_assignment",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R028",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "MOVE",
+      "source": "0",
+      "target": "F-AGE",
+      "business_category": "account_onboarding",
+      "translation_hint": "python_assignment",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R029",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "MOVE",
+      "source": "0",
+      "target": "F-PIN",
+      "business_category": "account_onboarding",
+      "translation_hint": "python_assignment",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R030",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "DISPLAY",
+      "value": "ENTER NAME:",
+      "business_category": "account_onboarding",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R031",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "ACCEPT",
+      "target": "F-NAME",
+      "business_category": "account_onboarding",
+      "translation_hint": "input_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R032",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "DISPLAY",
+      "value": "NAME CANNOT BE EMPTY",
+      "business_category": "account_onboarding",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R033",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "EXIT_PARAGRAPH",
+      "business_category": "account_onboarding",
+      "translation_hint": "manual_review",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R034",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "DISPLAY",
+      "value": "ENTER AGE:",
+      "business_category": "account_onboarding",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R035",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "ACCEPT",
+      "target": "F-AGE",
+      "business_category": "account_onboarding",
+      "translation_hint": "input_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R036",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "DISPLAY",
+      "value": "YOU MUST BE AT LEAST 18 YEARS OLD",
+      "business_category": "account_onboarding",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R037",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "EXIT_PARAGRAPH",
+      "business_category": "account_onboarding",
+      "translation_hint": "manual_review",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R038",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "DISPLAY",
+      "value": "CREATE 6-DIGIT PIN:",
+      "business_category": "account_onboarding",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R039",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "ACCEPT",
+      "target": "F-PIN",
+      "business_category": "account_onboarding",
+      "translation_hint": "input_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R040",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "DISPLAY",
+      "value": "PIN MUST BE 6 DIGITS",
+      "business_category": "account_onboarding",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R041",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "PERFORM",
+      "target": "GENERATE-ACCOUNT",
+      "business_category": "account_onboarding",
+      "translation_hint": "python_function_call",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R042",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "MOVE",
+      "source": "0",
+      "target": "F-BAL",
+      "business_category": "account_onboarding",
+      "translation_hint": "python_assignment",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R043",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "DISPLAY",
+      "value": "ACCOUNT CREATION FAILED",
+      "business_category": "account_onboarding",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R044",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "DISPLAY",
+      "value": "ACCOUNT CREATED SUCCESSFULLY",
+      "business_category": "account_onboarding",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R045",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "DISPLAY",
+      "value": "YOUR ACCOUNT NUMBER IS:",
+      "business_category": "account_onboarding",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R046",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "DISPLAY",
+      "source": "F-ACCOUNT",
+      "business_category": "account_onboarding",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R047",
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "EXIT",
+      "business_category": "account_onboarding",
+      "translation_hint": "manual_review",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R048",
+      "paragraph": "GENERATE-ACCOUNT",
+      "type": "READ",
+      "file": "USERDATA",
+      "invalid_key": [
+        {
+          "operation": "CONTINUE"
+        }
+      ],
+      "not_invalid_key": [
+        {
+          "operation": "PERFORM",
+          "target": "GENERATE-ACCOUNT"
+        }
+      ],
+      "business_category": "account_onboarding",
+      "translation_hint": "file_read_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R049",
+      "paragraph": "GENERATE-ACCOUNT",
+      "type": "CONTINUE",
+      "business_category": "account_onboarding",
+      "translation_hint": "manual_review",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R050",
+      "paragraph": "GENERATE-ACCOUNT",
+      "type": "PERFORM",
+      "target": "GENERATE-ACCOUNT",
+      "business_category": "account_onboarding",
+      "translation_hint": "python_function_call",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R051",
+      "paragraph": "GENERATE-ACCOUNT",
+      "type": "EXIT",
+      "business_category": "account_onboarding",
+      "translation_hint": "manual_review",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R052",
+      "paragraph": "LOGIN",
+      "type": "IF",
+      "condition": {
+        "left": "WS-ACCOUNT",
+        "operator": "<=",
+        "right": "0"
+      },
+      "true_branch": [
+        {
+          "operation": "DISPLAY",
+          "value": "INVALID ACCOUNT NUMBER"
+        }
+      ],
+      "false_branch": [],
+      "business_category": "authentication",
+      "translation_hint": "python_if_statement",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R053",
+      "paragraph": "LOGIN",
+      "type": "IF",
+      "condition": {
+        "left": "WS-FOUND",
+        "operator": "==",
+        "right": "N"
+      },
+      "true_branch": [
+        {
+          "operation": "DISPLAY",
+          "value": "ACCOUNT NOT FOUND"
+        }
+      ],
+      "false_branch": [
+        {
+          "operation": "DISPLAY",
+          "value": "ENTER PIN:"
+        },
+        {
+          "operation": "ACCEPT",
+          "target": "WS-PIN"
+        },
+        {
+          "operation": "DISPLAY",
+          "value": "PIN MUST BE 6 DIGITS"
+        },
+        {
+          "operation": "DISPLAY",
+          "value": "LOGIN SUCCESSFUL"
+        },
+        {
+          "operation": "DISPLAY",
+          "parts": [
+            "WELCOME, ",
+            "F-NAME"
+          ]
+        },
+        {
+          "operation": "MOVE",
+          "source": "0",
+          "target": "WS-CHOICE"
+        },
+        {
+          "operation": "PERFORM_UNTIL",
+          "target": "ATM-MENU",
+          "condition": {
+            "left": "WS-CHOICE",
+            "operator": "==",
+            "right": "4"
+          }
+        },
+        {
+          "operation": "DISPLAY",
+          "value": "WRONG PIN"
+        },
+        {
+          "operation": "DISPLAY",
+          "value": "PLEASE TRY AGAIN"
+        }
+      ],
+      "business_category": "authentication",
+      "translation_hint": "python_if_statement",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R054",
+      "paragraph": "LOGIN",
+      "type": "READ",
+      "file": "USERDATA",
+      "invalid_key": [
+        {
+          "operation": "MOVE",
+          "source": "N",
+          "target": "WS-FOUND"
+        }
+      ],
+      "not_invalid_key": [
+        {
+          "operation": "MOVE",
+          "source": "Y",
+          "target": "WS-FOUND"
+        }
+      ],
+      "business_category": "authentication",
+      "translation_hint": "file_read_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R055",
+      "paragraph": "LOGIN",
+      "type": "MOVE",
+      "source": "N",
+      "target": "WS-FOUND",
+      "business_category": "authentication",
+      "translation_hint": "python_assignment",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R056",
+      "paragraph": "LOGIN",
+      "type": "MOVE",
+      "source": "0",
+      "target": "WS-ACCOUNT",
+      "business_category": "authentication",
+      "translation_hint": "python_assignment",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R057",
+      "paragraph": "LOGIN",
+      "type": "MOVE",
+      "source": "0",
+      "target": "WS-PIN",
+      "business_category": "authentication",
+      "translation_hint": "python_assignment",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R058",
+      "paragraph": "LOGIN",
+      "type": "DISPLAY",
+      "value": "ENTER ACCOUNT NUMBER:",
+      "business_category": "authentication",
+      "translation_hint": "output_operation",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R059",
+      "paragraph": "LOGIN",
+      "type": "ACCEPT",
+      "target": "WS-ACCOUNT",
+      "business_category": "authentication",
+      "translation_hint": "input_operation",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R060",
+      "paragraph": "LOGIN",
+      "type": "DISPLAY",
+      "value": "INVALID ACCOUNT NUMBER",
+      "business_category": "authentication",
+      "translation_hint": "output_operation",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R061",
+      "paragraph": "LOGIN",
+      "type": "MOVE",
+      "source": "WS-ACCOUNT",
+      "target": "F-ACCOUNT",
+      "business_category": "authentication",
+      "translation_hint": "python_assignment",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R062",
+      "paragraph": "LOGIN",
+      "type": "MOVE",
+      "source": "N",
+      "target": "WS-FOUND",
+      "business_category": "authentication",
+      "translation_hint": "python_assignment",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R063",
+      "paragraph": "LOGIN",
+      "type": "MOVE",
+      "source": "Y",
+      "target": "WS-FOUND",
+      "business_category": "authentication",
+      "translation_hint": "python_assignment",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R064",
+      "paragraph": "LOGIN",
+      "type": "DISPLAY",
+      "value": "ACCOUNT NOT FOUND",
+      "business_category": "authentication",
+      "translation_hint": "output_operation",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R065",
+      "paragraph": "LOGIN",
+      "type": "DISPLAY",
+      "value": "ENTER PIN:",
+      "business_category": "authentication",
+      "translation_hint": "output_operation",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R066",
+      "paragraph": "LOGIN",
+      "type": "ACCEPT",
+      "target": "WS-PIN",
+      "business_category": "authentication",
+      "translation_hint": "input_operation",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R067",
+      "paragraph": "LOGIN",
+      "type": "DISPLAY",
+      "value": "PIN MUST BE 6 DIGITS",
+      "business_category": "authentication",
+      "translation_hint": "output_operation",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R068",
+      "paragraph": "LOGIN",
+      "type": "DISPLAY",
+      "value": "LOGIN SUCCESSFUL",
+      "business_category": "authentication",
+      "translation_hint": "output_operation",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R069",
+      "paragraph": "LOGIN",
+      "type": "DISPLAY",
+      "parts": [
+        "WELCOME, ",
+        "F-NAME"
+      ],
+      "business_category": "authentication",
+      "translation_hint": "output_operation",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R070",
+      "paragraph": "LOGIN",
+      "type": "MOVE",
+      "source": "0",
+      "target": "WS-CHOICE",
+      "business_category": "authentication",
+      "translation_hint": "python_assignment",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R071",
+      "paragraph": "LOGIN",
+      "type": "PERFORM_UNTIL",
+      "target": "ATM-MENU",
+      "condition": {
+        "left": "WS-CHOICE",
+        "operator": "==",
+        "right": "4"
+      },
+      "business_category": "authentication",
+      "translation_hint": "python_while_loop",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R072",
+      "paragraph": "LOGIN",
+      "type": "DISPLAY",
+      "value": "WRONG PIN",
+      "business_category": "authentication",
+      "translation_hint": "output_operation",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R073",
+      "paragraph": "LOGIN",
+      "type": "DISPLAY",
+      "value": "PLEASE TRY AGAIN",
+      "business_category": "authentication",
+      "translation_hint": "output_operation",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R074",
+      "paragraph": "LOGIN",
+      "type": "EXIT",
+      "business_category": "authentication",
+      "translation_hint": "manual_review",
+      "risk": "medium"
+    },
+    {
+      "rule_id": "R075",
+      "paragraph": "ATM-MENU",
+      "type": "IF",
+      "condition": {
+        "left": "WS-CHOICE",
+        "operator": "<",
+        "right": "1"
+      },
+      "true_branch": [
+        {
+          "operation": "DISPLAY",
+          "value": "INVALID CHOICE"
+        },
+        {
+          "operation": "DISPLAY",
+          "value": "PLEASE ENTER 1, 2, 3, OR 4"
+        }
+      ],
+      "false_branch": [],
+      "business_category": "program_control",
+      "translation_hint": "python_if_statement",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R076",
+      "paragraph": "ATM-MENU",
+      "type": "EVALUATE",
+      "subject": "WS-CHOICE",
+      "cases": [
+        {
+          "when": "1",
+          "actions": [
+            {
+              "operation": "PERFORM",
+              "target": "CHECK-BALANCE"
+            }
+          ]
+        },
+        {
+          "when": "2",
+          "actions": [
+            {
+              "operation": "PERFORM",
+              "target": "DEPOSIT"
+            }
+          ]
+        },
+        {
+          "when": "3",
+          "actions": [
+            {
+              "operation": "PERFORM",
+              "target": "WITHDRAW"
+            }
+          ]
+        },
+        {
+          "when": "4",
+          "actions": [
+            {
+              "operation": "DISPLAY",
+              "value": "LOGGING OUT"
+            }
+          ]
+        }
+      ],
+      "business_category": "program_control",
+      "translation_hint": "python_match_or_if_elif",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R077",
+      "paragraph": "ATM-MENU",
+      "type": "MOVE",
+      "source": "0",
+      "target": "WS-CHOICE",
+      "business_category": "program_control",
+      "translation_hint": "python_assignment",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R078",
+      "paragraph": "ATM-MENU",
+      "type": "DISPLAY",
+      "value": " ",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R079",
+      "paragraph": "ATM-MENU",
+      "type": "DISPLAY",
+      "value": "===== ATM MENU =====",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R080",
+      "paragraph": "ATM-MENU",
+      "type": "DISPLAY",
+      "parts": [
+        "ACCOUNT: ",
+        "F-ACCOUNT"
+      ],
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R081",
+      "paragraph": "ATM-MENU",
+      "type": "DISPLAY",
+      "parts": [
+        "NAME: ",
+        "F-NAME"
+      ],
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R082",
+      "paragraph": "ATM-MENU",
+      "type": "DISPLAY",
+      "value": "1 - CHECK BALANCE",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R083",
+      "paragraph": "ATM-MENU",
+      "type": "DISPLAY",
+      "value": "2 - DEPOSIT",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R084",
+      "paragraph": "ATM-MENU",
+      "type": "DISPLAY",
+      "value": "3 - WITHDRAW",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R085",
+      "paragraph": "ATM-MENU",
+      "type": "DISPLAY",
+      "value": "4 - LOGOUT",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R086",
+      "paragraph": "ATM-MENU",
+      "type": "DISPLAY",
+      "value": "ENTER CHOICE:",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R087",
+      "paragraph": "ATM-MENU",
+      "type": "ACCEPT",
+      "target": "WS-CHOICE",
+      "business_category": "program_control",
+      "translation_hint": "input_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R088",
+      "paragraph": "ATM-MENU",
+      "type": "DISPLAY",
+      "value": "INVALID CHOICE",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R089",
+      "paragraph": "ATM-MENU",
+      "type": "DISPLAY",
+      "value": "PLEASE ENTER 1, 2, 3, OR 4",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R090",
+      "paragraph": "ATM-MENU",
+      "type": "PERFORM",
+      "target": "CHECK-BALANCE",
+      "business_category": "program_control",
+      "translation_hint": "python_function_call",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R091",
+      "paragraph": "ATM-MENU",
+      "type": "PERFORM",
+      "target": "DEPOSIT",
+      "business_category": "program_control",
+      "translation_hint": "python_function_call",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R092",
+      "paragraph": "ATM-MENU",
+      "type": "PERFORM",
+      "target": "WITHDRAW",
+      "business_category": "program_control",
+      "translation_hint": "python_function_call",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R093",
+      "paragraph": "ATM-MENU",
+      "type": "DISPLAY",
+      "value": "LOGGING OUT",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R094",
+      "paragraph": "ATM-MENU",
+      "type": "EXIT",
+      "business_category": "program_control",
+      "translation_hint": "manual_review",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R095",
+      "paragraph": "CHECK-BALANCE",
+      "type": "DISPLAY",
+      "value": "CURRENT BALANCE:",
+      "business_category": "financial_transaction",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R096",
+      "paragraph": "CHECK-BALANCE",
+      "type": "DISPLAY",
+      "source": "F-BAL",
+      "business_category": "financial_transaction",
+      "translation_hint": "output_operation",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R097",
+      "paragraph": "CHECK-BALANCE",
+      "type": "EXIT",
+      "business_category": "financial_transaction",
+      "translation_hint": "manual_review",
+      "risk": "low"
+    },
+    {
+      "rule_id": "R098",
+      "paragraph": "DEPOSIT",
+      "type": "IF",
+      "condition": {
+        "left": "WS-AMOUNT",
+        "operator": "<=",
+        "right": "0"
+      },
+      "true_branch": [
+        {
+          "operation": "DISPLAY",
+          "value": "INVALID AMOUNT"
+        },
+        {
+          "operation": "DISPLAY",
+          "value": "AMOUNT MUST BE POSITIVE"
+        }
+      ],
+      "false_branch": [],
+      "business_category": "financial_transaction",
+      "translation_hint": "python_if_statement",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R099",
+      "paragraph": "DEPOSIT",
+      "type": "REWRITE",
+      "record": "F-DATA",
+      "invalid_key": [
+        {
+          "operation": "DISPLAY",
+          "value": "UPDATE FAILED"
+        }
+      ],
+      "not_invalid_key": [
+        {
+          "operation": "DISPLAY",
+          "value": "DEPOSIT SUCCESSFUL"
+        },
+        {
+          "operation": "DISPLAY",
+          "value": "NEW BALANCE:"
+        },
+        {
+          "operation": "DISPLAY",
+          "source": "F-BAL"
+        }
+      ],
+      "business_category": "financial_transaction",
+      "translation_hint": "file_update_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R100",
+      "paragraph": "DEPOSIT",
+      "type": "MOVE",
+      "source": "0",
+      "target": "WS-AMOUNT",
+      "business_category": "financial_transaction",
+      "translation_hint": "python_assignment",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R101",
+      "paragraph": "DEPOSIT",
+      "type": "DISPLAY",
+      "value": "ENTER DEPOSIT AMOUNT:",
+      "business_category": "financial_transaction",
+      "translation_hint": "output_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R102",
+      "paragraph": "DEPOSIT",
+      "type": "ACCEPT",
+      "target": "WS-AMOUNT",
+      "business_category": "financial_transaction",
+      "translation_hint": "input_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R103",
+      "paragraph": "DEPOSIT",
+      "type": "DISPLAY",
+      "value": "INVALID AMOUNT",
+      "business_category": "financial_transaction",
+      "translation_hint": "output_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R104",
+      "paragraph": "DEPOSIT",
+      "type": "DISPLAY",
+      "value": "AMOUNT MUST BE POSITIVE",
+      "business_category": "financial_transaction",
+      "translation_hint": "output_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R105",
+      "paragraph": "DEPOSIT",
+      "type": "ADD",
+      "source": "WS-AMOUNT",
+      "target": "F-BAL",
+      "business_category": "financial_transaction",
+      "translation_hint": "python_addition",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R106",
+      "paragraph": "DEPOSIT",
+      "type": "DISPLAY",
+      "value": "UPDATE FAILED",
+      "business_category": "financial_transaction",
+      "translation_hint": "output_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R107",
+      "paragraph": "DEPOSIT",
+      "type": "DISPLAY",
+      "value": "DEPOSIT SUCCESSFUL",
+      "business_category": "financial_transaction",
+      "translation_hint": "output_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R108",
+      "paragraph": "DEPOSIT",
+      "type": "DISPLAY",
+      "value": "NEW BALANCE:",
+      "business_category": "financial_transaction",
+      "translation_hint": "output_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R109",
+      "paragraph": "DEPOSIT",
+      "type": "DISPLAY",
+      "source": "F-BAL",
+      "business_category": "financial_transaction",
+      "translation_hint": "output_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R110",
+      "paragraph": "DEPOSIT",
+      "type": "EXIT",
+      "business_category": "financial_transaction",
+      "translation_hint": "manual_review",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R111",
+      "paragraph": "WITHDRAW",
+      "type": "IF",
+      "condition": {
+        "left": "WS-AMOUNT",
+        "operator": "<=",
+        "right": "0"
+      },
+      "true_branch": [
+        {
+          "operation": "DISPLAY",
+          "value": "INVALID AMOUNT"
+        },
+        {
+          "operation": "DISPLAY",
+          "value": "AMOUNT MUST BE POSITIVE"
+        }
+      ],
+      "false_branch": [],
+      "business_category": "financial_transaction",
+      "translation_hint": "python_if_statement",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R112",
+      "paragraph": "WITHDRAW",
+      "type": "IF",
+      "condition": {
+        "left": "WS-AMOUNT",
+        "operator": ">",
+        "right": "F-BAL"
+      },
+      "true_branch": [
+        {
+          "operation": "DISPLAY",
+          "value": "INSUFFICIENT BALANCE"
+        }
+      ],
+      "false_branch": [
+        {
+          "operation": "SUBTRACT",
+          "source": "WS-AMOUNT",
+          "target": "F-BAL"
+        },
+        {
+          "operation": "REWRITE",
+          "record": "F-DATA"
+        },
+        {
+          "operation": "DISPLAY",
+          "value": "UPDATE FAILED"
+        },
+        {
+          "operation": "DISPLAY",
+          "value": "WITHDRAW SUCCESSFUL"
+        },
+        {
+          "operation": "DISPLAY",
+          "value": "NEW BALANCE:"
+        },
+        {
+          "operation": "DISPLAY",
+          "source": "F-BAL"
+        }
+      ],
+      "business_category": "financial_transaction",
+      "translation_hint": "python_if_statement",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R113",
+      "paragraph": "WITHDRAW",
+      "type": "REWRITE",
+      "record": "F-DATA",
+      "invalid_key": [
+        {
+          "operation": "DISPLAY",
+          "value": "UPDATE FAILED"
+        }
+      ],
+      "not_invalid_key": [
+        {
+          "operation": "DISPLAY",
+          "value": "WITHDRAW SUCCESSFUL"
+        },
+        {
+          "operation": "DISPLAY",
+          "value": "NEW BALANCE:"
+        },
+        {
+          "operation": "DISPLAY",
+          "source": "F-BAL"
+        }
+      ],
+      "business_category": "financial_transaction",
+      "translation_hint": "file_update_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R114",
+      "paragraph": "WITHDRAW",
+      "type": "MOVE",
+      "source": "0",
+      "target": "WS-AMOUNT",
+      "business_category": "financial_transaction",
+      "translation_hint": "python_assignment",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R115",
+      "paragraph": "WITHDRAW",
+      "type": "DISPLAY",
+      "value": "ENTER WITHDRAW AMOUNT:",
+      "business_category": "financial_transaction",
+      "translation_hint": "output_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R116",
+      "paragraph": "WITHDRAW",
+      "type": "ACCEPT",
+      "target": "WS-AMOUNT",
+      "business_category": "financial_transaction",
+      "translation_hint": "input_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R117",
+      "paragraph": "WITHDRAW",
+      "type": "DISPLAY",
+      "value": "INVALID AMOUNT",
+      "business_category": "financial_transaction",
+      "translation_hint": "output_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R118",
+      "paragraph": "WITHDRAW",
+      "type": "DISPLAY",
+      "value": "AMOUNT MUST BE POSITIVE",
+      "business_category": "financial_transaction",
+      "translation_hint": "output_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R119",
+      "paragraph": "WITHDRAW",
+      "type": "DISPLAY",
+      "value": "INSUFFICIENT BALANCE",
+      "business_category": "financial_transaction",
+      "translation_hint": "output_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R120",
+      "paragraph": "WITHDRAW",
+      "type": "SUBTRACT",
+      "source": "WS-AMOUNT",
+      "target": "F-BAL",
+      "business_category": "financial_transaction",
+      "translation_hint": "python_subtraction",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R121",
+      "paragraph": "WITHDRAW",
+      "type": "DISPLAY",
+      "value": "UPDATE FAILED",
+      "business_category": "financial_transaction",
+      "translation_hint": "output_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R122",
+      "paragraph": "WITHDRAW",
+      "type": "DISPLAY",
+      "value": "WITHDRAW SUCCESSFUL",
+      "business_category": "financial_transaction",
+      "translation_hint": "output_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R123",
+      "paragraph": "WITHDRAW",
+      "type": "DISPLAY",
+      "value": "NEW BALANCE:",
+      "business_category": "financial_transaction",
+      "translation_hint": "output_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R124",
+      "paragraph": "WITHDRAW",
+      "type": "DISPLAY",
+      "source": "F-BAL",
+      "business_category": "financial_transaction",
+      "translation_hint": "output_operation",
+      "risk": "high"
+    },
+    {
+      "rule_id": "R125",
+      "paragraph": "WITHDRAW",
+      "type": "EXIT",
+      "business_category": "financial_transaction",
+      "translation_hint": "manual_review",
+      "risk": "high"
+    }
+  ]
+}

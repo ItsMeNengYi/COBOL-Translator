@@ -1,6 +1,19 @@
 {
   "program_name": "ATM-MACHINE",
+  "language": "COBOL",
+  "dialect": "GnuCOBOL",
   "source_file": "ATM.cob",
+  "entry_point": "MAIN-PROCEDURE",
+  "program_type": "interactive_banking_system",
+  "paragraph_count": 8,
+  "file_count": 1,
+  "supported_file_operations": [
+    "OPEN",
+    "READ",
+    "WRITE",
+    "REWRITE",
+    "CLOSE"
+  ],
   "divisions": [
     "IDENTIFICATION",
     "ENVIRONMENT",
@@ -16,7 +29,10 @@
       "FILE SECTION",
       "WORKING-STORAGE SECTION"
     ],
-    "PROCEDURE": []
+    "PROCEDURE": {
+      "entry_point": "MAIN-PROCEDURE",
+      "paragraph_count": 8
+    }
   },
   "files": [
     {

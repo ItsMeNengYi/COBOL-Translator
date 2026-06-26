@@ -14,28 +14,68 @@ def extract_program_name(content):
 
 
 def extract_divisions(content):
+    upper = content.upper()
     divisions = []
+
     for div in ["IDENTIFICATION", "ENVIRONMENT", "DATA", "PROCEDURE"]:
-        if f"{div} DIVISION" in content.upper():
+        if f"{div} DIVISION" in upper:
             divisions.append(div)
+
     return divisions
 
 
-def extract_sections(content):
+def extract_paragraphs(content):
+    match = re.search(
+        r"PROCEDURE DIVISION\.(.*?)(END PROGRAM|$)",
+        content,
+        re.IGNORECASE | re.DOTALL
+    )
+
+    if not match:
+        return []
+
+    procedure_text = match.group(1)
+    paragraphs = []
+
+    for line in procedure_text.splitlines():
+        stripped = line.strip().upper()
+
+        if re.match(r"^[A-Z0-9-]+\.$", stripped):
+            name = stripped.replace(".", "")
+
+            if name not in [
+                "EXIT",
+                "STOP",
+                "END-IF",
+                "END-PERFORM",
+                "END-EVALUATE"
+            ]:
+                paragraphs.append(name)
+
+    return paragraphs
+
+
+def extract_sections(content, paragraphs):
     upper = content.upper()
 
     sections = {
         "ENVIRONMENT": [],
         "DATA": [],
-        "PROCEDURE": []
+        "PROCEDURE": {
+            "entry_point": paragraphs[0] if paragraphs else None,
+            "paragraph_count": len(paragraphs)
+        }
     }
 
     if "INPUT-OUTPUT SECTION" in upper:
         sections["ENVIRONMENT"].append("INPUT-OUTPUT")
+
     if "FILE-CONTROL" in upper:
         sections["ENVIRONMENT"].append("FILE-CONTROL")
+
     if "FILE SECTION" in upper:
         sections["DATA"].append("FILE SECTION")
+
     if "WORKING-STORAGE SECTION" in upper:
         sections["DATA"].append("WORKING-STORAGE SECTION")
 
@@ -67,30 +107,8 @@ def extract_files(content):
     return files
 
 
-def extract_procedure_text(content):
-    match = re.search(r"PROCEDURE DIVISION\.(.*)", content, re.IGNORECASE | re.DOTALL)
-    return match.group(1) if match else ""
-
-
-def extract_paragraphs(content):
-    procedure_text = extract_procedure_text(content)
-    paragraphs = []
-
-    for line in procedure_text.splitlines():
-        stripped = line.strip()
-
-        if re.match(r"^[A-Z0-9-]+\.$", stripped.upper()):
-            name = stripped.replace(".", "").upper()
-
-            if name not in ["EXIT", "STOP", "END-IF", "END-PERFORM", "END-EVALUATE"]:
-                paragraphs.append(name)
-
-    return paragraphs
-
-
 def detect_supported_constructs(content):
     upper = content.upper()
-
     constructs = []
 
     checks = {
@@ -114,24 +132,49 @@ def detect_supported_constructs(content):
         "EXIT PARAGRAPH": "EXIT PARAGRAPH" in upper
     }
 
-    for name, exists in checks.items():
+    for construct, exists in checks.items():
         if exists:
-            constructs.append(name)
+            constructs.append(construct)
 
     return constructs
+
+
+def detect_file_operations(content):
+    upper = content.upper()
+    operations = []
+
+    for op in ["OPEN", "READ", "WRITE", "REWRITE", "CLOSE"]:
+        if re.search(rf"\b{op}\b", upper):
+            operations.append(op)
+
+    return operations
 
 
 def build_program_structure(filepath):
     content = read_cobol_file(filepath)
 
+    program_name = extract_program_name(content)
+    divisions = extract_divisions(content)
+    paragraphs = extract_paragraphs(content)
+    files = extract_files(content)
+    supported_constructs = detect_supported_constructs(content)
+    file_operations = detect_file_operations(content)
+
     return {
-        "program_name": extract_program_name(content),
+        "program_name": program_name,
+        "language": "COBOL",
+        "dialect": "GnuCOBOL",
         "source_file": Path(filepath).name,
-        "divisions": extract_divisions(content),
-        "sections": extract_sections(content),
-        "files": extract_files(content),
-        "paragraphs": extract_paragraphs(content),
-        "supported_constructs_detected": detect_supported_constructs(content)
+        "entry_point": paragraphs[0] if paragraphs else None,
+        "program_type": "interactive_banking_system",
+        "paragraph_count": len(paragraphs),
+        "file_count": len(files),
+        "supported_file_operations": file_operations,
+        "divisions": divisions,
+        "sections": extract_sections(content, paragraphs),
+        "files": files,
+        "paragraphs": paragraphs,
+        "supported_constructs_detected": supported_constructs
     }
 
 
