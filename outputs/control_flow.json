@@ -1,0 +1,158 @@
+{
+  "entry_point": "MAIN-PROCEDURE",
+  "nodes": [
+    "MAIN-PROCEDURE",
+    "CREATE-ACCOUNT",
+    "GENERATE-ACCOUNT",
+    "LOGIN",
+    "ATM-MENU",
+    "CHECK-BALANCE",
+    "DEPOSIT",
+    "WITHDRAW",
+    "EXIT_PROGRAM"
+  ],
+  "edges": [
+    {
+      "from": "MAIN-PROCEDURE",
+      "to": "EVALUATE",
+      "trigger": "PERFORM EVALUATE"
+    },
+    {
+      "from": "MAIN-PROCEDURE",
+      "to": "CREATE-ACCOUNT",
+      "trigger": "PERFORM CREATE-ACCOUNT"
+    },
+    {
+      "from": "MAIN-PROCEDURE",
+      "to": "LOGIN",
+      "trigger": "PERFORM LOGIN"
+    },
+    {
+      "from": "MAIN-PROCEDURE",
+      "to": "CLOSE",
+      "trigger": "PERFORM CLOSE"
+    },
+    {
+      "from": "MAIN-PROCEDURE",
+      "to": "CREATE-ACCOUNT",
+      "trigger": "EVALUATE WS-MAIN-CHOICE WHEN 1"
+    },
+    {
+      "from": "MAIN-PROCEDURE",
+      "to": "LOGIN",
+      "trigger": "EVALUATE WS-MAIN-CHOICE WHEN 2"
+    },
+    {
+      "from": "CREATE-ACCOUNT",
+      "to": "PERFORM",
+      "trigger": "PERFORM PERFORM"
+    },
+    {
+      "from": "GENERATE-ACCOUNT",
+      "to": "GENERATE-ACCOUNT",
+      "trigger": "PERFORM GENERATE-ACCOUNT"
+    },
+    {
+      "from": "LOGIN",
+      "to": "MOVE",
+      "trigger": "PERFORM MOVE"
+    },
+    {
+      "from": "LOGIN",
+      "to": "IF",
+      "trigger": "PERFORM IF"
+    },
+    {
+      "from": "LOGIN",
+      "to": "ATM-MENU",
+      "trigger": "PERFORM ATM-MENU UNTIL condition"
+    },
+    {
+      "from": "ATM-MENU",
+      "to": "EVALUATE",
+      "trigger": "PERFORM EVALUATE"
+    },
+    {
+      "from": "ATM-MENU",
+      "to": "CHECK-BALANCE",
+      "trigger": "PERFORM CHECK-BALANCE"
+    },
+    {
+      "from": "ATM-MENU",
+      "to": "DEPOSIT",
+      "trigger": "PERFORM DEPOSIT"
+    },
+    {
+      "from": "ATM-MENU",
+      "to": "WITHDRAW",
+      "trigger": "PERFORM WITHDRAW"
+    },
+    {
+      "from": "ATM-MENU",
+      "to": "CHECK-BALANCE",
+      "trigger": "EVALUATE WS-CHOICE WHEN 1"
+    },
+    {
+      "from": "ATM-MENU",
+      "to": "DEPOSIT",
+      "trigger": "EVALUATE WS-CHOICE WHEN 2"
+    },
+    {
+      "from": "ATM-MENU",
+      "to": "WITHDRAW",
+      "trigger": "EVALUATE WS-CHOICE WHEN 3"
+    },
+    {
+      "from": "DEPOSIT",
+      "to": "ADD",
+      "trigger": "PERFORM ADD"
+    },
+    {
+      "from": "WITHDRAW",
+      "to": "IF",
+      "trigger": "PERFORM IF"
+    }
+  ],
+  "loops": [
+    {
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "PERFORM_UNTIL",
+      "condition_raw": "WS-MAIN-CHOICE = 3"
+    },
+    {
+      "paragraph": "MAIN-PROCEDURE",
+      "type": "PERFORM_UNTIL",
+      "condition_raw": "WS-MAIN-CHOICE >= 1"
+    },
+    {
+      "paragraph": "CREATE-ACCOUNT",
+      "type": "PERFORM_UNTIL",
+      "condition_raw": "F-PIN >= 100000"
+    },
+    {
+      "paragraph": "LOGIN",
+      "type": "PERFORM_UNTIL",
+      "condition_raw": "WS-ACCOUNT > 0"
+    },
+    {
+      "paragraph": "LOGIN",
+      "type": "PERFORM_UNTIL",
+      "condition_raw": "WS-PIN >= 100000"
+    },
+    {
+      "paragraph": "ATM-MENU",
+      "type": "PERFORM_UNTIL",
+      "condition_raw": "WS-CHOICE >= 1"
+    },
+    {
+      "paragraph": "DEPOSIT",
+      "type": "PERFORM_UNTIL",
+      "condition_raw": "WS-AMOUNT > 0"
+    },
+    {
+      "paragraph": "WITHDRAW",
+      "type": "PERFORM_UNTIL",
+      "condition_raw": "WS-AMOUNT > 0"
+    }
+  ]
+}
