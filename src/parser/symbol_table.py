@@ -12,15 +12,6 @@ def python_safe_name(cobol_name):
 
 
 def parse_repeated_count(token, char):
-    """
-    Handles:
-    X      -> 1
-    XX     -> 2
-    X(20)  -> 20
-    9      -> 1
-    99     -> 2
-    9(10)  -> 10
-    """
     token = token.upper()
 
     if token == char:
@@ -50,13 +41,11 @@ def parse_pic(pic, usage=None):
         "usage": usage if usage else None
     }
 
-    # COMP / COMP-3 override rules
     if "COMP-3" in usage:
         result["python_type"] = "Decimal"
     elif "COMP" in usage:
         result["python_type"] = "int"
 
-    # PIC X, XX, X(20)
     x_length = parse_repeated_count(pic, "X")
     if x_length is not None:
         result.update({
@@ -68,11 +57,9 @@ def parse_pic(pic, usage=None):
         })
         return result
 
-    # Remove signed prefix for parsing: S9(5), S99
     signed = pic.startswith("S")
     numeric_pic = pic[1:] if signed else pic
 
-    # Decimal PIC: 9(10)V99, 999V99, S9(5)V9(2)
     if "V" in numeric_pic:
         left, right = numeric_pic.split("V", 1)
 
@@ -81,7 +68,6 @@ def parse_pic(pic, usage=None):
 
         if left_digits is not None and right_digits is not None:
             total_digits = left_digits + right_digits
-
             result.update({
                 "cobol_type": "signed_numeric" if signed else "unsigned_numeric",
                 "python_type": "Decimal",
@@ -91,7 +77,6 @@ def parse_pic(pic, usage=None):
             })
             return result
 
-    # Integer PIC: 9, 99, 999, 9(10), S9(5)
     int_digits = parse_repeated_count(numeric_pic, "9")
     if int_digits is not None:
         result.update({
@@ -163,48 +148,6 @@ def extract_usage(line):
     return None
 
 
-def infer_semantic_role(name):
-    upper = name.upper()
-
-    if "BAL" in upper or "BALANCE" in upper:
-        return "ACCOUNT_BALANCE"
-
-    if "AMOUNT" in upper or "DEPOSIT" in upper or "WITHDRAW" in upper:
-        return "MONEY_AMOUNT"
-
-    if "PIN" in upper:
-        return "AUTHENTICATION_PIN"
-
-    if "ACCOUNT" in upper:
-        return "ACCOUNT_IDENTIFIER"
-
-    if "NAME" in upper:
-        return "CUSTOMER_NAME"
-
-    if "AGE" in upper:
-        return "CUSTOMER_AGE"
-
-    if "STATUS" in upper:
-        return "FILE_STATUS"
-
-    if "CHOICE" in upper:
-        return "MENU_CHOICE"
-
-    return None
-
-
-def is_money_field(name, pic_info):
-    role = infer_semantic_role(name)
-
-    if role in ["ACCOUNT_BALANCE", "MONEY_AMOUNT"]:
-        return True
-
-    if pic_info["scale"] and pic_info["scale"] > 0:
-        return True
-
-    return False
-
-
 def build_symbol_table(filepath):
     content = read_cobol_file(filepath)
     lines = content.splitlines()
@@ -214,7 +157,7 @@ def build_symbol_table(filepath):
 
     variable_pattern = re.compile(
         r"^\s*(\d{2})\s+([A-Z0-9-]+)"
-        r"(?:\s+PIC\s+([A-Z0-9()VS.-]+))?"
+        r"(?:\s+PIC\s+([A-Z0-9()VS.,+-]+))?"
         r"(?:\s+(COMP-3|COMP))?",
         re.IGNORECASE
     )
@@ -236,7 +179,10 @@ def build_symbol_table(filepath):
                 "level": level,
                 "kind": "record",
                 "section": section,
-                "children": []
+                "children": [],
+                "semantic_role": None,
+                "semantic_source": "ai_required",
+                "semantic_confidence": None
             }
 
             if level == "01":
@@ -245,7 +191,6 @@ def build_symbol_table(filepath):
             continue
 
         pic_info = parse_pic(pic, usage)
-        semantic_role = infer_semantic_role(name)
 
         entry = {
             "level": level,
@@ -255,16 +200,25 @@ def build_symbol_table(filepath):
             "python_type": pic_info["python_type"],
             "python_name": python_safe_name(name),
             "initial_value": extract_initial_value(line),
-            "scale": pic_info["scale"]
+            "scale": pic_info["scale"],
+
+            "semantic_role": None,
+            "semantic_source": "ai_required",
+            "semantic_confidence": None,
+
+            "ai_enrichment_needed": True,
+            "ai_enrichment_targets": [
+                "semantic_role",
+                "is_money",
+                "business_meaning",
+                "risk_level",
+                "translation_notes",
+                "test_hints"
+            ]
         }
 
         if usage:
             entry["usage"] = usage
-
-        if semantic_role:
-            entry["heuristic_semantic_role"] = semantic_role
-            entry["semantic_source"] = "rule_heuristic"
-            entry["semantic_confidence"] = "low"
 
         if pic_info["length"] is not None:
             entry["length"] = pic_info["length"]
@@ -275,13 +229,13 @@ def build_symbol_table(filepath):
         if pic_info["cobol_type"] == "alphanumeric":
             entry["padding"] = "right-space"
 
-        if is_money_field(name, pic_info):
+        # Deterministic rule: decimal PIC must use Decimal.
+        # Business meaning of money is left to AI enrichment.
+        if pic_info["scale"] and pic_info["scale"] > 0:
             entry["python_type"] = "Decimal"
-            entry["is_money"] = True
-            entry["money_detection_source"] = "rule_heuristic"
-            entry["money_confidence"] = "medium"
-            entry["note"] = "Money-like field detected by PIC scale or variable naming; use Decimal, never float."
-      
+            entry["decimal_detection_source"] = "pic_clause"
+            entry["note"] = "Decimal PIC detected from implied decimal scale; use Decimal."
+
         if name == "WS-FILE-STATUS":
             entry["meaning"] = {
                 "00": "success",
