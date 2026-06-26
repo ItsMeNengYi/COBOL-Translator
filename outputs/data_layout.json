@@ -1,0 +1,73 @@
+{
+  "files": {
+    "USERDATA": {
+      "assign_to": "atm_accounts.dat",
+      "organization": "INDEXED",
+      "access_mode": "RANDOM",
+      "record_key": "F-ACCOUNT",
+      "file_status": "WS-FILE-STATUS",
+      "record_name": "F-DATA",
+      "record_length": 50,
+      "storage_encoding": "fixed-width",
+      "serialization": "indexed-record",
+      "fields": [
+        {
+          "name": "F-ACCOUNT",
+          "python_name": "f_account",
+          "pic": "9(10)",
+          "type": "int",
+          "start": 0,
+          "end": 10,
+          "length": 10,
+          "scale": 0,
+          "semantic_role": "ACCOUNT_IDENTIFIER"
+        },
+        {
+          "name": "F-PIN",
+          "python_name": "f_pin",
+          "pic": "9(6)",
+          "type": "int",
+          "start": 10,
+          "end": 16,
+          "length": 6,
+          "scale": 0,
+          "semantic_role": "AUTHENTICATION_PIN"
+        },
+        {
+          "name": "F-BAL",
+          "python_name": "f_bal",
+          "pic": "9(12)",
+          "type": "Decimal",
+          "start": 16,
+          "end": 28,
+          "length": 12,
+          "scale": 0,
+          "semantic_role": "ACCOUNT_BALANCE"
+        },
+        {
+          "name": "F-NAME",
+          "python_name": "f_name",
+          "pic": "X(20)",
+          "type": "str",
+          "start": 28,
+          "end": 48,
+          "length": 20,
+          "scale": 0,
+          "padding": "right-space",
+          "semantic_role": "CUSTOMER_NAME"
+        },
+        {
+          "name": "F-AGE",
+          "python_name": "f_age",
+          "pic": "99",
+          "type": "int",
+          "start": 48,
+          "end": 50,
+          "length": 2,
+          "scale": 0,
+          "semantic_role": "CUSTOMER_AGE"
+        }
+      ]
+    }
+  }
+}
