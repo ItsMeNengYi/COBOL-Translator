@@ -1,0 +1,61 @@
+{
+  "program_name": "ATM-MACHINE",
+  "source_file": "ATM.cob",
+  "divisions": [
+    "IDENTIFICATION",
+    "ENVIRONMENT",
+    "DATA",
+    "PROCEDURE"
+  ],
+  "sections": {
+    "ENVIRONMENT": [
+      "INPUT-OUTPUT",
+      "FILE-CONTROL"
+    ],
+    "DATA": [
+      "FILE SECTION",
+      "WORKING-STORAGE SECTION"
+    ],
+    "PROCEDURE": []
+  },
+  "files": [
+    {
+      "select_name": "USERDATA",
+      "assign_to": "atm_accounts.dat",
+      "organization": "INDEXED",
+      "access_mode": "RANDOM",
+      "record_key": "F-ACCOUNT",
+      "file_status": "WS-FILE-STATUS"
+    }
+  ],
+  "paragraphs": [
+    "MAIN-PROCEDURE",
+    "CREATE-ACCOUNT",
+    "GENERATE-ACCOUNT",
+    "LOGIN",
+    "ATM-MENU",
+    "CHECK-BALANCE",
+    "DEPOSIT",
+    "WITHDRAW"
+  ],
+  "supported_constructs_detected": [
+    "OPEN",
+    "CLOSE",
+    "STOP RUN",
+    "IF",
+    "PERFORM UNTIL",
+    "PERFORM paragraph",
+    "EVALUATE/WHEN",
+    "MOVE",
+    "DISPLAY",
+    "ACCEPT",
+    "COMPUTE",
+    "READ INVALID KEY",
+    "WRITE INVALID KEY",
+    "REWRITE INVALID KEY",
+    "ADD",
+    "SUBTRACT",
+    "EXIT",
+    "EXIT PARAGRAPH"
+  ]
+}
