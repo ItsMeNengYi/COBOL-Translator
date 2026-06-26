@@ -52,7 +52,7 @@
 
 ## Important Data Fields
 
-- Money fields: F-BAL, WS-AMOUNT
+- Money fields: 
 - Total variables: 13
 - Total rules extracted: 125
 - Control-flow nodes: 9
