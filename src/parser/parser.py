@@ -4,15 +4,22 @@ import re
 def extract_variables(content):
     variables = []
 
-    pattern = r"^\s*(\d{2})\s+([A-Z0-9-]+)\s+PIC\s+([A-Z0-9()V.-]+)"
+    variable_pattern = r"^\s*(\d{2})\s+([A-Z0-9-]+)\s+PIC\s+([A-Z0-9()V.-]+)"
 
     for line in content.splitlines():
-        match = re.search(pattern, line.upper())
+        line_upper = line.upper()
+
+        match = re.search(variable_pattern, line_upper)
+
         if match:
+            level = match.group(1)
+            name = match.group(2)
+            picture = match.group(3)
+
             variables.append({
-                "level": match.group(1),
-                "name": match.group(2),
-                "picture": match.group(3)
+                "level": level,
+                "name": name,
+                "picture": picture
             })
 
     return variables
