@@ -262,7 +262,9 @@ def build_symbol_table(filepath):
             entry["usage"] = usage
 
         if semantic_role:
-            entry["semantic_role"] = semantic_role
+            entry["heuristic_semantic_role"] = semantic_role
+            entry["semantic_source"] = "rule_heuristic"
+            entry["semantic_confidence"] = "low"
 
         if pic_info["length"] is not None:
             entry["length"] = pic_info["length"]
@@ -276,8 +278,10 @@ def build_symbol_table(filepath):
         if is_money_field(name, pic_info):
             entry["python_type"] = "Decimal"
             entry["is_money"] = True
-            entry["note"] = "Money-like field or decimal PIC; use Decimal, never float."
-
+            entry["money_detection_source"] = "rule_heuristic"
+            entry["money_confidence"] = "medium"
+            entry["note"] = "Money-like field detected by PIC scale or variable naming; use Decimal, never float."
+      
         if name == "WS-FILE-STATUS":
             entry["meaning"] = {
                 "00": "success",
