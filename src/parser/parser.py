@@ -14,8 +14,7 @@ def extract_variables(content):
         if match:
             level = match.group(1)
             name = match.group(2)
-            picture = match.group(3)
-
+            picture = match.group(3).rstrip(".")
             variables.append({
                 "level": level,
                 "name": name,
