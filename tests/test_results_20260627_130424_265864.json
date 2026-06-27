@@ -1,0 +1,65 @@
+{
+  "cobol_path": "inputs/ATM.cob",
+  "python_path": "translated/ATM_CodeMigrate.py",
+  "ran_at": "2026-06-27T13:04:24",
+  "compile": {
+    "ok": true,
+    "returncode": 0,
+    "executable": "/var/folders/rj/n8k_1ngs26s167c68_dd37ym0000gn/T/cobol-test-run-k6qxfcht/ATM",
+    "output": ""
+  },
+  "results": [
+    {
+      "name": "case_001",
+      "stdin": [
+        "1",
+        "1",
+        "Test User",
+        "30",
+        "123456",
+        "1",
+        "123456",
+        "1",
+        "100",
+        "100",
+        "3"
+      ],
+      "matched": false,
+      "cobol": {
+        "returncode": 0,
+        "output": " \n===== ATM SYSTEM =====\n1 - CREATE ACCOUNT\n2 - LOGIN\n3 - EXIT\nENTER CHOICE:\nENTER NAME:\nENTER AGE:\nYOU MUST BE AT LEAST 18 YEARS OLD\n \n===== ATM SYSTEM =====\n1 - CREATE ACCOUNT\n2 - LOGIN\n3 - EXIT\nENTER CHOICE:\nINVALID CHOICE\nPLEASE ENTER 1, 2, OR 3\nENTER CHOICE:\nINVALID CHOICE\nPLEASE ENTER 1, 2, OR 3\nENTER CHOICE:\nENTER NAME:\nENTER AGE:\nYOU MUST BE AT LEAST 18 YEARS OLD\n \n===== ATM SYSTEM =====\n1 - CREATE ACCOUNT\n2 - LOGIN\n3 - EXIT\nENTER CHOICE:\nINVALID CHOICE\nPLEASE ENTER 1, 2, OR 3\nENTER CHOICE:\nINVALID CHOICE\nPLEASE ENTER 1, 2, OR 3\nENTER CHOICE:\nGOODBYE\n"
+      },
+      "python": {
+        "returncode": 1,
+        "output": "  File \"/Users/ny/workspace/COBOL-Translator/translated/ATM_CodeMigrate.py\", line 8\n    def process_files(self):\n    ^\nIndentationError: expected an indented block after function definition on line 6\n"
+      },
+      "diff": "--- cobol\n+++ python\n@@ -1,37 +1,4 @@\n- \n-===== ATM SYSTEM =====\n-1 - CREATE ACCOUNT\n-2 - LOGIN\n-3 - EXIT\n-ENTER CHOICE:\n-ENTER NAME:\n-ENTER AGE:\n-YOU MUST BE AT LEAST 18 YEARS OLD\n- \n-===== ATM SYSTEM =====\n-1 - CREATE ACCOUNT\n-2 - LOGIN\n-3 - EXIT\n-ENTER CHOICE:\n-INVALID CHOICE\n-PLEASE ENTER 1, 2, OR 3\n-ENTER CHOICE:\n-INVALID CHOICE\n-PLEASE ENTER 1, 2, OR 3\n-ENTER CHOICE:\n-ENTER NAME:\n-ENTER AGE:\n-YOU MUST BE AT LEAST 18 YEARS OLD\n- \n-===== ATM SYSTEM =====\n-1 - CREATE ACCOUNT\n-2 - LOGIN\n-3 - EXIT\n-ENTER CHOICE:\n-INVALID CHOICE\n-PLEASE ENTER 1, 2, OR 3\n-ENTER CHOICE:\n-INVALID CHOICE\n-PLEASE ENTER 1, 2, OR 3\n-ENTER CHOICE:\n-GOODBYE\n+  File \"/Users/ny/workspace/COBOL-Translator/translated/ATM_CodeMigrate.py\", line 8\n+    def process_files(self):\n+    ^\n+IndentationError: expected an indented block after function definition on line 6\n"
+    },
+    {
+      "name": "case_002",
+      "stdin": [
+        "2",
+        "1",
+        "Test User",
+        "30",
+        "123456",
+        "1",
+        "123456",
+        "1",
+        "100",
+        "100",
+        "3"
+      ],
+      "matched": false,
+      "cobol": {
+        "returncode": 0,
+        "output": " \n===== ATM SYSTEM =====\n1 - CREATE ACCOUNT\n2 - LOGIN\n3 - EXIT\nENTER CHOICE:\nENTER ACCOUNT NUMBER:\nACCOUNT NOT FOUND\n \n===== ATM SYSTEM =====\n1 - CREATE ACCOUNT\n2 - LOGIN\n3 - EXIT\nENTER CHOICE:\nINVALID CHOICE\nPLEASE ENTER 1, 2, OR 3\nENTER CHOICE:\nINVALID CHOICE\nPLEASE ENTER 1, 2, OR 3\nENTER CHOICE:\nINVALID CHOICE\nPLEASE ENTER 1, 2, OR 3\nENTER CHOICE:\nENTER NAME:\nENTER AGE:\nYOU MUST BE AT LEAST 18 YEARS OLD\n \n===== ATM SYSTEM =====\n1 - CREATE ACCOUNT\n2 - LOGIN\n3 - EXIT\nENTER CHOICE:\nINVALID CHOICE\nPLEASE ENTER 1, 2, OR 3\nENTER CHOICE:\nINVALID CHOICE\nPLEASE ENTER 1, 2, OR 3\nENTER CHOICE:\nGOODBYE\n"
+      },
+      "python": {
+        "returncode": 1,
+        "output": "  File \"/Users/ny/workspace/COBOL-Translator/translated/ATM_CodeMigrate.py\", line 8\n    def process_files(self):\n    ^\nIndentationError: expected an indented block after function definition on line 6\n"
+      },
+      "diff": "--- cobol\n+++ python\n@@ -1,39 +1,4 @@\n- \n-===== ATM SYSTEM =====\n-1 - CREATE ACCOUNT\n-2 - LOGIN\n-3 - EXIT\n-ENTER CHOICE:\n-ENTER ACCOUNT NUMBER:\n-ACCOUNT NOT FOUND\n- \n-===== ATM SYSTEM =====\n-1 - CREATE ACCOUNT\n-2 - LOGIN\n-3 - EXIT\n-ENTER CHOICE:\n-INVALID CHOICE\n-PLEASE ENTER 1, 2, OR 3\n-ENTER CHOICE:\n-INVALID CHOICE\n-PLEASE ENTER 1, 2, OR 3\n-ENTER CHOICE:\n-INVALID CHOICE\n-PLEASE ENTER 1, 2, OR 3\n-ENTER CHOICE:\n-ENTER NAME:\n-ENTER AGE:\n-YOU MUST BE AT LEAST 18 YEARS OLD\n- \n-===== ATM SYSTEM =====\n-1 - CREATE ACCOUNT\n-2 - LOGIN\n-3 - EXIT\n-ENTER CHOICE:\n-INVALID CHOICE\n-PLEASE ENTER 1, 2, OR 3\n-ENTER CHOICE:\n-INVALID CHOICE\n-PLEASE ENTER 1, 2, OR 3\n-ENTER CHOICE:\n-GOODBYE\n+  File \"/Users/ny/workspace/COBOL-Translator/translated/ATM_CodeMigrate.py\", line 8\n+    def process_files(self):\n+    ^\n+IndentationError: expected an indented block after function definition on line 6\n"
+    }
+  ]
+}

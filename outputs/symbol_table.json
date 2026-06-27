@@ -1,0 +1,102 @@
+{
+  "EMP-NAME": {
+    "level": "01",
+    "section": "WORKING-STORAGE",
+    "pic": "X(20)",
+    "cobol_type": "alphanumeric",
+    "python_type": "str",
+    "python_name": "emp_name",
+    "initial_value": null,
+    "scale": 0,
+    "semantic_role": null,
+    "semantic_source": "ai_required",
+    "semantic_confidence": null,
+    "ai_enrichment_needed": true,
+    "ai_enrichment_targets": [
+      "semantic_role",
+      "is_money",
+      "business_meaning",
+      "risk_level",
+      "translation_notes",
+      "test_hints"
+    ],
+    "length": 20,
+    "padding": "right-space"
+  },
+  "HOURS-WORKED": {
+    "level": "01",
+    "section": "WORKING-STORAGE",
+    "pic": "9(3)",
+    "cobol_type": "unsigned_numeric",
+    "python_type": "int",
+    "python_name": "hours_worked",
+    "initial_value": null,
+    "scale": 0,
+    "semantic_role": null,
+    "semantic_source": "ai_required",
+    "semantic_confidence": null,
+    "ai_enrichment_needed": true,
+    "ai_enrichment_targets": [
+      "semantic_role",
+      "is_money",
+      "business_meaning",
+      "risk_level",
+      "translation_notes",
+      "test_hints"
+    ],
+    "length": 3,
+    "digits": 3
+  },
+  "HOURLY-RATE": {
+    "level": "01",
+    "section": "WORKING-STORAGE",
+    "pic": "9(3)V99",
+    "cobol_type": "unsigned_numeric",
+    "python_type": "Decimal",
+    "python_name": "hourly_rate",
+    "initial_value": null,
+    "scale": 2,
+    "semantic_role": null,
+    "semantic_source": "ai_required",
+    "semantic_confidence": null,
+    "ai_enrichment_needed": true,
+    "ai_enrichment_targets": [
+      "semantic_role",
+      "is_money",
+      "business_meaning",
+      "risk_level",
+      "translation_notes",
+      "test_hints"
+    ],
+    "length": 5,
+    "digits": 5,
+    "decimal_detection_source": "pic_clause",
+    "note": "Decimal PIC detected from implied decimal scale; use Decimal."
+  },
+  "GROSS-PAY": {
+    "level": "01",
+    "section": "WORKING-STORAGE",
+    "pic": "9(5)V99",
+    "cobol_type": "unsigned_numeric",
+    "python_type": "Decimal",
+    "python_name": "gross_pay",
+    "initial_value": null,
+    "scale": 2,
+    "semantic_role": null,
+    "semantic_source": "ai_required",
+    "semantic_confidence": null,
+    "ai_enrichment_needed": true,
+    "ai_enrichment_targets": [
+      "semantic_role",
+      "is_money",
+      "business_meaning",
+      "risk_level",
+      "translation_notes",
+      "test_hints"
+    ],
+    "length": 7,
+    "digits": 7,
+    "decimal_detection_source": "pic_clause",
+    "note": "Decimal PIC detected from implied decimal scale; use Decimal."
+  }
+}

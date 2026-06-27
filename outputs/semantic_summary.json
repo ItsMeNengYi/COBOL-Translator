@@ -1,0 +1,10 @@
+{
+  "program": "ATM",
+  "variables": ["BALANCE", "AMOUNT", "PIN"],
+  "paragraphs": ["LOGIN", "WITHDRAW", "DEPOSIT"],
+  "business_rules": [
+    "User must enter correct PIN before transaction",
+    "Deposit increases balance",
+    "Withdrawal decreases balance only if balance is sufficient"
+  ]
+}

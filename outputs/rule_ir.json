@@ -1,0 +1,172 @@
+{
+  "program": "ATM-MACHINE",
+  "schema_version": "0.2",
+  "rules": [
+    {
+      "rule_id": "R001",
+      "paragraph": "MAIN",
+      "type": "DISPLAY",
+      "value": "ENTER EMPLOYEE NAME:",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
+    },
+    {
+      "rule_id": "R002",
+      "paragraph": "MAIN",
+      "type": "ACCEPT",
+      "target": "EMP-NAME",
+      "business_category": "program_control",
+      "translation_hint": "input_operation",
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
+    },
+    {
+      "rule_id": "R003",
+      "paragraph": "MAIN",
+      "type": "DISPLAY",
+      "value": "ENTER HOURS:",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
+    },
+    {
+      "rule_id": "R004",
+      "paragraph": "MAIN",
+      "type": "ACCEPT",
+      "target": "HOURS-WORKED",
+      "business_category": "program_control",
+      "translation_hint": "input_operation",
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
+    },
+    {
+      "rule_id": "R005",
+      "paragraph": "MAIN",
+      "type": "DISPLAY",
+      "value": "ENTER RATE:",
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
+    },
+    {
+      "rule_id": "R006",
+      "paragraph": "MAIN",
+      "type": "ACCEPT",
+      "target": "HOURLY-RATE",
+      "business_category": "program_control",
+      "translation_hint": "input_operation",
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
+    },
+    {
+      "rule_id": "R007",
+      "paragraph": "MAIN",
+      "type": "COMPUTE",
+      "target": "GROSS-PAY",
+      "expression": "HOURS-WORKED * HOURLY-RATE",
+      "business_category": "program_control",
+      "translation_hint": "python_expression",
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
+    },
+    {
+      "rule_id": "R008",
+      "paragraph": "MAIN",
+      "type": "DISPLAY",
+      "parts": [
+        "EMPLOYEE: ",
+        "EMP-NAME"
+      ],
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
+    },
+    {
+      "rule_id": "R009",
+      "paragraph": "MAIN",
+      "type": "DISPLAY",
+      "parts": [
+        "GROSS PAY: ",
+        "GROSS-PAY"
+      ],
+      "business_category": "program_control",
+      "translation_hint": "output_operation",
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
+    },
+    {
+      "rule_id": "R010",
+      "paragraph": "MAIN",
+      "type": "STOP_RUN",
+      "business_category": "program_control",
+      "translation_hint": "program_exit",
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
+    }
+  ]
+}

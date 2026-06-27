@@ -1,0 +1,230 @@
+{
+  "program": "ATM-MACHINE",
+  "detected_domain": "retail banking interactive ATM system",
+  "variable_enrichment": {
+    "F-ACCOUNT": {
+      "semantic_role": "unique customer account identifier",
+      "is_money": false,
+      "confidence": "high",
+      "reason": "Used as key to identify a user account in indexed file, typical for bank accounts"
+    },
+    "F-PIN": {
+      "semantic_role": "customer account authentication PIN code",
+      "is_money": false,
+      "confidence": "high",
+      "reason": "Used for user authentication with length constraint to 6 digits"
+    },
+    "F-BAL": {
+      "semantic_role": "account balance",
+      "is_money": true,
+      "confidence": "high",
+      "reason": "12-digit numeric field representing user's money balance in the account"
+    },
+    "F-NAME": {
+      "semantic_role": "account holder's full name",
+      "is_money": false,
+      "confidence": "high",
+      "reason": "String field used to hold customer's identifying name"
+    },
+    "F-AGE": {
+      "semantic_role": "account holder's age",
+      "is_money": false,
+      "confidence": "high",
+      "reason": "Two-digit numeric field validated against minimum age of 18"
+    },
+    "WS-FILE-STATUS": {
+      "semantic_role": "file operation status code",
+      "is_money": false,
+      "confidence": "high",
+      "reason": "Two-character status to track file I/O success/failure"
+    },
+    "WS-MAIN-CHOICE": {
+      "semantic_role": "user main menu choice selection",
+      "is_money": false,
+      "confidence": "high",
+      "reason": "Integer controlling program menu navigation"
+    },
+    "WS-CHOICE": {
+      "semantic_role": "user submenu choice selection",
+      "is_money": false,
+      "confidence": "high",
+      "reason": "Integer controlling ATM menu options selection"
+    },
+    "WS-ACCOUNT": {
+      "semantic_role": "input account number for operations",
+      "is_money": false,
+      "confidence": "high",
+      "reason": "Integer to hold user input for account verification"
+    },
+    "WS-PIN": {
+      "semantic_role": "input PIN for authentication",
+      "is_money": false,
+      "confidence": "high",
+      "reason": "Integer for user PIN input"
+    },
+    "WS-AMOUNT": {
+      "semantic_role": "transaction monetary amount",
+      "is_money": true,
+      "confidence": "high",
+      "reason": "12-digit integer validated to be positive, used in deposit/withdraw"
+    },
+    "WS-FOUND": {
+      "semantic_role": "flag for account lookup success",
+      "is_money": false,
+      "confidence": "high",
+      "reason": "Character flag 'Y' or 'N' to indicate account presence in storage"
+    }
+  },
+  "business_rules": [
+    {
+      "rule_id": "R023",
+      "business_meaning": "Account creation fails if the account holder's name is empty, ensuring mandatory identification.",
+      "risk_level": "low",
+      "test_hints": [
+        "Create account with empty name",
+        "Verify rejection message displayed"
+      ],
+      "translation_notes": "Enforce not-null check on user name field before proceeding."
+    },
+    {
+      "rule_id": "R024",
+      "business_meaning": "Account creation restricted to individuals aged 18 or older to comply with legal age requirements.",
+      "risk_level": "low",
+      "test_hints": [
+        "Attempt account creation with age below 18",
+        "Check for proper rejection"
+      ],
+      "translation_notes": "Implement age validation prior to account creation process."
+    },
+    {
+      "rule_id": "R025",
+      "business_meaning": "PIN must be exactly 6 digits, ensuring security and uniform authentication credential format.",
+      "risk_level": "low",
+      "test_hints": [
+        "Enter PIN less than 6 digits",
+        "Verify appropriate warning message"
+      ],
+      "translation_notes": "Validate PIN length numeric range during onboarding."
+    },
+    {
+      "rule_id": "R026",
+      "business_meaning": "New account data write operation either confirms success with account number display or fails showing error prompting user retry.",
+      "risk_level": "high",
+      "test_hints": [
+        "Simulate successful write to data store",
+        "Simulate failure scenario",
+        "Verify user messaging"
+      ],
+      "translation_notes": "Handle database/file write status carefully with user feedback."
+    },
+    {
+      "rule_id": "R052",
+      "business_meaning": "Login process immediately rejects invalid (zero or negative) account numbers to prevent meaningless lookups.",
+      "risk_level": "medium",
+      "test_hints": [
+        "Enter invalid account number 0 or negative",
+        "Confirm rejection message"
+      ],
+      "translation_notes": "Pre-validate account input prior to file operations."
+    },
+    {
+      "rule_id": "R053",
+      "business_meaning": "If user account not found, login fails with notification; otherwise, prompts for PIN and allows limited retries on failure before access.",
+      "risk_level": "medium",
+      "test_hints": [
+        "Login with non-existent account",
+        "Login with existing account and wrong PIN",
+        "Login with correct PIN"
+      ],
+      "translation_notes": "Enforce account existence check and PIN validation with retry logic."
+    },
+    {
+      "rule_id": "R054",
+      "business_meaning": "Account retrieval from storage sets found flag to control login flow based on success or failure of record read.",
+      "risk_level": "high",
+      "test_hints": [
+        "Test file read hit and miss scenarios",
+        "Verify found flag correctness"
+      ],
+      "translation_notes": "Atomic file read determines account existence for further validation."
+    },
+    {
+      "rule_id": "R098",
+      "business_meaning": "Deposit amount must be positive; zero or negative inputs are rejected to maintain transaction validity.",
+      "risk_level": "high",
+      "test_hints": [
+        "Deposit zero or negative amount",
+        "Deposit positive amount"
+      ],
+      "translation_notes": "Ensure input validation for deposit transactions."
+    },
+    {
+      "rule_id": "R099",
+      "business_meaning": "Deposit operation updates the account balance and confirms success or failure to the user accordingly.",
+      "risk_level": "high",
+      "test_hints": [
+        "Deposit and check updated balance",
+        "Simulate failed update and check message"
+      ],
+      "translation_notes": "Manage file rewrite carefully with confirmation messages."
+    },
+    {
+      "rule_id": "R105",
+      "business_meaning": "Deposited amount is added to existing balance for monetary correctness.",
+      "risk_level": "high",
+      "test_hints": [
+        "Deposit known amount",
+        "Verify balance is correctly incremented"
+      ],
+      "translation_notes": "Arithmetic operation critical to monetary integrity."
+    },
+    {
+      "rule_id": "R111",
+      "business_meaning": "Withdrawal amount must be positive; zero or negative values invalidate the request.",
+      "risk_level": "high",
+      "test_hints": [
+        "Withdraw zero or negative amount",
+        "Withdraw positive amount"
+      ],
+      "translation_notes": "Input validation similar to deposit enforced."
+    },
+    {
+      "rule_id": "R112",
+      "business_meaning": "Withdrawal amount cannot exceed current balance; insufficient funds trigger rejection.",
+      "risk_level": "high",
+      "test_hints": [
+        "Withdraw more than balance",
+        "Withdraw exactly balance",
+        "Withdraw less than balance"
+      ],
+      "translation_notes": "Balance check prevents overdraft or unauthorized withdrawals."
+    },
+    {
+      "rule_id": "R113",
+      "business_meaning": "Withdrawal updates balance and confirms success or failure to the user, mirroring deposit update process.",
+      "risk_level": "high",
+      "test_hints": [
+        "Successful withdrawal updates balance",
+        "Failed update shows error"
+      ],
+      "translation_notes": "File update status is critical for transaction integrity."
+    },
+    {
+      "rule_id": "R120",
+      "business_meaning": "Withdrawal amount is subtracted from account balance in monetary adjustment.",
+      "risk_level": "high",
+      "test_hints": [
+        "Withdraw amount and verify balance decreases correctly"
+      ],
+      "translation_notes": "Monetary subtraction ensures accurate balance after withdrawal."
+    }
+  ],
+  "overall_business_summary": "This interactive ATM system supports typical banking operations such as account creation with mandatory validation on name and age, secure login authenticated via account number and PIN, and essential financial transactions including deposits and withdrawals with strict validation on amounts and balance sufficiency. User interactions include menus to perform these operations, with persistent storage managed via indexed file operations ensuring record-level access and updates.",
+  "migration_risks": [
+    "Correctly preserving file I/O error handling and status checking to avoid silent failures or data corruption",
+    "Ensuring input validations for user data (age, name, PIN length) are exactly replicated in new environment",
+    "Maintaining atomicity and integrity of balance updates during deposits and withdrawals to prevent race conditions or inconsistencies",
+    "Reproducing retry and authentication logic securely to prevent unauthorized access or denial of service",
+    "Mapping legacy COBOL data types with strict fixed-length numeric and string fields to corresponding modern data structures without truncation or data loss"
+  ]
+}
