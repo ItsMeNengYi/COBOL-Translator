@@ -12,7 +12,6 @@ from typing import Any
 import streamlit as st
 import streamlit.components.v1 as components
 
-from src.report_generator import default_report_data, generate_html_report
 from test_results_ui import (
     DEFAULT_RESULTS_PATH,
     load_rule_function_results,
@@ -22,7 +21,6 @@ from test_results_ui import (
 
 
 APP_NAME = "Avo-cuddle"
-REPORT_PATH = Path("reports/migration_report.html")
 DEFAULT_COBOL_PATH = Path("inputs/ATM.cob")
 LOGO_PATH = Path("assets/avocuddle_logo.svg")
 COBOL_DATA_DIR = Path("data/cobol")
@@ -402,31 +400,11 @@ def inject_styles() -> None:
           margin-top: 4px;
         }
 
-        div[class*="st-key-header_report"] button,
-        div[class*="st-key-bottom_report"] button {
-          background: white;
-          border: 1px solid var(--border);
-          border-radius: 12px;
-          box-shadow: var(--soft-shadow);
-          color: var(--forest);
-          font-weight: 750;
-          min-height: 44px;
-          padding: 0 18px;
-        }
-
-        div[class*="st-key-header_report"] button:hover,
-        div[class*="st-key-bottom_report"] button:hover {
-          background: #F8FAF9;
-          border: 1px solid var(--border);
-          color: var(--forest);
-        }
-
         .panel-card,
         .action-card,
         .report-card,
         .st-key-source_card,
-        .st-key-generated_card,
-        .st-key-bottom_report_card {
+        .st-key-generated_card {
           background: var(--card);
           border: 1px solid var(--border);
           border-radius: 16px;
@@ -603,11 +581,6 @@ def inject_styles() -> None:
           color: var(--forest);
         }
 
-        .st-key-bottom_report_card {
-          min-height: 108px;
-          padding: 20px;
-        }
-
         div[class*="st-key-test_toggle"] button {
           background: #F3F4F6;
           border: 1px solid var(--border);
@@ -756,12 +729,6 @@ def inject_styles() -> None:
           color: var(--text-secondary) !important;
         }
 
-        @media (max-width: 1000px) {
-          .bottom-actions {
-            grid-template-columns: 1fr;
-          }
-        }
-
         @media (max-width: 760px) {
           .block-container {
             padding: 22px 16px 36px;
@@ -780,9 +747,6 @@ def inject_styles() -> None:
         """,
         unsafe_allow_html=True,
     )
-def generate_report_silently() -> None:
-    # Future integration point: report_generator.py data assembled from parser/extractor/test runner.
-    generate_html_report(default_report_data(), REPORT_PATH)
 
 
 def render_header() -> None:
@@ -930,20 +894,13 @@ def render_bottom_actions() -> None:
     icon = ":material/check_circle:" if failed == 0 and total else ":material/error:"
     label = f"{passed} / {total} Passed\nClick to view details"
 
-    left, right = st.columns(2, gap="large")
-    with left:
-        if st.button(
-            label,
-            key="test_toggle",
-            icon=icon,
-            use_container_width=True,
-        ):
-            st.session_state.show_test_report = not st.session_state.show_test_report
-    with right:
-        with st.container(border=False, key="bottom_report_card"):
-            if st.button("Generate Report", key="bottom_report", icon=":material/description:", use_container_width=True):
-                generate_report_silently()
-            st.markdown('<div class="action-subtitle">Download HTML report</div>', unsafe_allow_html=True)
+    if st.button(
+        label,
+        key="test_toggle",
+        icon=icon,
+        use_container_width=True,
+    ):
+        st.session_state.show_test_report = not st.session_state.show_test_report
 
     if st.session_state.test_generation_error:
         st.error(st.session_state.test_generation_error)
