@@ -62,7 +62,7 @@
 <body>
   <header>
     <h1>COBOL Modernization Migration Report</h1>
-    <p>Generated 2026-06-27 11:50:44</p>
+    <p>Generated 2026-06-27 14:44:24</p>
   </header>
   <main>
     <section class="cards">
@@ -78,7 +78,7 @@
           <thead><tr><th>Rule ID</th><th>Paragraph</th><th>Type</th><th>Target</th><th>Business Category</th><th>Risk</th><th>Description</th></tr></thead>
           <tbody><tr><td>BR-001</td><td>VALIDATE-ACCOUNT</td><td>Validation</td><td>Account Number</td><td>Customer Account</td><td>Low</td><td>Rejects requests when the account identifier is missing or malformed.</td></tr>
 <tr><td>BR-002</td><td>CHECK-BALANCE</td><td>Decision</td><td>Withdrawal Amount</td><td>Funds Availability</td><td>Medium</td><td>Compares requested cash amount against current ledger balance.</td></tr>
-<tr><td>BR-003</td><td>APPLY-FEE</td><td>Calculation</td><td>Transaction Fee</td><td>Fee Processing</td><td>High</td><td>Applies fee logic for out-of-network withdrawal transactions.</td></tr></tbody>
+<tr><td>BR-003</td><td>APPLY-FEE</td><td>Calculation</td><td>Transaction Fee</td><td>Fee Processing</td><td>Medium</td><td>Applies fee logic for out-of-network withdrawal transactions.</td></tr></tbody>
         </table>
       </div>
     </section>
@@ -111,9 +111,8 @@
       <div class="table-wrap">
         <table>
           <thead><tr><th>Mismatch ID</th><th>Description</th><th>Severity</th><th>COBOL</th><th>Python/JavaScript</th><th>Suggestion</th></tr></thead>
-          <tbody><tr><td>MM-001</td><td>Decimal rounding differs for half-cent values.</td><td>Medium</td><td>ROUNDED numeric assignment</td><td></td><td>Add an explicit Decimal rounding mode matching COBOL compiler settings.</td></tr>
-<tr><td>MM-002</td><td>Whitespace padding behavior needs confirmation for fixed-width fields.</td><td>High</td><td>PIC X field padding</td><td></td><td>Apply fixed-width formatting at system boundaries.</td></tr>
-<tr><td>MM-003</td><td>File status exception branch missing.</td><td>Low</td><td>FILE STATUS CHECK</td><td></td><td>Add exception handling for file operations.</td></tr></tbody>
+          <tbody><tr><td>MM-001</td><td>Decimal rounding differs for half-cent values.</td><td>Medium</td><td>ROUNDED numeric assignment</td><td>Default round behavior</td><td>Add an explicit Decimal rounding mode matching COBOL compiler settings.</td></tr>
+<tr><td>MM-002</td><td>Whitespace padding behavior needs confirmation for fixed-width fields.</td><td>Low</td><td>PIC X field padding</td><td>Variable-length string</td><td>Apply fixed-width formatting at system boundaries.</td></tr></tbody>
         </table>
       </div>
     </section>
