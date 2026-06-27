@@ -1,8 +1,63 @@
 {
-  "MAIN": {
-    "start_line": 12,
-    "end_line": 28,
+  "MAIN-PROCEDURE": {
+    "start_line": 35,
+    "end_line": 78,
+    "calls": [
+      "CREATE-ACCOUNT",
+      "LOGIN"
+    ],
+    "purpose": "Open account file, handle main menu, route to account creation or login, then close file."
+  },
+  "CREATE-ACCOUNT": {
+    "start_line": 79,
+    "end_line": 123,
+    "calls": [
+      "GENERATE-ACCOUNT"
+    ],
+    "purpose": "Collect name, age, PIN; validate inputs; generate account number; create account record."
+  },
+  "GENERATE-ACCOUNT": {
+    "start_line": 124,
+    "end_line": 136,
+    "calls": [
+      "GENERATE-ACCOUNT"
+    ],
+    "purpose": "Generate random account number and retry if it already exists."
+  },
+  "LOGIN": {
+    "start_line": 137,
+    "end_line": 184,
+    "calls": [
+      "ATM-MENU"
+    ],
+    "purpose": "Read account, validate existence and PIN, then enter ATM menu until logout."
+  },
+  "ATM-MENU": {
+    "start_line": 185,
+    "end_line": 221,
+    "calls": [
+      "CHECK-BALANCE",
+      "DEPOSIT",
+      "WITHDRAW"
+    ],
+    "purpose": "Show post-login menu and route to balance, deposit, withdraw, or logout."
+  },
+  "CHECK-BALANCE": {
+    "start_line": 222,
+    "end_line": 226,
     "calls": [],
-    "purpose": "Purpose not inferred."
+    "purpose": "Display current account balance."
+  },
+  "DEPOSIT": {
+    "start_line": 227,
+    "end_line": 252,
+    "calls": [],
+    "purpose": "Accept positive deposit amount, add it to balance, and update account record."
+  },
+  "WITHDRAW": {
+    "start_line": 253,
+    "end_line": 282,
+    "calls": [],
+    "purpose": "Accept positive withdrawal amount, check sufficient balance, subtract it, and update account record if valid."
   }
 }

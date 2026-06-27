@@ -1,0 +1,29 @@
+IDENTIFICATION DIVISION.
+PROGRAM-ID. GRADE.
+
+DATA DIVISION.
+WORKING-STORAGE SECTION.
+01 MARK PIC 999.
+01 GRADE PIC X.
+
+PROCEDURE DIVISION.
+MAIN.
+    DISPLAY "ENTER MARK:"
+    ACCEPT MARK
+
+    IF MARK >= 80
+        MOVE "A" TO GRADE
+    ELSE
+        IF MARK >= 70
+            MOVE "B" TO GRADE
+        ELSE
+            IF MARK >= 60
+                MOVE "C" TO GRADE
+            ELSE
+                MOVE "F" TO GRADE
+            END-IF
+        END-IF
+    END-IF
+
+    DISPLAY "GRADE = " GRADE
+    STOP RUN.
