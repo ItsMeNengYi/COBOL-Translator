@@ -1,27 +1,39 @@
-# Program Summary: PAYROLL
+# Program Summary: ATM-MACHINE
 
 ## Overview
 
-`PAYROLL` is a COBOL ATM/account management program. It uses an indexed account file and supports account creation, login, balance inquiry, deposit, withdrawal, and logout.
+`ATM-MACHINE` is a COBOL ATM/account management program. It uses an indexed account file and supports account creation, login, balance inquiry, deposit, withdrawal, and logout.
 
 ## Program Structure
 
-- Source file: `employee_payroll.cob`
+- Source file: `ATM.cob`
 - Language: COBOL
 - Dialect: GnuCOBOL
-- Entry point: `MAIN`
+- Entry point: `MAIN-PROCEDURE`
 - Program type: interactive_banking_system
-- Divisions detected: IDENTIFICATION, DATA, PROCEDURE
-- Paragraph count: 1
-- File count: 0
+- Divisions detected: IDENTIFICATION, ENVIRONMENT, DATA, PROCEDURE
+- Paragraph count: 8
+- File count: 1
 
 ## Main Paragraphs
 
-- `MAIN`: Purpose not inferred.
+- `MAIN-PROCEDURE`: Open account file, handle main menu, route to account creation or login, then close file.
+- `CREATE-ACCOUNT`: Collect name, age, PIN; validate inputs; generate account number; create account record.
+- `GENERATE-ACCOUNT`: Generate random account number and retry if it already exists.
+- `LOGIN`: Read account, validate existence and PIN, then enter ATM menu until logout.
+- `ATM-MENU`: Show post-login menu and route to balance, deposit, withdraw, or logout.
+- `CHECK-BALANCE`: Display current account balance.
+- `DEPOSIT`: Accept positive deposit amount, add it to balance, and update account record.
+- `WITHDRAW`: Accept positive withdrawal amount, check sufficient balance, subtract it, and update account record if valid.
 
 
 ## File Layout
 
+- `USERDATA` assigned to `atm_accounts.dat`
+  - Organization: INDEXED
+  - Access mode: RANDOM
+  - Record key: `F-ACCOUNT`
+  - Record length: 50
 
 
 ## Important Business Rules
@@ -41,11 +53,11 @@
 ## Important Data Fields
 
 - Money fields: 
-- Total variables: 4
-- Total rules extracted: 10
-- Control-flow nodes: 2
-- Control-flow edges: 0
-- Loops detected: 0
+- Total variables: 13
+- Total rules extracted: 126
+- Control-flow nodes: 9
+- Control-flow edges: 20
+- Loops detected: 8
 
 ## Notes for Translation and Verification
 
