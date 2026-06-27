@@ -39,10 +39,13 @@ Run these two commands in your terminal:
 ```bash
 docker build -t cobol-translator .
 
-docker run --rm -v "$(pwd)":/app cobol-translator
+```
+for windows
+```bash
+docker run --rm -p 8501:8501 -v "${PWD}:/app" cobol-translator
 ```
 
-for streamlit
+for mac/linux
 
 ```bash
 docker run --rm -p 8501:8501 -v "$(pwd)":/app cobol-translator 
