@@ -27,3 +27,9 @@ docker build -t cobol-translator .
 
 docker run --rm -v "$(pwd)":/app cobol-translator
 ```
+
+for streamlit
+
+```bash
+docker run --rm -p 8501:8501 -v "$(pwd)":/app cobol-translator 
+```
