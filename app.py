@@ -13,6 +13,12 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 from src.report_generator import default_report_data, generate_html_report
+from test_results_ui import (
+    DEFAULT_RESULTS_PATH,
+    load_rule_function_results,
+    render_rule_function_test_report,
+    summarize_rule_function_results,
+)
 
 
 APP_NAME = "Avo-cuddle"
@@ -83,6 +89,8 @@ def ensure_state() -> None:
         "paste_buffer": "",
         "translation_status": "",
         "translation_error": "",
+        "test_generation_status": "",
+        "test_generation_error": "",
         "show_test_report": False,
     }
     for key, value in defaults.items():
@@ -115,9 +123,46 @@ def translated_final_path(cobol_path: Path) -> Path:
     return Path("translated") / cobol_path.stem.lower() / "translated_final.py"
 
 
+def rule_ir_path(cobol_path: Path) -> Path:
+    return Path("outputs") / cobol_path.stem.lower() / "rule_ir.json"
+
+
+def translation_map_path(cobol_path: Path) -> Path:
+    return Path("outputs") / cobol_path.stem.lower() / "translation_map.json"
+
+
+def run_test_generator_for_source(cobol_path: Path, python_path: Path) -> None:
+    st.session_state.test_generation_status = "Running test generator..."
+    st.session_state.test_generation_error = ""
+
+    command = [
+        sys.executable,
+        "tests/test_rule.py",
+        rule_ir_path(cobol_path).as_posix(),
+        "--python",
+        python_path.as_posix(),
+        "--translation-map",
+        translation_map_path(cobol_path).as_posix(),
+        "--max-testcases",
+        "10",
+        "--output-dir",
+        "tests",
+    ]
+    try:
+        subprocess.run(command, cwd=Path.cwd(), check=True, capture_output=True, text=True)
+    except subprocess.CalledProcessError as exc:
+        st.session_state.test_generation_status = "Test generation failed"
+        st.session_state.test_generation_error = (exc.stderr or exc.stdout or str(exc)).strip()
+        return
+
+    st.session_state.test_generation_status = f"Updated {DEFAULT_RESULTS_PATH.as_posix()}"
+
+
 def run_pipeline_for_source(filename: str, source_code: str) -> None:
     st.session_state.translation_status = "Running pipeline..."
     st.session_state.translation_error = ""
+    st.session_state.test_generation_status = ""
+    st.session_state.test_generation_error = ""
     st.session_state.generated_code = ""
 
     cobol_path = write_cobol_input(filename, source_code)
@@ -132,6 +177,7 @@ def run_pipeline_for_source(filename: str, source_code: str) -> None:
     final_path = translated_final_path(cobol_path)
     if final_path.exists():
         st.session_state.generated_code = final_path.read_text(encoding="utf-8", errors="replace")
+        run_test_generator_for_source(cobol_path, final_path)
         st.session_state.translation_status = f"Loaded {final_path.as_posix()}"
     else:
         st.session_state.translation_status = "Pipeline completed, but translated_final.py was not found"
@@ -271,78 +317,6 @@ if __name__ == "__main__":
 def run_translation() -> None:
     filename = st.session_state.uploaded_file_name or "pasted-source.cob"
     run_pipeline_for_source(filename, st.session_state.cobol_code)
-
-
-def test_report_rows() -> list[dict[str, str]]:
-    # Future integration point: test_runner.py
-    return [
-        {
-            "Status": "TC-01",
-            "Scenario": "Deposit valid amount",
-            "Description": "Deposit a valid amount",
-            "Expected Output": "Deposited: 100.00",
-            "Actual Output": "Deposited: 100.00",
-            "Result": "Passed",
-        },
-        {
-            "Status": "TC-02",
-            "Scenario": "Balance inquiry",
-            "Description": "Read account balance after setup",
-            "Expected Output": "Balance: 150.00",
-            "Actual Output": "Balance: 150.00",
-            "Result": "Passed",
-        },
-        {
-            "Status": "TC-03",
-            "Scenario": "Withdraw valid amount",
-            "Description": "Withdraw amount below available balance",
-            "Expected Output": "Withdraw: 50.00\nNew Balance: 100.00",
-            "Actual Output": "Withdraw: 50.00\nNew Balance: 100.00",
-            "Result": "Passed",
-        },
-        {
-            "Status": "TC-04",
-            "Scenario": "Withdraw over balance",
-            "Description": "Withdraw amount greater than balance",
-            "Expected Output": "Insufficient balance.\nTransaction cancelled.",
-            "Actual Output": "Withdraw: 500.00\nNew Balance: -350.00",
-            "Result": "Failed",
-        },
-    ]
-
-
-def render_test_report_table(rows: list[dict[str, str]]) -> str:
-    body = []
-    for row in rows:
-        failed = row["Result"] == "Failed"
-        output_class = " output-failed" if failed else ""
-        body.append(
-            f"""
-            <tr class="{'failed-row' if failed else ''}">
-              <td><span class="status-mark {'mark-fail' if failed else 'mark-pass'}"></span><span class="status-pill {'fail-pill' if failed else 'pass-pill'}">{escape(row["Status"])}</span></td>
-              <td>{escape(row["Scenario"])}</td>
-              <td>{escape(row["Description"])}</td>
-              <td><pre class="output-cell{output_class}">{escape(row["Expected Output"])}</pre></td>
-              <td><pre class="output-cell{output_class}">{escape(row["Actual Output"])}</pre></td>
-            </tr>
-            """
-        )
-    return f"""
-    <div class="report-table-wrap">
-      <table class="report-table">
-        <thead>
-          <tr>
-            <th>Status</th>
-            <th>Scenario</th>
-            <th>Description</th>
-            <th>Expected Output</th>
-            <th>Actual Output</th>
-          </tr>
-        </thead>
-        <tbody>{''.join(body)}</tbody>
-      </table>
-    </div>
-    """
 
 
 def inject_styles() -> None:
@@ -847,6 +821,8 @@ def render_source_panel() -> None:
                 st.session_state.paste_buffer = ""
                 st.session_state.translation_status = ""
                 st.session_state.translation_error = ""
+                st.session_state.test_generation_status = ""
+                st.session_state.test_generation_error = ""
                 st.rerun()
 
         if st.session_state.cobol_code:
@@ -946,16 +922,20 @@ def render_generated_panel() -> None:
 
 
 def render_bottom_actions() -> None:
-    passed = 10
-    total = 11
-    failed = total - passed
+    results = load_rule_function_results(DEFAULT_RESULTS_PATH)
+    summary = summarize_rule_function_results(results)
+    passed = summary["passed_cases"]
+    total = summary["total_cases"]
+    failed = summary["failed_cases"]
+    icon = ":material/check_circle:" if failed == 0 and total else ":material/error:"
+    label = f"{passed} / {total} Passed\nClick to view details"
 
     left, right = st.columns(2, gap="large")
     with left:
         if st.button(
-            f"{passed} / {total} Passed\nClick to view details",
+            label,
             key="test_toggle",
-            icon=":material/error:",
+            icon=icon,
             use_container_width=True,
         ):
             st.session_state.show_test_report = not st.session_state.show_test_report
@@ -965,22 +945,14 @@ def render_bottom_actions() -> None:
                 generate_report_silently()
             st.markdown('<div class="action-subtitle">Download HTML report</div>', unsafe_allow_html=True)
 
+    if st.session_state.test_generation_error:
+        st.error(st.session_state.test_generation_error)
+    elif st.session_state.test_generation_status:
+        st.caption(st.session_state.test_generation_status)
+
 
 def render_test_report() -> None:
-    rows = test_report_rows()
-    failed_count = sum(1 for row in rows if row["Result"] == "Failed")
-    st.markdown(
-        f"""
-        <section class="report-card">
-          <div class="report-head">
-            <div class="report-title"><span class="title-icon">{icon_svg("test")}</span>Test Case Report</div>
-            <span class="failed-badge">{failed_count} Failed</span>
-          </div>
-          {render_test_report_table(rows)}
-        </section>
-        """,
-        unsafe_allow_html=True,
-    )
+    render_rule_function_test_report(DEFAULT_RESULTS_PATH, title_icon_html=icon_svg("test"))
 
 
 def latest_refinement_report() -> dict[str, Any] | None:

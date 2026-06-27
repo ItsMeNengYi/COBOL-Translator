@@ -466,6 +466,17 @@ def generate_function_case(
     }
 
 
+def testcase_signature(case: dict[str, Any]) -> str:
+    comparable = {
+        "function": case.get("function"),
+        "stdin": case.get("stdin"),
+        "pre_state": case.get("pre_state"),
+        "expected_by_rule": case.get("expected_by_rule"),
+        "covered_rules": case.get("covered_rules"),
+    }
+    return json.dumps(comparable, sort_keys=True, default=str)
+
+
 def stdin_for_function(function_name: str, rules: list[dict[str, Any]], variant: int) -> list[str]:
     if function_name == "main_procedure":
         return ["0", "3"] if variant % 2 else ["3"]
@@ -609,8 +620,14 @@ def generate_and_run_rule_tests(
     for function_name, group in grouped.items():
         function_source = functions.get(function_name)
         function_results = []
+        seen_testcases: set[str] = set()
         for variant in range(max_testcases):
             case = generate_function_case(function_name, group["rules"], variant)
+            signature = testcase_signature(case)
+            if signature in seen_testcases:
+                continue
+            seen_testcases.add(signature)
+
             if function_source:
                 execution = run_python_function(
                     resolved_python_path,
