@@ -1,0 +1,9 @@
+{
+  "entry_point": "MAIN",
+  "nodes": [
+    "MAIN",
+    "EXIT_PROGRAM"
+  ],
+  "edges": [],
+  "loops": []
+}

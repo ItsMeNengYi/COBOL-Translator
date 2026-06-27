@@ -3,6 +3,20 @@ I set up a template based on `task.md`. The structure is not exactly the same be
 
 ---
 
+## How to run translator
+```bash
+python -m src.pipeline data/cobol/employee_payroll.cob
+```
+
+## How to run test generator
+```bash
+python3 tests/test_generator.py --generate-only --max-cases 2
+or
+python3 tests/test_generator.py <generated_json>
+or
+python3 tests/test_generator.py --max-cases 2
+```
+
 ## How to Run It
 
 ### 1. Install Docker
@@ -25,5 +39,14 @@ Run these two commands in your terminal:
 ```bash
 docker build -t cobol-translator .
 
-docker run --rm -v "$(pwd)":/app cobol-translator
+```
+for windows
+```bash
+docker run --rm -p 8501:8501 -v "${PWD}:/app" cobol-translator
+```
+
+for mac/linux
+
+```bash
+docker run --rm -p 8501:8501 -v "$(pwd)":/app cobol-translator 
 ```
