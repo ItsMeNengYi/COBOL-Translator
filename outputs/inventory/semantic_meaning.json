@@ -1,6 +1,6 @@
 {
-  "source_file": "C:\\Users\\Xinyi\\Downloads\\cobol\\COBOL-Translator\\data\\cobol\\employee_payroll.cob",
-  "program_name": "PAYROLL",
+  "source_file": "C:\\Users\\Xinyi\\Downloads\\cobol\\COBOL-Translator\\data\\cobol\\INVENTORY.cob",
+  "program_name": "INVENTORY",
   "entry_point": "MAIN",
   "overview": {
     "language": "COBOL",
@@ -15,13 +15,13 @@
       "called_paragraphs": [],
       "rule_count": 10,
       "operations": [
+        "IF",
         "DISPLAY",
         "ACCEPT",
         "DISPLAY",
         "ACCEPT",
+        "SUBTRACT",
         "DISPLAY",
-        "ACCEPT",
-        "COMPUTE",
         "DISPLAY",
         "DISPLAY",
         "STOP_RUN"
@@ -29,37 +29,21 @@
     }
   },
   "variables": {
-    "EMP-NAME": {
-      "python_name": "emp_name",
-      "kind": null,
-      "type": "str",
-      "pic": "X(20)",
-      "scale": 0,
-      "is_money": false
-    },
-    "HOURS-WORKED": {
-      "python_name": "hours_worked",
+    "STOCK": {
+      "python_name": "stock",
       "kind": null,
       "type": "int",
-      "pic": "9(3)",
+      "pic": "999",
       "scale": 0,
       "is_money": false
     },
-    "HOURLY-RATE": {
-      "python_name": "hourly_rate",
+    "ORDER-QTY": {
+      "python_name": "order_qty",
       "kind": null,
-      "type": "Decimal",
-      "pic": "9(3)V99",
-      "scale": 2,
+      "type": "int",
+      "pic": "999",
+      "scale": 0,
       "is_money": false
-    },
-    "GROSS-PAY": {
-      "python_name": "gross_pay",
-      "kind": null,
-      "type": "Decimal",
-      "pic": "9(5)V99",
-      "scale": 2,
-      "is_money": true
     }
   },
   "files": {},

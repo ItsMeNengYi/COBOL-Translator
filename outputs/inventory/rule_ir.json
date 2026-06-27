@@ -1,14 +1,42 @@
 {
-  "program": "PAYROLL",
+  "program": "INVENTORY",
   "schema_version": "0.2",
   "rules": [
     {
       "rule_id": "R001",
       "paragraph": "MAIN",
-      "type": "DISPLAY",
-      "value": "ENTER EMPLOYEE NAME:",
+      "type": "IF",
+      "condition": {
+        "left": "ORDER-QTY",
+        "operator": "<=",
+        "right": "STOCK"
+      },
+      "true_branch": [
+        {
+          "operation": "SUBTRACT",
+          "source": "ORDER-QTY",
+          "target": "STOCK"
+        },
+        {
+          "operation": "DISPLAY",
+          "value": "ORDER APPROVED"
+        },
+        {
+          "operation": "DISPLAY",
+          "parts": [
+            "REMAINING: ",
+            "STOCK"
+          ]
+        }
+      ],
+      "false_branch": [
+        {
+          "operation": "DISPLAY",
+          "value": "INSUFFICIENT STOCK"
+        }
+      ],
       "business_category": "program_control",
-      "translation_hint": "output_operation",
+      "translation_hint": "python_if_statement",
       "risk": "low",
       "needs_ai_enrichment": true,
       "ai_enrichment_targets": [
@@ -21,10 +49,10 @@
     {
       "rule_id": "R002",
       "paragraph": "MAIN",
-      "type": "ACCEPT",
-      "target": "EMP-NAME",
+      "type": "DISPLAY",
+      "value": "CURRENT STOCK:",
       "business_category": "program_control",
-      "translation_hint": "input_operation",
+      "translation_hint": "output_operation",
       "risk": "low",
       "needs_ai_enrichment": true,
       "ai_enrichment_targets": [
@@ -37,10 +65,10 @@
     {
       "rule_id": "R003",
       "paragraph": "MAIN",
-      "type": "DISPLAY",
-      "value": "ENTER HOURS:",
+      "type": "ACCEPT",
+      "target": "STOCK",
       "business_category": "program_control",
-      "translation_hint": "output_operation",
+      "translation_hint": "input_operation",
       "risk": "low",
       "needs_ai_enrichment": true,
       "ai_enrichment_targets": [
@@ -53,24 +81,8 @@
     {
       "rule_id": "R004",
       "paragraph": "MAIN",
-      "type": "ACCEPT",
-      "target": "HOURS-WORKED",
-      "business_category": "program_control",
-      "translation_hint": "input_operation",
-      "risk": "low",
-      "needs_ai_enrichment": true,
-      "ai_enrichment_targets": [
-        "business_meaning",
-        "risk_reason",
-        "test_hints",
-        "translation_notes"
-      ]
-    },
-    {
-      "rule_id": "R005",
-      "paragraph": "MAIN",
       "type": "DISPLAY",
-      "value": "ENTER RATE:",
+      "value": "ORDER QUANTITY:",
       "business_category": "program_control",
       "translation_hint": "output_operation",
       "risk": "low",
@@ -83,10 +95,10 @@
       ]
     },
     {
-      "rule_id": "R006",
+      "rule_id": "R005",
       "paragraph": "MAIN",
       "type": "ACCEPT",
-      "target": "HOURLY-RATE",
+      "target": "ORDER-QTY",
       "business_category": "program_control",
       "translation_hint": "input_operation",
       "risk": "low",
@@ -99,13 +111,29 @@
       ]
     },
     {
+      "rule_id": "R006",
+      "paragraph": "MAIN",
+      "type": "SUBTRACT",
+      "source": "ORDER-QTY",
+      "target": "STOCK",
+      "business_category": "program_control",
+      "translation_hint": "python_subtraction",
+      "risk": "low",
+      "needs_ai_enrichment": true,
+      "ai_enrichment_targets": [
+        "business_meaning",
+        "risk_reason",
+        "test_hints",
+        "translation_notes"
+      ]
+    },
+    {
       "rule_id": "R007",
       "paragraph": "MAIN",
-      "type": "COMPUTE",
-      "target": "GROSS-PAY",
-      "expression": "HOURS-WORKED * HOURLY-RATE",
+      "type": "DISPLAY",
+      "value": "ORDER APPROVED",
       "business_category": "program_control",
-      "translation_hint": "python_expression",
+      "translation_hint": "output_operation",
       "risk": "low",
       "needs_ai_enrichment": true,
       "ai_enrichment_targets": [
@@ -120,8 +148,8 @@
       "paragraph": "MAIN",
       "type": "DISPLAY",
       "parts": [
-        "EMPLOYEE: ",
-        "EMP-NAME"
+        "REMAINING: ",
+        "STOCK"
       ],
       "business_category": "program_control",
       "translation_hint": "output_operation",
@@ -138,10 +166,7 @@
       "rule_id": "R009",
       "paragraph": "MAIN",
       "type": "DISPLAY",
-      "parts": [
-        "GROSS PAY: ",
-        "GROSS-PAY"
-      ],
+      "value": "INSUFFICIENT STOCK",
       "business_category": "program_control",
       "translation_hint": "output_operation",
       "risk": "low",
