@@ -421,7 +421,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Generate and run stdin tests for a COBOL/Python pair.")
     parser.add_argument("test_json", nargs="?", type=Path, help="Optional generated_tests_*.json to run.")
     parser.add_argument("--cobol", default="inputs/ATM.cob", type=Path)
-    parser.add_argument("--python", default="translated/ATM_CodeMigrate.py", type=Path)
+    parser.add_argument("--python", default="translated/atm_translated_final.py", type=Path)
     parser.add_argument("--use-ai", action="store_true", help="Ask llm_agent.py if deterministic analysis is weak.")
     parser.add_argument("--max-cases", default=10, type=int)
     parser.add_argument("--run-json", type=Path, help="Run an existing generated_tests_*.json file.")
@@ -458,6 +458,7 @@ def main() -> None:
     result_path = save_timestamped_result_json(result)
     print(f"Wrote {result_path}")
 
+    return result_path
 
 if __name__ == "__main__":
     main()
