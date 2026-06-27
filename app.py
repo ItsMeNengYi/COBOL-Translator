@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import base64
 from html import escape
 from pathlib import Path
 from typing import Any
@@ -12,6 +13,7 @@ from src.report_generator import default_report_data, generate_html_report
 APP_NAME = "Avo-cuddle"
 REPORT_PATH = Path("reports/migration_report.html")
 DEFAULT_COBOL_PATH = Path("inputs/ATM.cob")
+LOGO_PATH = Path("assets/avocuddle_logo.svg")
 
 
 def icon_svg(name: str) -> str:
@@ -52,6 +54,12 @@ def icon_svg(name: str) -> str:
     return icons[name]
 
 
+def logo_data_uri() -> str:
+    logo_bytes = LOGO_PATH.read_bytes()
+    encoded = base64.b64encode(logo_bytes).decode("ascii")
+    return f"data:image/svg+xml;base64,{encoded}"
+
+
 def load_default_cobol() -> tuple[str, str, int]:
     if DEFAULT_COBOL_PATH.exists():
         code = DEFAULT_COBOL_PATH.read_text(encoding="utf-8", errors="replace")
@@ -66,6 +74,7 @@ def ensure_state() -> None:
         "uploaded_file_size": 0,
         "generated_code": "",
         "output_language": "Python",
+        "paste_buffer": "",
         "show_test_report": False,
     }
     for key, value in defaults.items():
@@ -200,23 +209,32 @@ def inject_styles() -> None:
         """
         <style>
         :root {
-          --bg: #ffffff;
-          --surface: #ffffff;
-          --soft: #f8fafc;
-          --line: #e5e7eb;
-          --ink: #0f172a;
-          --muted: #64748b;
-          --blue: #0f766e;
-          --purple: #10b981;
-          --green: #16a34a;
-          --red: #dc2626;
+          --bg: #F8FAF9;
+          --card: #FFFFFF;
+          --primary: #6FB62C;
+          --primary-dark: #5DA425;
+          --secondary: #93C83E;
+          --forest: #083C2F;
+          --emerald: #0F5D46;
+          --seed: #6B3F1A;
+          --text: #0F172A;
+          --text-secondary: #64748B;
+          --border: #E5E7EB;
+          --success: #16A34A;
+          --warning: #F59E0B;
+          --danger: #DC2626;
+          --info: #2563EB;
+          --soft-green: #EAF7E8;
+          --soft-red: #FEE2E2;
+          --soft-yellow: #FEF3C7;
+          --soft-blue: #EFF6FF;
           --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
           --soft-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .stApp {
           background: var(--bg);
-          color: var(--ink);
+          color: var(--text);
         }
 
         [data-testid="stHeader"] {
@@ -232,66 +250,50 @@ def inject_styles() -> None:
           letter-spacing: 0;
         }
 
-        .app-header {
-          align-items: center;
-          display: flex;
-          justify-content: space-between;
-          gap: 24px;
-          margin-bottom: 28px;
-        }
-
         .brand {
           align-items: center;
           display: flex;
-          gap: 16px;
+          gap: 18px;
         }
 
         .logo {
           align-items: center;
-          background: linear-gradient(135deg, var(--blue), var(--purple));
-          border-radius: 16px;
-          box-shadow: 0 12px 30px rgba(16, 185, 129, 0.22);
-          color: white;
+          background: transparent;
+          border-radius: 0;
           display: inline-flex;
-          height: 54px;
+          height: 60px;
           justify-content: center;
-          width: 54px;
+          width: auto;
         }
 
-        .logo svg,
-        .icon-button svg,
-        .copy-icon svg {
-          height: 22px;
-          width: 22px;
+        .logo img {
+          display: block;
+          height: 60px;
+          max-width: 230px;
+          object-fit: contain;
+          width: auto;
         }
 
         .brand-title {
-          color: var(--ink);
+          color: var(--text);
           font-size: 28px;
           font-weight: 800;
           line-height: 1.1;
         }
 
         .brand-subtitle {
-          color: var(--muted);
+          color: var(--text-secondary);
           font-size: 15px;
           margin-top: 4px;
         }
 
-        .header-actions {
-          align-items: center;
-          display: flex;
-          gap: 12px;
-          justify-content: flex-end;
-        }
-
         div[class*="st-key-header_report"] button,
         div[class*="st-key-bottom_report"] button {
-          background: linear-gradient(135deg, var(--blue), var(--purple));
-          border: 0;
+          background: white;
+          border: 1px solid var(--border);
           border-radius: 12px;
-          box-shadow: 0 12px 24px rgba(16, 185, 129, 0.2);
-          color: white;
+          box-shadow: var(--soft-shadow);
+          color: var(--forest);
           font-weight: 750;
           min-height: 44px;
           padding: 0 18px;
@@ -299,9 +301,9 @@ def inject_styles() -> None:
 
         div[class*="st-key-header_report"] button:hover,
         div[class*="st-key-bottom_report"] button:hover {
-          border: 0;
-          color: white;
-          filter: brightness(1.03);
+          background: #F8FAF9;
+          border: 1px solid var(--border);
+          color: var(--forest);
         }
 
         .panel-card,
@@ -310,13 +312,12 @@ def inject_styles() -> None:
         .st-key-source_card,
         .st-key-generated_card,
         .st-key-bottom_report_card {
-          background: var(--surface);
-          border: 1px solid rgba(229, 231, 235, 0.9);
+          background: var(--card);
+          border: 1px solid var(--border);
           border-radius: 16px;
           box-shadow: var(--shadow);
         }
 
-        .panel-card,
         .st-key-source_card,
         .st-key-generated_card {
           display: flex;
@@ -326,17 +327,9 @@ def inject_styles() -> None:
           padding: 20px;
         }
 
-        .panel-head {
-          align-items: center;
-          border-bottom: 1px solid var(--line);
-          display: flex;
-          justify-content: space-between;
-          padding: 18px 20px;
-        }
-
         .panel-title {
           align-items: center;
-          color: var(--ink);
+          color: var(--forest);
           display: flex;
           font-size: 17px;
           font-weight: 800;
@@ -346,32 +339,27 @@ def inject_styles() -> None:
 
         .title-icon {
           align-items: center;
-          background: #dcfce7;
+          background: var(--soft-green);
           border-radius: 10px;
-          color: #0f766e;
+          color: var(--emerald);
           display: inline-flex;
           height: 34px;
           justify-content: center;
           width: 34px;
         }
 
-        .title-icon svg {
+        .title-icon svg,
+        .file-pill svg {
           height: 19px;
           width: 19px;
         }
 
-        .panel-tools {
-          align-items: center;
-          display: flex;
-          gap: 10px;
-        }
-
         .info-row {
           align-items: center;
-          background: var(--soft);
-          border: 1px solid var(--line);
+          background: var(--soft-green);
+          border: 1px solid var(--border);
           border-radius: 12px;
-          color: #334155;
+          color: var(--text);
           display: flex;
           flex-wrap: wrap;
           font-size: 14px;
@@ -391,7 +379,7 @@ def inject_styles() -> None:
         .file-pill {
           align-items: center;
           background: #ffffff;
-          border: 1px solid var(--line);
+          border: 1px solid var(--border);
           border-radius: 10px;
           display: inline-flex;
           font-size: 13px;
@@ -402,117 +390,82 @@ def inject_styles() -> None:
         }
 
         .file-pill svg {
-          color: #0f766e;
-          height: 17px;
-          width: 17px;
+          color: var(--emerald);
         }
 
         .status-badge {
-          background: #dcfce7;
+          background: #DCFCE7;
           border-radius: 999px;
-          color: var(--green);
+          color: var(--success);
           font-size: 12px;
           font-weight: 800;
           padding: 4px 10px;
         }
 
-        .ghost-note {
-          color: var(--muted);
-          font-size: 13px;
-        }
-
-        .code-zone {
-          flex: 1;
-        }
-
-        .upload-zone {
-          background: linear-gradient(180deg, #ffffff, #f8fafc);
-          border-top: 1px solid var(--line);
-          padding-top: 16px;
-        }
-
         .upload-label {
-          color: var(--ink);
+          color: var(--text);
           font-size: 14px;
           font-weight: 750;
           margin-bottom: 8px;
         }
 
-        .support-text {
-          color: var(--muted);
-          font-size: 12px;
-          margin-top: 8px;
+        .support-text,
+        .language-label,
+        .action-subtitle {
+          color: var(--text-secondary);
         }
 
-        div[data-testid="stFileUploader"] section {
-          align-items: center;
-          background: linear-gradient(180deg, #ffffff, #f0fdf4);
-          border: 1px dashed #86efac;
-          border-radius: 16px;
-          min-height: 220px;
-          padding: 28px;
-        }
-
-        div[data-testid="stFileUploader"] section:hover {
-          border-color: #22c55e;
-          background: #f0fdf4;
-        }
-
-        textarea {
-          border-radius: 12px !important;
+        .empty-note {
+          background: #F3F4F6;
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          color: #475569;
+          font-size: 14px;
+          padding: 12px 14px;
         }
 
         .language-label {
-          color: var(--muted);
           font-size: 12px;
           font-weight: 800;
           margin-bottom: 4px;
           text-transform: uppercase;
         }
 
-        .download-row {
-          display: flex;
-          gap: 10px;
-          padding-bottom: 14px;
+        div[data-testid="stFileUploader"] section {
+          align-items: center;
+          background: #F8FAF9;
+          border: 1px dashed #CBD5E1;
+          border-radius: 16px;
+          min-height: 220px;
+          padding: 28px;
         }
 
-        .download-row > div {
-          flex: 1;
+        div[data-testid="stFileUploader"] section:hover {
+          background: #F3F4F6;
+          border-color: #94A3B8;
         }
 
         div[data-testid="stDownloadButton"] button,
         div[class*="st-key-copy_code"] button,
         div[class*="st-key-clear_source"] button {
           background: white;
-          border: 1px solid var(--line);
+          border: 1px solid var(--border);
           border-radius: 12px;
-          color: #334155;
+          color: var(--forest);
           font-weight: 700;
           min-height: 40px;
         }
 
         div[data-testid="stDownloadButton"] button {
-          background: linear-gradient(135deg, var(--blue), var(--purple));
-          border: 0;
-          color: white;
+          background: white;
+          border: 1px solid var(--border);
+          color: var(--forest);
         }
 
         div[data-testid="stDownloadButton"] button:hover {
-          border: 0;
-          color: white;
-          filter: brightness(1.03);
-        }
-
-        .bottom-actions {
-          display: grid;
-          gap: 18px;
-          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-          margin: 24px 0;
-        }
-
-        .action-card {
-          min-height: 108px;
-          padding: 20px;
+          background: #F8FAF9;
+          border: 1px solid var(--border);
+          color: var(--forest);
         }
 
         .st-key-bottom_report_card {
@@ -521,10 +474,10 @@ def inject_styles() -> None:
         }
 
         div[class*="st-key-test_toggle"] button {
-          background: #fee2e2;
-          border: 1px solid #fecaca;
+          background: #F3F4F6;
+          border: 1px solid var(--border);
           border-radius: 16px;
-          color: #991b1b;
+          color: #475569;
           font-size: 18px;
           font-weight: 850;
           min-height: 108px;
@@ -532,15 +485,9 @@ def inject_styles() -> None:
         }
 
         div[class*="st-key-test_toggle"] button:hover {
-          background: #fecaca;
-          border-color: #fca5a5;
-          color: #7f1d1d;
-        }
-
-        .action-subtitle {
-          color: var(--muted);
-          font-size: 13px;
-          margin-top: 4px;
+          background: #E5E7EB;
+          border-color: #CBD5E1;
+          color: #334155;
         }
 
         .report-card {
@@ -557,7 +504,7 @@ def inject_styles() -> None:
 
         .report-title {
           align-items: center;
-          color: var(--ink);
+          color: var(--forest);
           display: flex;
           font-size: 20px;
           font-weight: 850;
@@ -565,9 +512,9 @@ def inject_styles() -> None:
         }
 
         .failed-badge {
-          background: #fee2e2;
+          background: var(--soft-red);
           border-radius: 999px;
-          color: #b91c1c;
+          color: var(--danger);
           font-size: 13px;
           font-weight: 850;
           padding: 6px 12px;
@@ -592,8 +539,8 @@ def inject_styles() -> None:
         }
 
         .report-table td {
-          border-top: 1px solid var(--line);
-          color: var(--ink);
+          border-top: 1px solid var(--border);
+          color: var(--text);
           font-size: 14px;
           padding: 12px;
           vertical-align: top;
@@ -617,21 +564,21 @@ def inject_styles() -> None:
         }
 
         .mark-pass {
-          background: #16a34a;
+          background: var(--success);
         }
 
         .mark-fail {
-          background: #dc2626;
+          background: var(--danger);
         }
 
         .pass-pill {
-          background: #dcfce7;
-          color: #166534;
+          background: #DCFCE7;
+          color: var(--success);
         }
 
         .fail-pill {
-          background: #fee2e2;
-          color: #991b1b;
+          background: var(--soft-red);
+          color: var(--danger);
         }
 
         .output-cell {
@@ -647,15 +594,34 @@ def inject_styles() -> None:
 
         .output-failed {
           background: #fff1f2;
-          color: #b91c1c;
+          color: var(--danger);
+        }
+
+        code .k,
+        code .kn,
+        code .kd,
+        code .nb {
+          color: var(--info) !important;
+        }
+
+        code .s,
+        code .s1,
+        code .s2 {
+          color: var(--success) !important;
+        }
+
+        code .m,
+        code .mi,
+        code .mf {
+          color: var(--seed) !important;
+        }
+
+        code .c,
+        code .c1 {
+          color: var(--text-secondary) !important;
         }
 
         @media (max-width: 1000px) {
-          .app-header {
-            align-items: flex-start;
-            flex-direction: column;
-          }
-
           .bottom-actions {
             grid-template-columns: 1fr;
           }
@@ -669,13 +635,16 @@ def inject_styles() -> None:
           .brand-title {
             font-size: 24px;
           }
+
+          .logo,
+          .logo img {
+            height: 44px;
+          }
         }
         </style>
         """,
         unsafe_allow_html=True,
     )
-
-
 def generate_report_silently() -> None:
     # Future integration point: report_generator.py data assembled from parser/extractor/test runner.
     generate_html_report(default_report_data(), REPORT_PATH)
@@ -687,7 +656,7 @@ def render_header() -> None:
         st.markdown(
             f"""
             <div class="brand">
-              <div class="logo">{icon_svg("logo")}</div>
+              <div class="logo"><img src="{logo_data_uri()}" alt="AvoCuddle COBOL Migrator logo"></div>
               <div>
                 <div class="brand-title">Avo-cuddle</div>
                 <div class="brand-subtitle">COBOL to Modern Code Converter</div>
@@ -697,8 +666,7 @@ def render_header() -> None:
             unsafe_allow_html=True,
         )
     with right:
-        if st.button("Generate Report", key="header_report", icon=":material/description:", use_container_width=True):
-            generate_report_silently()
+        pass
 
 
 def render_source_panel() -> None:
@@ -715,6 +683,7 @@ def render_source_panel() -> None:
                 st.session_state.generated_code = ""
                 st.session_state.uploaded_file_name = ""
                 st.session_state.uploaded_file_size = 0
+                st.session_state.paste_buffer = ""
                 st.rerun()
 
         if st.session_state.cobol_code:
@@ -749,6 +718,20 @@ def render_source_panel() -> None:
                 st.rerun()
 
             st.markdown('<div class="support-text">Supported formats: .cob, .cbl, .cpy, .txt</div>', unsafe_allow_html=True)
+            st.markdown('<div class="upload-label" style="margin-top:18px;">Or paste COBOL source code</div>', unsafe_allow_html=True)
+            pasted_code = st.text_area(
+                "Paste COBOL source code",
+                key="paste_buffer",
+                height=180,
+                placeholder="Paste COBOL code here...",
+                label_visibility="collapsed",
+            )
+            if pasted_code.strip():
+                st.session_state.cobol_code = pasted_code
+                st.session_state.uploaded_file_name = "pasted-source.cob"
+                st.session_state.uploaded_file_size = len(pasted_code.encode("utf-8"))
+                run_translation()
+                st.rerun()
 
 
 def render_generated_panel() -> None:
@@ -789,7 +772,10 @@ def render_generated_panel() -> None:
         if st.session_state.generated_code:
             st.code(st.session_state.generated_code, language="python", line_numbers=True)
         else:
-            st.info("Generated Python code will appear automatically after upload.")
+            st.markdown(
+                '<div class="empty-note">Generated Python code will appear automatically after upload.</div>',
+                unsafe_allow_html=True,
+            )
 
 
 def render_bottom_actions() -> None:
@@ -849,3 +835,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
