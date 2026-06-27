@@ -3,6 +3,11 @@ I set up a template based on `task.md`. The structure is not exactly the same be
 
 ---
 
+## How to run translator
+```bash
+python -m src.pipeline data/cobol/employee_payroll.cob
+```
+
 ## How to Run It
 
 ### 1. Install Docker
