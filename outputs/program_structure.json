@@ -1,0 +1,36 @@
+{
+  "program_name": "PAYROLL",
+  "language": "COBOL",
+  "dialect": "GnuCOBOL",
+  "source_file": "employee_payroll.cob",
+  "entry_point": "MAIN",
+  "program_type": "interactive_banking_system",
+  "paragraph_count": 1,
+  "file_count": 0,
+  "supported_file_operations": [],
+  "divisions": [
+    "IDENTIFICATION",
+    "DATA",
+    "PROCEDURE"
+  ],
+  "sections": {
+    "ENVIRONMENT": [],
+    "DATA": [
+      "WORKING-STORAGE SECTION"
+    ],
+    "PROCEDURE": {
+      "entry_point": "MAIN",
+      "paragraph_count": 1
+    }
+  },
+  "files": [],
+  "paragraphs": [
+    "MAIN"
+  ],
+  "supported_constructs_detected": [
+    "STOP RUN",
+    "DISPLAY",
+    "ACCEPT",
+    "COMPUTE"
+  ]
+}

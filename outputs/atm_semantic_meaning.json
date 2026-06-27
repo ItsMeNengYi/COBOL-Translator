@@ -1,0 +1,553 @@
+{
+  "source_file": "/Users/nicole/CobolTranslator/COBOL-Translator/data/cobol/ATM.cob",
+  "program_name": "ATM-MACHINE",
+  "entry_point": "MAIN-PROCEDURE",
+  "overview": {
+    "language": "COBOL",
+    "dialect": "GnuCOBOL",
+    "program_type": "interactive_banking_system",
+    "paragraph_count": 8,
+    "rule_count": 126
+  },
+  "paragraphs": {
+    "MAIN-PROCEDURE": {
+      "purpose": "Open account file, handle main menu, route to account creation or login, then close file.",
+      "called_paragraphs": [
+        "EVALUATE",
+        "CREATE-ACCOUNT",
+        "LOGIN",
+        "CLOSE",
+        "CREATE-ACCOUNT",
+        "LOGIN"
+      ],
+      "rule_count": 22,
+      "operations": [
+        "IF",
+        "IF",
+        "EVALUATE",
+        "OPEN",
+        "OPEN",
+        "CLOSE",
+        "OPEN",
+        "MOVE",
+        "DISPLAY",
+        "DISPLAY",
+        "DISPLAY",
+        "DISPLAY",
+        "DISPLAY",
+        "DISPLAY",
+        "ACCEPT",
+        "DISPLAY",
+        "DISPLAY",
+        "PERFORM",
+        "PERFORM",
+        "DISPLAY",
+        "CLOSE",
+        "STOP_RUN"
+      ]
+    },
+    "CREATE-ACCOUNT": {
+      "purpose": "Collect name, age, PIN; validate inputs; generate account number; create account record.",
+      "called_paragraphs": [
+        "PERFORM"
+      ],
+      "rule_count": 25,
+      "operations": [
+        "IF",
+        "IF",
+        "IF",
+        "WRITE",
+        "MOVE",
+        "MOVE",
+        "MOVE",
+        "DISPLAY",
+        "ACCEPT",
+        "DISPLAY",
+        "EXIT_PARAGRAPH",
+        "DISPLAY",
+        "ACCEPT",
+        "DISPLAY",
+        "EXIT_PARAGRAPH",
+        "DISPLAY",
+        "ACCEPT",
+        "DISPLAY",
+        "PERFORM",
+        "MOVE",
+        "DISPLAY",
+        "DISPLAY",
+        "DISPLAY",
+        "DISPLAY",
+        "EXIT"
+      ]
+    },
+    "GENERATE-ACCOUNT": {
+      "purpose": "Generate random account number and retry if it already exists.",
+      "called_paragraphs": [
+        "GENERATE-ACCOUNT"
+      ],
+      "rule_count": 5,
+      "operations": [
+        "READ",
+        "COMPUTE",
+        "CONTINUE",
+        "PERFORM",
+        "EXIT"
+      ]
+    },
+    "LOGIN": {
+      "purpose": "Read account, validate existence and PIN, then enter ATM menu until logout.",
+      "called_paragraphs": [
+        "MOVE",
+        "IF",
+        "ATM-MENU"
+      ],
+      "rule_count": 23,
+      "operations": [
+        "IF",
+        "IF",
+        "READ",
+        "MOVE",
+        "MOVE",
+        "MOVE",
+        "DISPLAY",
+        "ACCEPT",
+        "DISPLAY",
+        "MOVE",
+        "MOVE",
+        "MOVE",
+        "DISPLAY",
+        "DISPLAY",
+        "ACCEPT",
+        "DISPLAY",
+        "DISPLAY",
+        "DISPLAY",
+        "MOVE",
+        "PERFORM_UNTIL",
+        "DISPLAY",
+        "DISPLAY",
+        "EXIT"
+      ]
+    },
+    "ATM-MENU": {
+      "purpose": "Show post-login menu and route to balance, deposit, withdraw, or logout.",
+      "called_paragraphs": [
+        "EVALUATE",
+        "CHECK-BALANCE",
+        "DEPOSIT",
+        "WITHDRAW",
+        "CHECK-BALANCE",
+        "DEPOSIT",
+        "WITHDRAW"
+      ],
+      "rule_count": 20,
+      "operations": [
+        "IF",
+        "EVALUATE",
+        "MOVE",
+        "DISPLAY",
+        "DISPLAY",
+        "DISPLAY",
+        "DISPLAY",
+        "DISPLAY",
+        "DISPLAY",
+        "DISPLAY",
+        "DISPLAY",
+        "DISPLAY",
+        "ACCEPT",
+        "DISPLAY",
+        "DISPLAY",
+        "PERFORM",
+        "PERFORM",
+        "PERFORM",
+        "DISPLAY",
+        "EXIT"
+      ]
+    },
+    "CHECK-BALANCE": {
+      "purpose": "Display current account balance.",
+      "called_paragraphs": [],
+      "rule_count": 3,
+      "operations": [
+        "DISPLAY",
+        "DISPLAY",
+        "EXIT"
+      ]
+    },
+    "DEPOSIT": {
+      "purpose": "Accept positive deposit amount, add it to balance, and update account record.",
+      "called_paragraphs": [
+        "ADD"
+      ],
+      "rule_count": 13,
+      "operations": [
+        "IF",
+        "REWRITE",
+        "MOVE",
+        "DISPLAY",
+        "ACCEPT",
+        "DISPLAY",
+        "DISPLAY",
+        "ADD",
+        "DISPLAY",
+        "DISPLAY",
+        "DISPLAY",
+        "DISPLAY",
+        "EXIT"
+      ]
+    },
+    "WITHDRAW": {
+      "purpose": "Accept positive withdrawal amount, check sufficient balance, subtract it, and update account record if valid.",
+      "called_paragraphs": [
+        "IF"
+      ],
+      "rule_count": 15,
+      "operations": [
+        "IF",
+        "IF",
+        "REWRITE",
+        "MOVE",
+        "DISPLAY",
+        "ACCEPT",
+        "DISPLAY",
+        "DISPLAY",
+        "DISPLAY",
+        "SUBTRACT",
+        "DISPLAY",
+        "DISPLAY",
+        "DISPLAY",
+        "DISPLAY",
+        "EXIT"
+      ]
+    }
+  },
+  "variables": {
+    "F-DATA": {
+      "python_name": null,
+      "kind": "record",
+      "type": null,
+      "pic": null,
+      "scale": null,
+      "is_money": false
+    },
+    "F-ACCOUNT": {
+      "python_name": "f_account",
+      "kind": null,
+      "type": "int",
+      "pic": "9(10)",
+      "scale": 0,
+      "is_money": false
+    },
+    "F-PIN": {
+      "python_name": "f_pin",
+      "kind": null,
+      "type": "int",
+      "pic": "9(6)",
+      "scale": 0,
+      "is_money": false
+    },
+    "F-BAL": {
+      "python_name": "f_bal",
+      "kind": null,
+      "type": "Decimal",
+      "pic": "9(12)",
+      "scale": 0,
+      "is_money": true
+    },
+    "F-NAME": {
+      "python_name": "f_name",
+      "kind": null,
+      "type": "str",
+      "pic": "X(20)",
+      "scale": 0,
+      "is_money": false
+    },
+    "F-AGE": {
+      "python_name": "f_age",
+      "kind": null,
+      "type": "int",
+      "pic": "99",
+      "scale": 0,
+      "is_money": false
+    },
+    "WS-FILE-STATUS": {
+      "python_name": "ws_file_status",
+      "kind": null,
+      "type": "str",
+      "pic": "XX",
+      "scale": 0,
+      "is_money": false
+    },
+    "WS-MAIN-CHOICE": {
+      "python_name": "ws_main_choice",
+      "kind": null,
+      "type": "int",
+      "pic": "99",
+      "scale": 0,
+      "is_money": false
+    },
+    "WS-CHOICE": {
+      "python_name": "ws_choice",
+      "kind": null,
+      "type": "int",
+      "pic": "99",
+      "scale": 0,
+      "is_money": false
+    },
+    "WS-ACCOUNT": {
+      "python_name": "ws_account",
+      "kind": null,
+      "type": "int",
+      "pic": "9(10)",
+      "scale": 0,
+      "is_money": false
+    },
+    "WS-PIN": {
+      "python_name": "ws_pin",
+      "kind": null,
+      "type": "int",
+      "pic": "9(6)",
+      "scale": 0,
+      "is_money": false
+    },
+    "WS-AMOUNT": {
+      "python_name": "ws_amount",
+      "kind": null,
+      "type": "Decimal",
+      "pic": "9(12)",
+      "scale": 0,
+      "is_money": true
+    },
+    "WS-FOUND": {
+      "python_name": "ws_found",
+      "kind": null,
+      "type": "str",
+      "pic": "X",
+      "scale": 0,
+      "is_money": false
+    }
+  },
+  "files": {
+    "USERDATA": {
+      "assign_to": "atm_accounts.dat",
+      "organization": "INDEXED",
+      "access_mode": "RANDOM",
+      "record_key": "F-ACCOUNT",
+      "file_status": "WS-FILE-STATUS",
+      "record_name": "F-DATA",
+      "record_length": 50,
+      "storage_encoding": "fixed-width",
+      "serialization": "indexed-record",
+      "fields": [
+        {
+          "name": "F-ACCOUNT",
+          "python_name": "f_account",
+          "pic": "9(10)",
+          "type": "int",
+          "start": 0,
+          "end": 10,
+          "length": 10,
+          "scale": 0
+        },
+        {
+          "name": "F-PIN",
+          "python_name": "f_pin",
+          "pic": "9(6)",
+          "type": "int",
+          "start": 10,
+          "end": 16,
+          "length": 6,
+          "scale": 0
+        },
+        {
+          "name": "F-BAL",
+          "python_name": "f_bal",
+          "pic": "9(12)",
+          "type": "int",
+          "start": 16,
+          "end": 28,
+          "length": 12,
+          "scale": 0
+        },
+        {
+          "name": "F-NAME",
+          "python_name": "f_name",
+          "pic": "X(20)",
+          "type": "str",
+          "start": 28,
+          "end": 48,
+          "length": 20,
+          "scale": 0,
+          "padding": "right-space"
+        },
+        {
+          "name": "F-AGE",
+          "python_name": "f_age",
+          "pic": "99",
+          "type": "int",
+          "start": 48,
+          "end": 50,
+          "length": 2,
+          "scale": 0
+        }
+      ]
+    }
+  },
+  "control_flow": {
+    "entry_point": "MAIN-PROCEDURE",
+    "nodes": [
+      "MAIN-PROCEDURE",
+      "CREATE-ACCOUNT",
+      "GENERATE-ACCOUNT",
+      "LOGIN",
+      "ATM-MENU",
+      "CHECK-BALANCE",
+      "DEPOSIT",
+      "WITHDRAW",
+      "EXIT_PROGRAM"
+    ],
+    "edges": [
+      {
+        "from": "MAIN-PROCEDURE",
+        "to": "EVALUATE",
+        "trigger": "PERFORM EVALUATE"
+      },
+      {
+        "from": "MAIN-PROCEDURE",
+        "to": "CREATE-ACCOUNT",
+        "trigger": "PERFORM CREATE-ACCOUNT"
+      },
+      {
+        "from": "MAIN-PROCEDURE",
+        "to": "LOGIN",
+        "trigger": "PERFORM LOGIN"
+      },
+      {
+        "from": "MAIN-PROCEDURE",
+        "to": "CLOSE",
+        "trigger": "PERFORM CLOSE"
+      },
+      {
+        "from": "MAIN-PROCEDURE",
+        "to": "CREATE-ACCOUNT",
+        "trigger": "EVALUATE WS-MAIN-CHOICE WHEN 1"
+      },
+      {
+        "from": "MAIN-PROCEDURE",
+        "to": "LOGIN",
+        "trigger": "EVALUATE WS-MAIN-CHOICE WHEN 2"
+      },
+      {
+        "from": "CREATE-ACCOUNT",
+        "to": "PERFORM",
+        "trigger": "PERFORM PERFORM"
+      },
+      {
+        "from": "GENERATE-ACCOUNT",
+        "to": "GENERATE-ACCOUNT",
+        "trigger": "PERFORM GENERATE-ACCOUNT"
+      },
+      {
+        "from": "LOGIN",
+        "to": "MOVE",
+        "trigger": "PERFORM MOVE"
+      },
+      {
+        "from": "LOGIN",
+        "to": "IF",
+        "trigger": "PERFORM IF"
+      },
+      {
+        "from": "LOGIN",
+        "to": "ATM-MENU",
+        "trigger": "PERFORM ATM-MENU UNTIL condition"
+      },
+      {
+        "from": "ATM-MENU",
+        "to": "EVALUATE",
+        "trigger": "PERFORM EVALUATE"
+      },
+      {
+        "from": "ATM-MENU",
+        "to": "CHECK-BALANCE",
+        "trigger": "PERFORM CHECK-BALANCE"
+      },
+      {
+        "from": "ATM-MENU",
+        "to": "DEPOSIT",
+        "trigger": "PERFORM DEPOSIT"
+      },
+      {
+        "from": "ATM-MENU",
+        "to": "WITHDRAW",
+        "trigger": "PERFORM WITHDRAW"
+      },
+      {
+        "from": "ATM-MENU",
+        "to": "CHECK-BALANCE",
+        "trigger": "EVALUATE WS-CHOICE WHEN 1"
+      },
+      {
+        "from": "ATM-MENU",
+        "to": "DEPOSIT",
+        "trigger": "EVALUATE WS-CHOICE WHEN 2"
+      },
+      {
+        "from": "ATM-MENU",
+        "to": "WITHDRAW",
+        "trigger": "EVALUATE WS-CHOICE WHEN 3"
+      },
+      {
+        "from": "DEPOSIT",
+        "to": "ADD",
+        "trigger": "PERFORM ADD"
+      },
+      {
+        "from": "WITHDRAW",
+        "to": "IF",
+        "trigger": "PERFORM IF"
+      }
+    ],
+    "loops": [
+      {
+        "paragraph": "MAIN-PROCEDURE",
+        "type": "PERFORM_UNTIL",
+        "condition_raw": "WS-MAIN-CHOICE = 3"
+      },
+      {
+        "paragraph": "MAIN-PROCEDURE",
+        "type": "PERFORM_UNTIL",
+        "condition_raw": "WS-MAIN-CHOICE >= 1"
+      },
+      {
+        "paragraph": "CREATE-ACCOUNT",
+        "type": "PERFORM_UNTIL",
+        "condition_raw": "F-PIN >= 100000"
+      },
+      {
+        "paragraph": "LOGIN",
+        "type": "PERFORM_UNTIL",
+        "condition_raw": "WS-ACCOUNT > 0"
+      },
+      {
+        "paragraph": "LOGIN",
+        "type": "PERFORM_UNTIL",
+        "condition_raw": "WS-PIN >= 100000"
+      },
+      {
+        "paragraph": "ATM-MENU",
+        "type": "PERFORM_UNTIL",
+        "condition_raw": "WS-CHOICE >= 1"
+      },
+      {
+        "paragraph": "DEPOSIT",
+        "type": "PERFORM_UNTIL",
+        "condition_raw": "WS-AMOUNT > 0"
+      },
+      {
+        "paragraph": "WITHDRAW",
+        "type": "PERFORM_UNTIL",
+        "condition_raw": "WS-AMOUNT > 0"
+      }
+    ]
+  }
+}

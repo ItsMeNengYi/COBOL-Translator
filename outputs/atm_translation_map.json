@@ -1,0 +1,26 @@
+{
+  "MAIN-PROCEDURE": {
+    "python_function": "main_procedure"
+  },
+  "CREATE-ACCOUNT": {
+    "python_function": "create_account"
+  },
+  "GENERATE-ACCOUNT": {
+    "python_function": "generate_account"
+  },
+  "LOGIN": {
+    "python_function": "login"
+  },
+  "ATM-MENU": {
+    "python_function": "atm_menu"
+  },
+  "CHECK-BALANCE": {
+    "python_function": "check_balance"
+  },
+  "DEPOSIT": {
+    "python_function": "deposit"
+  },
+  "WITHDRAW": {
+    "python_function": "withdraw"
+  }
+}
