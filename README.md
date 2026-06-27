@@ -8,6 +8,15 @@ I set up a template based on `task.md`. The structure is not exactly the same be
 python -m src.pipeline data/cobol/employee_payroll.cob
 ```
 
+## How to run test generator
+```bash
+python3 tests/test_generator.py --generate-only --max-cases 2
+or
+python3 tests/test_generator.py <generated_json>
+or
+python3 tests/test_generator.py --max-cases 2
+```
+
 ## How to Run It
 
 ### 1. Install Docker
