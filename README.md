@@ -8,6 +8,26 @@ I set up a template based on `task.md`. The structure is not exactly the same be
 python -m src.pipeline data/cobol/employee_payroll.cob
 ```
 
+For any input file, outputs are grouped by the COBOL filename stem.
+For example, `data/cobol/employee_payroll.cob` generates:
+
+```text
+outputs/employee_payroll/
+  program_structure.json
+  symbol_table.json
+  paragraph_map.json
+  control_flow.json
+  data_layout.json
+  rule_ir.json
+  semantic_meaning.json
+  program_summary.md
+  translation_map.json
+
+translated/employee_payroll/
+  translated.py
+  translated_final.py
+```
+
 ## How to run test generator
 ```bash
 python3 tests/test_generator.py --generate-only --max-cases 2

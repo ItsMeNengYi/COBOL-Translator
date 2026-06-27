@@ -11,6 +11,7 @@ import argparse
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -164,12 +165,48 @@ def build_semantic_meaning(cobol_path: Path, output_path: Path) -> None:
 
 def default_output_paths(cobol_path: Path) -> dict[str, Path]:
     stem = cobol_path.stem.lower()
+    output_dir = OUTPUTS_DIR / stem
+    translated_dir = TRANSLATED_DIR / stem
     return {
-        "semantic": OUTPUTS_DIR / f"{stem}_semantic_meaning.json",
-        "translated": TRANSLATED_DIR / f"{stem}_translated.py",
-        "final": TRANSLATED_DIR / f"{stem}_translated_final.py",
-        "translation_map": OUTPUTS_DIR / f"{stem}_translation_map.json",
+        "output_dir": output_dir,
+        "translated_dir": translated_dir,
+        "program_structure": output_dir / "program_structure.json",
+        "symbol_table": output_dir / "symbol_table.json",
+        "paragraph_map": output_dir / "paragraph_map.json",
+        "control_flow": output_dir / "control_flow.json",
+        "data_layout": output_dir / "data_layout.json",
+        "rule_ir": output_dir / "rule_ir.json",
+        "program_summary": output_dir / "program_summary.md",
+        "semantic": output_dir / "semantic_meaning.json",
+        "translated": translated_dir / "translated.py",
+        "final": translated_dir / "translated_final.py",
+        "translation_map": output_dir / "translation_map.json",
     }
+
+
+def write_named_parser_outputs(paths: dict[str, Path]) -> None:
+    copies = {
+        PROGRAM_STRUCTURE_PATH: paths["program_structure"],
+        SYMBOL_TABLE_PATH: paths["symbol_table"],
+        PARAGRAPH_MAP_PATH: paths["paragraph_map"],
+        CONTROL_FLOW_PATH: paths["control_flow"],
+        DATA_LAYOUT_PATH: paths["data_layout"],
+        RULE_IR_PATH: paths["rule_ir"],
+        PROGRAM_SUMMARY_PATH: paths["program_summary"],
+    }
+    for source, target in copies.items():
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, target)
+
+
+def cleanup_top_level_generated_files() -> None:
+    """Remove compatibility artifacts after per-program outputs are written."""
+    for directory in (OUTPUTS_DIR, TRANSLATED_DIR):
+        if not directory.exists():
+            continue
+        for path in directory.iterdir():
+            if path.is_file():
+                path.unlink()
 
 
 def run_rule_based_translation(translated_output: Path, translation_map_output: Path) -> None:
@@ -223,18 +260,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--semantic-output",
         default=None,
-        help="Semantic meaning JSON output path. Default: outputs/<input>_semantic_meaning.json",
+        help="Semantic meaning JSON output path. Default: outputs/<input>/semantic_meaning.json",
     )
     parser.add_argument(
         "--translated-output",
         default=None,
-        help="Rule-based Python output path. Default: translated/<input>_translated.py",
+        help="Rule-based Python output path. Default: translated/<input>/translated.py",
     )
     parser.add_argument(
         "-o",
         "--output",
         default=None,
-        help="Final Python output path. Default: translated/<input>_translated_final.py",
+        help="Final Python output path. Default: translated/<input>/translated_final.py",
     )
     parser.add_argument(
         "--use-llm",
@@ -270,10 +307,17 @@ def main() -> None:
     print(f"Source COBOL: {cobol_path}", flush=True)
     run_semantic_parser(cobol_path)
     build_semantic_meaning(cobol_path, semantic_output)
+    write_named_parser_outputs(default_paths)
     run_rule_based_translation(translated_output, translation_map_output)
     run_fallback(translated_output, final_output, use_llm=args.use_llm)
+    cleanup_top_level_generated_files()
 
     print("Pipeline complete.", flush=True)
+    print(f"Output folder: {default_paths['output_dir']}", flush=True)
+    print(f"Translated folder: {default_paths['translated_dir']}", flush=True)
+    print(f"Program structure: {default_paths['program_structure']}", flush=True)
+    print(f"Symbol table: {default_paths['symbol_table']}", flush=True)
+    print(f"Rule IR: {default_paths['rule_ir']}", flush=True)
     print(f"Semantic meaning: {semantic_output}", flush=True)
     print(f"Rule-based Python: {translated_output}", flush=True)
     print(f"Final Python: {final_output}", flush=True)

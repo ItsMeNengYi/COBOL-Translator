@@ -12,6 +12,11 @@ def read_json(filepath):
         return json.load(f)
 
 
+def extract_program_name(content):
+    match = re.search(r"PROGRAM-ID\.\s*([A-Z0-9-]+)", content.upper())
+    return match.group(1) if match else None
+
+
 def extract_paragraph_body(content, start_line, end_line):
     lines = content.splitlines()
     return lines[start_line - 1:end_line]
@@ -624,7 +629,7 @@ def build_rule_ir(cobol_path, paragraph_map_path):
             rule_counter += 1
 
     return {
-        "program": "ATM-MACHINE",
+        "program": extract_program_name(content),
         "schema_version": "0.2",
         "rules": all_rules
     }

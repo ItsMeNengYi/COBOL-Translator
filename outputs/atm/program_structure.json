@@ -1,0 +1,77 @@
+{
+  "program_name": "ATM-MACHINE",
+  "language": "COBOL",
+  "dialect": "GnuCOBOL",
+  "source_file": "ATM.cob",
+  "entry_point": "MAIN-PROCEDURE",
+  "program_type": "interactive_banking_system",
+  "paragraph_count": 8,
+  "file_count": 1,
+  "supported_file_operations": [
+    "OPEN",
+    "READ",
+    "WRITE",
+    "REWRITE",
+    "CLOSE"
+  ],
+  "divisions": [
+    "IDENTIFICATION",
+    "ENVIRONMENT",
+    "DATA",
+    "PROCEDURE"
+  ],
+  "sections": {
+    "ENVIRONMENT": [
+      "INPUT-OUTPUT",
+      "FILE-CONTROL"
+    ],
+    "DATA": [
+      "FILE SECTION",
+      "WORKING-STORAGE SECTION"
+    ],
+    "PROCEDURE": {
+      "entry_point": "MAIN-PROCEDURE",
+      "paragraph_count": 8
+    }
+  },
+  "files": [
+    {
+      "select_name": "USERDATA",
+      "assign_to": "atm_accounts.dat",
+      "organization": "INDEXED",
+      "access_mode": "RANDOM",
+      "record_key": "F-ACCOUNT",
+      "file_status": "WS-FILE-STATUS"
+    }
+  ],
+  "paragraphs": [
+    "MAIN-PROCEDURE",
+    "CREATE-ACCOUNT",
+    "GENERATE-ACCOUNT",
+    "LOGIN",
+    "ATM-MENU",
+    "CHECK-BALANCE",
+    "DEPOSIT",
+    "WITHDRAW"
+  ],
+  "supported_constructs_detected": [
+    "OPEN",
+    "CLOSE",
+    "STOP RUN",
+    "IF",
+    "PERFORM UNTIL",
+    "PERFORM paragraph",
+    "EVALUATE/WHEN",
+    "MOVE",
+    "DISPLAY",
+    "ACCEPT",
+    "COMPUTE",
+    "READ INVALID KEY",
+    "WRITE INVALID KEY",
+    "REWRITE INVALID KEY",
+    "ADD",
+    "SUBTRACT",
+    "EXIT",
+    "EXIT PARAGRAPH"
+  ]
+}
