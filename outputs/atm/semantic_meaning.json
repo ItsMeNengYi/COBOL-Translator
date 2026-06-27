@@ -1,5 +1,5 @@
 {
-  "source_file": "/Users/nicole/CobolTranslator/COBOL-Translator/data/cobol/ATM.cob",
+  "source_file": "C:\\Users\\Xinyi\\Downloads\\cobol\\COBOL-Translator\\inputs\\ATM.cob",
   "program_name": "ATM-MACHINE",
   "entry_point": "MAIN-PROCEDURE",
   "overview": {
