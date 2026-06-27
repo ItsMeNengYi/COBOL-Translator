@@ -142,24 +142,84 @@ def render_copy_button(text: str) -> None:
     payload = json.dumps(text)
     components.html(
         f"""
+        <style>
+          html, body {{
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            font-family: "Source Sans Pro", sans-serif;
+          }}
+          #copy-code {{
+            align-items: center;
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            color: #083C2F;
+            cursor: pointer;
+            display: inline-flex;
+            font-size: 1rem;
+            font-weight: 600;
+            gap: 8px;
+            justify-content: center;
+            line-height: 1.2;
+            min-height: 40px;
+            padding: 0 16px;
+            width: 100%;
+          }}
+          #copy-code:hover {{
+            background: #F8FAF9;
+          }}
+          #copy-code svg {{
+            height: 18px;
+            width: 18px;
+          }}
+        </style>
         <button id="copy-code" style="
           width: 100%;
-          min-height: 40px;
-          border: 1px solid #E5E7EB;
-          border-radius: 12px;
-          background: #FFFFFF;
-          color: #083C2F;
-          font-weight: 700;
-          cursor: pointer;
-          font-family: inherit;
-        ">Copy Code</button>
+        ">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M8 8h10v12H8zM6 16H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+          <span>Copy Code</span>
+        </button>
         <script>
           const btn = document.getElementById("copy-code");
+          const label = btn.querySelector("span");
+          const codeText = {payload};
+
+          async function copyToClipboard(value) {{
+            try {{
+              await navigator.clipboard.writeText(value);
+              return true;
+            }} catch (err) {{
+              // Fallback for browsers/environments where Clipboard API is restricted.
+              const area = document.createElement("textarea");
+              area.value = value;
+              area.setAttribute("readonly", "");
+              area.style.position = "fixed";
+              area.style.top = "-9999px";
+              document.body.appendChild(area);
+              area.select();
+              const ok = document.execCommand("copy");
+              document.body.removeChild(area);
+              return ok;
+            }}
+          }}
+
+          function flashMessage(message) {{
+            const original = label.textContent;
+            label.textContent = message;
+            setTimeout(() => label.textContent = original, 1200);
+          }}
+
           btn.addEventListener("click", async () => {{
-            await navigator.clipboard.writeText({payload});
-            const original = btn.textContent;
-            btn.textContent = "Copied";
-            setTimeout(() => btn.textContent = original, 1200);
+            if (!codeText || !codeText.trim()) {{
+              flashMessage("No code yet");
+              return;
+            }}
+
+            const copied = await copyToClipboard(codeText);
+            flashMessage(copied ? "Copied" : "Copy failed");
           }});
         </script>
         """,
