@@ -1,11 +1,16 @@
 from __future__ import annotations
 
 import base64
+import json
+import re
+import subprocess
+import sys
 from html import escape
 from pathlib import Path
 from typing import Any
 
 import streamlit as st
+import streamlit.components.v1 as components
 
 from src.report_generator import default_report_data, generate_html_report
 
@@ -14,6 +19,7 @@ APP_NAME = "Avo-cuddle"
 REPORT_PATH = Path("reports/migration_report.html")
 DEFAULT_COBOL_PATH = Path("inputs/ATM.cob")
 LOGO_PATH = Path("assets/avocuddle_logo.svg")
+COBOL_DATA_DIR = Path("data/cobol")
 
 
 def icon_svg(name: str) -> str:
@@ -75,6 +81,8 @@ def ensure_state() -> None:
         "generated_code": "",
         "output_language": "Python",
         "paste_buffer": "",
+        "translation_status": "",
+        "translation_error": "",
         "show_test_report": False,
     }
     for key, value in defaults.items():
@@ -85,6 +93,78 @@ def format_size(size_bytes: int) -> str:
     if size_bytes >= 1024:
         return f"{size_bytes / 1024:.1f} KB"
     return f"{size_bytes} B"
+
+
+def safe_cobol_filename(filename: str) -> str:
+    stem = Path(filename).stem or "uploaded_cobol"
+    suffix = Path(filename).suffix.lower() or ".cob"
+    if suffix not in {".cob", ".cbl", ".cpy", ".txt"}:
+        suffix = ".cob"
+    safe_stem = re.sub(r"[^A-Za-z0-9_.-]+", "_", stem).strip("._") or "uploaded_cobol"
+    return f"{safe_stem}{suffix}"
+
+
+def write_cobol_input(filename: str, source_code: str) -> Path:
+    COBOL_DATA_DIR.mkdir(parents=True, exist_ok=True)
+    target = COBOL_DATA_DIR / safe_cobol_filename(filename)
+    target.write_text(source_code, encoding="utf-8")
+    return target
+
+
+def translated_final_path(cobol_path: Path) -> Path:
+    return Path("translated") / cobol_path.stem.lower() / "translated_final.py"
+
+
+def run_pipeline_for_source(filename: str, source_code: str) -> None:
+    st.session_state.translation_status = "Running pipeline..."
+    st.session_state.translation_error = ""
+    st.session_state.generated_code = ""
+
+    cobol_path = write_cobol_input(filename, source_code)
+    command = [sys.executable, "-m", "src.pipeline", cobol_path.as_posix()]
+    try:
+        subprocess.run(command, cwd=Path.cwd(), check=True, capture_output=True, text=True)
+    except subprocess.CalledProcessError as exc:
+        st.session_state.translation_status = "Pipeline failed"
+        st.session_state.translation_error = (exc.stderr or exc.stdout or str(exc)).strip()
+        return
+
+    final_path = translated_final_path(cobol_path)
+    if final_path.exists():
+        st.session_state.generated_code = final_path.read_text(encoding="utf-8", errors="replace")
+        st.session_state.translation_status = f"Loaded {final_path.as_posix()}"
+    else:
+        st.session_state.translation_status = "Pipeline completed, but translated_final.py was not found"
+        st.session_state.translation_error = f"Expected output: {final_path.as_posix()}"
+
+
+def render_copy_button(text: str) -> None:
+    payload = json.dumps(text)
+    components.html(
+        f"""
+        <button id="copy-code" style="
+          width: 100%;
+          min-height: 40px;
+          border: 1px solid #E5E7EB;
+          border-radius: 12px;
+          background: #FFFFFF;
+          color: #083C2F;
+          font-weight: 700;
+          cursor: pointer;
+          font-family: inherit;
+        ">Copy Code</button>
+        <script>
+          const btn = document.getElementById("copy-code");
+          btn.addEventListener("click", async () => {{
+            await navigator.clipboard.writeText({payload});
+            const original = btn.textContent;
+            btn.textContent = "Copied";
+            setTimeout(() => btn.textContent = original, 1200);
+          }});
+        </script>
+        """,
+        height=46,
+    )
 
 
 def translate_cobol_to_python(cobol_code: str) -> str:
@@ -129,7 +209,8 @@ if __name__ == "__main__":
 
 
 def run_translation() -> None:
-    st.session_state.generated_code = translate_cobol_to_python(st.session_state.cobol_code)
+    filename = st.session_state.uploaded_file_name or "pasted-source.cob"
+    run_pipeline_for_source(filename, st.session_state.cobol_code)
 
 
 def test_report_rows() -> list[dict[str, str]]:
@@ -684,6 +765,8 @@ def render_source_panel() -> None:
                 st.session_state.uploaded_file_name = ""
                 st.session_state.uploaded_file_size = 0
                 st.session_state.paste_buffer = ""
+                st.session_state.translation_status = ""
+                st.session_state.translation_error = ""
                 st.rerun()
 
         if st.session_state.cobol_code:
@@ -714,7 +797,8 @@ def render_source_panel() -> None:
                 st.session_state.cobol_code = raw.decode("utf-8", errors="replace")
                 st.session_state.uploaded_file_name = uploaded_file.name
                 st.session_state.uploaded_file_size = len(raw)
-                run_translation()
+                with st.spinner("Running COBOL migration pipeline..."):
+                    run_translation()
                 st.rerun()
 
             st.markdown('<div class="support-text">Supported formats: .cob, .cbl, .cpy, .txt</div>', unsafe_allow_html=True)
@@ -730,7 +814,8 @@ def render_source_panel() -> None:
                 st.session_state.cobol_code = pasted_code
                 st.session_state.uploaded_file_name = "pasted-source.cob"
                 st.session_state.uploaded_file_size = len(pasted_code.encode("utf-8"))
-                run_translation()
+                with st.spinner("Running COBOL migration pipeline..."):
+                    run_translation()
                 st.rerun()
 
 
@@ -758,7 +843,7 @@ def render_generated_panel() -> None:
 
         copy_col, download_col = st.columns(2)
         with copy_col:
-            st.button("Copy Code", key="copy_code", icon=":material/content_copy:", use_container_width=True)
+            render_copy_button(st.session_state.generated_code or "")
         with download_col:
             st.download_button(
                 "Download .py",
@@ -772,6 +857,8 @@ def render_generated_panel() -> None:
         if st.session_state.generated_code:
             st.code(st.session_state.generated_code, language="python", line_numbers=True)
         else:
+            if st.session_state.translation_error:
+                st.error(st.session_state.translation_error)
             st.markdown(
                 '<div class="empty-note">Generated Python code will appear automatically after upload.</div>',
                 unsafe_allow_html=True,
@@ -835,4 +922,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

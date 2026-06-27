@@ -1,12 +1,12 @@
-# Program Summary: PAYROLL
+# Program Summary: INVENTORY
 
 ## Overview
 
-`PAYROLL` is a COBOL ATM/account management program. It uses an indexed account file and supports account creation, login, balance inquiry, deposit, withdrawal, and logout.
+`INVENTORY` is a COBOL ATM/account management program. It uses an indexed account file and supports account creation, login, balance inquiry, deposit, withdrawal, and logout.
 
 ## Program Structure
 
-- Source file: `employee_payroll.cob`
+- Source file: `INVENTORY.cob`
 - Language: COBOL
 - Dialect: GnuCOBOL
 - Entry point: `MAIN`
@@ -41,7 +41,7 @@
 ## Important Data Fields
 
 - Money fields: 
-- Total variables: 4
+- Total variables: 2
 - Total rules extracted: 10
 - Control-flow nodes: 2
 - Control-flow edges: 0

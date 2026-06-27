@@ -1,8 +1,8 @@
 {
-  "program_name": "PAYROLL",
+  "program_name": "INVENTORY",
   "language": "COBOL",
   "dialect": "GnuCOBOL",
-  "source_file": "employee_payroll.cob",
+  "source_file": "INVENTORY.cob",
   "entry_point": "MAIN",
   "program_type": "interactive_banking_system",
   "paragraph_count": 1,
@@ -29,8 +29,9 @@
   ],
   "supported_constructs_detected": [
     "STOP RUN",
+    "IF",
     "DISPLAY",
     "ACCEPT",
-    "COMPUTE"
+    "SUBTRACT"
   ]
 }

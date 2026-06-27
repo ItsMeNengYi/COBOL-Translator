@@ -1,0 +1,50 @@
+{
+  "STOCK": {
+    "level": "01",
+    "section": "WORKING-STORAGE",
+    "pic": "999",
+    "cobol_type": "unsigned_numeric",
+    "python_type": "int",
+    "python_name": "stock",
+    "initial_value": null,
+    "scale": 0,
+    "semantic_role": null,
+    "semantic_source": "ai_required",
+    "semantic_confidence": null,
+    "ai_enrichment_needed": true,
+    "ai_enrichment_targets": [
+      "semantic_role",
+      "is_money",
+      "business_meaning",
+      "risk_level",
+      "translation_notes",
+      "test_hints"
+    ],
+    "length": 3,
+    "digits": 3
+  },
+  "ORDER-QTY": {
+    "level": "01",
+    "section": "WORKING-STORAGE",
+    "pic": "999",
+    "cobol_type": "unsigned_numeric",
+    "python_type": "int",
+    "python_name": "order_qty",
+    "initial_value": null,
+    "scale": 0,
+    "semantic_role": null,
+    "semantic_source": "ai_required",
+    "semantic_confidence": null,
+    "ai_enrichment_needed": true,
+    "ai_enrichment_targets": [
+      "semantic_role",
+      "is_money",
+      "business_meaning",
+      "risk_level",
+      "translation_notes",
+      "test_hints"
+    ],
+    "length": 3,
+    "digits": 3
+  }
+}
