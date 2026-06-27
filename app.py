@@ -95,6 +95,10 @@ def ensure_state() -> None:
         st.session_state.setdefault(key, value)
 
 
+def has_source_submission() -> bool:
+    return bool(str(st.session_state.get("cobol_code", "")).strip())
+
+
 def format_size(size_bytes: int) -> str:
     if size_bytes >= 1024:
         return f"{size_bytes / 1024:.1f} KB"
@@ -787,6 +791,7 @@ def render_source_panel() -> None:
                 st.session_state.translation_error = ""
                 st.session_state.test_generation_status = ""
                 st.session_state.test_generation_error = ""
+                st.session_state.show_test_report = False
                 st.rerun()
 
         if st.session_state.cobol_code:
@@ -965,9 +970,13 @@ def main() -> None:
     with right:
         render_generated_panel()
 
-    render_bottom_actions()
-    render_refinement_status()
-    if st.session_state.show_test_report:
+    if has_source_submission():
+        render_bottom_actions()
+        render_refinement_status()
+    elif st.session_state.show_test_report:
+        st.session_state.show_test_report = False
+
+    if has_source_submission() and st.session_state.show_test_report:
         render_test_report()
 
 
