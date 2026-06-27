@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from html import escape
 from pathlib import Path
 from typing import Any
@@ -830,6 +831,47 @@ def render_test_report() -> None:
     )
 
 
+def latest_refinement_report() -> dict[str, Any] | None:
+    reports = sorted(
+        Path("translated").glob("*/refinement_report.json"),
+        key=lambda path: path.stat().st_mtime,
+        reverse=True,
+    )
+    if not reports:
+        return None
+    try:
+        report = json.loads(reports[0].read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return None
+    report["_report_path"] = str(reports[0])
+    return report
+
+
+def render_refinement_status() -> None:
+    report = latest_refinement_report()
+    if not report:
+        return
+
+    history = report.get("history") or []
+    latest = history[-1] if history else {}
+    accepted = "Accepted" if latest.get("latest_accepted") else "Discarded"
+    status = str(report.get("status", "unknown")).upper()
+
+    st.markdown("### Refinement Status")
+    cols = st.columns(5)
+    cols[0].metric("Iteration", report.get("iterations_used", 0))
+    cols[1].metric("Total Tests", report.get("total_tests", 0))
+    cols[2].metric("Passed", report.get("best_passed", 0))
+    cols[3].metric("Failed", report.get("best_failed", 0))
+    cols[4].metric("Status", status)
+
+    st.caption(
+        "Best version kept: "
+        f"{report.get('best_file', '')} | Latest version: {accepted} | "
+        f"Report: {report.get('_report_path', '')}"
+    )
+
+
 def main() -> None:
     st.set_page_config(page_title=APP_NAME, page_icon=":material/code:", layout="wide")
     ensure_state()
@@ -843,6 +885,7 @@ def main() -> None:
         render_generated_panel()
 
     render_bottom_actions()
+    render_refinement_status()
     if st.session_state.show_test_report:
         render_test_report()
 

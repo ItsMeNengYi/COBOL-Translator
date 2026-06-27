@@ -296,6 +296,96 @@ def split_if_block(block_lines):
     return true_lines, false_lines
 
 
+def parse_ordered_statements(lines):
+    """Parse top-level statements in the same order they appear in COBOL."""
+    normalized_lines = normalize_continuation_lines(lines)
+    statements = []
+    i = 0
+
+    while i < len(normalized_lines):
+        line = clean_line(normalized_lines[i])
+        upper = line.upper()
+
+        if not upper or upper in {"ELSE", "END-IF", "END-EVALUATE"}:
+            i += 1
+            continue
+
+        if upper.startswith("IF "):
+            condition = upper[3:].strip()
+            block_lines = []
+            depth = 1
+            j = i + 1
+
+            while j < len(normalized_lines):
+                next_upper = clean_line(normalized_lines[j]).upper()
+                if next_upper.startswith("IF "):
+                    depth += 1
+                if next_upper.startswith("END-IF"):
+                    depth -= 1
+                    if depth == 0:
+                        break
+                block_lines.append(normalized_lines[j])
+                j += 1
+
+            true_lines, false_lines = split_if_block(block_lines)
+            statements.append({
+                "operation": "IF",
+                "condition": parse_condition(condition),
+                "true_branch": parse_ordered_statements(true_lines),
+                "false_branch": parse_ordered_statements(false_lines),
+            })
+            i = j + 1
+            continue
+
+        if upper.startswith("EVALUATE "):
+            evaluate_rules = extract_evaluate_blocks(normalized_lines[i:])
+            if evaluate_rules:
+                statements.append(evaluate_rules[0])
+            depth = 1
+            i += 1
+            while i < len(normalized_lines) and depth:
+                next_upper = clean_line(normalized_lines[i]).upper()
+                if next_upper.startswith("EVALUATE "):
+                    depth += 1
+                elif next_upper.startswith("END-EVALUATE"):
+                    depth -= 1
+                i += 1
+            continue
+
+        if upper.startswith(("READ ", "WRITE ", "REWRITE ")):
+            file_blocks = extract_file_operation_blocks(normalized_lines[i:])
+            if file_blocks:
+                statements.append(file_blocks[0])
+            end_prefixes = ("END-READ", "END-WRITE", "END-REWRITE")
+            i += 1
+            while i < len(normalized_lines):
+                if clean_line(normalized_lines[i]).upper().startswith(end_prefixes):
+                    i += 1
+                    break
+                i += 1
+            continue
+
+        if upper.startswith((
+            "ELSE",
+            "WHEN ",
+            "INVALID KEY",
+            "NOT INVALID KEY",
+            "END-READ",
+            "END-WRITE",
+            "END-REWRITE",
+        )):
+            i += 1
+            continue
+
+        op = parse_operation_line(line)
+        if op:
+            statements.append(op)
+
+        i += 1
+
+    return statements
+
+
 def extract_if_blocks(lines):
     """
     Extract simple IF ... ELSE ... END-IF blocks.
@@ -589,42 +679,7 @@ def build_rule_ir(cobol_path, paragraph_map_path):
             meta["end_line"]
         )
 
-        # Extract structured IF blocks
-        for if_block in extract_if_blocks(lines):
-            rule = {
-                "rule_id": f"R{rule_counter:03d}",
-                "paragraph": paragraph_name,
-                "type": "IF",
-                "condition": if_block["condition"],
-                "true_branch": if_block["true_branch"],
-                "false_branch": if_block["false_branch"]
-            }
-            all_rules.append(add_rule_metadata(rule))
-            rule_counter += 1
-
-        # Extract structured EVALUATE blocks
-        for evaluate in extract_evaluate_blocks(lines):
-            rule = {
-                "rule_id": f"R{rule_counter:03d}",
-                "paragraph": paragraph_name,
-                "type": "EVALUATE",
-                "subject": evaluate["subject"],
-                "cases": evaluate["cases"]
-            }
-            all_rules.append(add_rule_metadata(rule))
-            rule_counter += 1
-
-        # Extract structured READ/WRITE/REWRITE with INVALID KEY branches
-        for file_op in extract_file_operation_blocks(lines):
-            all_rules.append(operation_to_rule(file_op, paragraph_name, rule_counter))
-            rule_counter += 1
-
-        # Extract simple standalone operations
-        for operation in extract_simple_operations(lines):
-            # Avoid duplicating READ/WRITE/REWRITE already extracted as blocks
-            if operation["operation"] in ["READ", "WRITE", "REWRITE"]:
-                continue
-
+        for operation in parse_ordered_statements(lines):
             all_rules.append(operation_to_rule(operation, paragraph_name, rule_counter))
             rule_counter += 1
 

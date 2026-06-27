@@ -11,8 +11,8 @@ ws_main_choice = 0
 ws_choice = 0
 ws_account = 0
 ws_pin = 0
-ws_amount = Decimal("0.00")
-ws_found = ""
+ws_amount = Decimal('0')
+ws_found = 'N'
 
 # generated functions
 def main_procedure():

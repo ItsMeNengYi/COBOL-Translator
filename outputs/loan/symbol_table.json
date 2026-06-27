@@ -1,0 +1,74 @@
+{
+  "SALARY": {
+    "level": "01",
+    "section": "WORKING-STORAGE",
+    "pic": "9(6)",
+    "cobol_type": "unsigned_numeric",
+    "python_type": "int",
+    "python_name": "salary",
+    "initial_value": null,
+    "scale": 0,
+    "semantic_role": null,
+    "semantic_source": "ai_required",
+    "semantic_confidence": null,
+    "ai_enrichment_needed": true,
+    "ai_enrichment_targets": [
+      "semantic_role",
+      "is_money",
+      "business_meaning",
+      "risk_level",
+      "translation_notes",
+      "test_hints"
+    ],
+    "length": 6,
+    "digits": 6
+  },
+  "CREDIT-SCORE": {
+    "level": "01",
+    "section": "WORKING-STORAGE",
+    "pic": "999",
+    "cobol_type": "unsigned_numeric",
+    "python_type": "int",
+    "python_name": "credit_score",
+    "initial_value": null,
+    "scale": 0,
+    "semantic_role": null,
+    "semantic_source": "ai_required",
+    "semantic_confidence": null,
+    "ai_enrichment_needed": true,
+    "ai_enrichment_targets": [
+      "semantic_role",
+      "is_money",
+      "business_meaning",
+      "risk_level",
+      "translation_notes",
+      "test_hints"
+    ],
+    "length": 3,
+    "digits": 3
+  },
+  "APPROVED": {
+    "level": "01",
+    "section": "WORKING-STORAGE",
+    "pic": "X",
+    "cobol_type": "alphanumeric",
+    "python_type": "str",
+    "python_name": "approved",
+    "initial_value": "N",
+    "scale": 0,
+    "semantic_role": null,
+    "semantic_source": "ai_required",
+    "semantic_confidence": null,
+    "ai_enrichment_needed": true,
+    "ai_enrichment_targets": [
+      "semantic_role",
+      "is_money",
+      "business_meaning",
+      "risk_level",
+      "translation_notes",
+      "test_hints"
+    ],
+    "length": 1,
+    "padding": "right-space"
+  }
+}

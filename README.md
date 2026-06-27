@@ -28,6 +28,22 @@ translated/employee_payroll/
   translated_final.py
 ```
 
+## How to run refinement
+```bash
+python -m src.refinement_runner data/cobol/employee_payroll.cob --max-iterations 5 --patience 2
+```
+
+This saves refinement artifacts beside the translated program:
+
+```text
+translated/employee_payroll/
+  employee_payroll_v1.py
+  employee_payroll_v2.py
+  employee_payroll_best.py
+  generated_tests.json
+  refinement_report.json
+```
+
 ## How to run test generator
 ```bash
 python3 tests/test_rule.py --max-testcases 10

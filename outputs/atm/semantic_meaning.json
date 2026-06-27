@@ -7,7 +7,7 @@
     "dialect": "GnuCOBOL",
     "program_type": "interactive_banking_system",
     "paragraph_count": 8,
-    "rule_count": 126
+    "rule_count": 73
   },
   "paragraphs": {
     "MAIN-PROCEDURE": {
@@ -20,15 +20,10 @@
         "CREATE-ACCOUNT",
         "LOGIN"
       ],
-      "rule_count": 22,
+      "rule_count": 14,
       "operations": [
+        "OPEN",
         "IF",
-        "IF",
-        "EVALUATE",
-        "OPEN",
-        "OPEN",
-        "CLOSE",
-        "OPEN",
         "MOVE",
         "DISPLAY",
         "DISPLAY",
@@ -37,11 +32,8 @@
         "DISPLAY",
         "DISPLAY",
         "ACCEPT",
-        "DISPLAY",
-        "DISPLAY",
-        "PERFORM",
-        "PERFORM",
-        "DISPLAY",
+        "IF",
+        "EVALUATE",
         "CLOSE",
         "STOP_RUN"
       ]
@@ -51,32 +43,23 @@
       "called_paragraphs": [
         "PERFORM"
       ],
-      "rule_count": 25,
+      "rule_count": 16,
       "operations": [
-        "IF",
-        "IF",
-        "IF",
-        "WRITE",
         "MOVE",
         "MOVE",
         "MOVE",
         "DISPLAY",
         "ACCEPT",
-        "DISPLAY",
-        "EXIT_PARAGRAPH",
-        "DISPLAY",
-        "ACCEPT",
-        "DISPLAY",
-        "EXIT_PARAGRAPH",
+        "IF",
         "DISPLAY",
         "ACCEPT",
+        "IF",
         "DISPLAY",
+        "ACCEPT",
+        "IF",
         "PERFORM",
         "MOVE",
-        "DISPLAY",
-        "DISPLAY",
-        "DISPLAY",
-        "DISPLAY",
+        "WRITE",
         "EXIT"
       ]
     },
@@ -85,12 +68,10 @@
       "called_paragraphs": [
         "GENERATE-ACCOUNT"
       ],
-      "rule_count": 5,
+      "rule_count": 3,
       "operations": [
-        "READ",
         "COMPUTE",
-        "CONTINUE",
-        "PERFORM",
+        "READ",
         "EXIT"
       ]
     },
@@ -101,30 +82,17 @@
         "IF",
         "ATM-MENU"
       ],
-      "rule_count": 23,
+      "rule_count": 10,
       "operations": [
+        "MOVE",
+        "MOVE",
+        "MOVE",
+        "DISPLAY",
+        "ACCEPT",
         "IF",
-        "IF",
+        "MOVE",
         "READ",
-        "MOVE",
-        "MOVE",
-        "MOVE",
-        "DISPLAY",
-        "ACCEPT",
-        "DISPLAY",
-        "MOVE",
-        "MOVE",
-        "MOVE",
-        "DISPLAY",
-        "DISPLAY",
-        "ACCEPT",
-        "DISPLAY",
-        "DISPLAY",
-        "DISPLAY",
-        "MOVE",
-        "PERFORM_UNTIL",
-        "DISPLAY",
-        "DISPLAY",
+        "IF",
         "EXIT"
       ]
     },
@@ -139,10 +107,8 @@
         "DEPOSIT",
         "WITHDRAW"
       ],
-      "rule_count": 20,
+      "rule_count": 14,
       "operations": [
-        "IF",
-        "EVALUATE",
         "MOVE",
         "DISPLAY",
         "DISPLAY",
@@ -154,12 +120,8 @@
         "DISPLAY",
         "DISPLAY",
         "ACCEPT",
-        "DISPLAY",
-        "DISPLAY",
-        "PERFORM",
-        "PERFORM",
-        "PERFORM",
-        "DISPLAY",
+        "IF",
+        "EVALUATE",
         "EXIT"
       ]
     },
@@ -178,20 +140,14 @@
       "called_paragraphs": [
         "ADD"
       ],
-      "rule_count": 13,
+      "rule_count": 7,
       "operations": [
-        "IF",
-        "REWRITE",
         "MOVE",
         "DISPLAY",
         "ACCEPT",
-        "DISPLAY",
-        "DISPLAY",
+        "IF",
         "ADD",
-        "DISPLAY",
-        "DISPLAY",
-        "DISPLAY",
-        "DISPLAY",
+        "REWRITE",
         "EXIT"
       ]
     },
@@ -200,22 +156,13 @@
       "called_paragraphs": [
         "IF"
       ],
-      "rule_count": 15,
+      "rule_count": 6,
       "operations": [
-        "IF",
-        "IF",
-        "REWRITE",
         "MOVE",
         "DISPLAY",
         "ACCEPT",
-        "DISPLAY",
-        "DISPLAY",
-        "DISPLAY",
-        "SUBTRACT",
-        "DISPLAY",
-        "DISPLAY",
-        "DISPLAY",
-        "DISPLAY",
+        "IF",
+        "IF",
         "EXIT"
       ]
     }

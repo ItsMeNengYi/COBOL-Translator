@@ -324,6 +324,17 @@ def initial_value_for_type(python_type: str) -> str:
     return '""'
 
 
+def initial_value_for_symbol(symbol: dict[str, Any], python_type: str) -> str:
+    initial_value = symbol.get("initial_value")
+    if initial_value is None:
+        return initial_value_for_type(python_type)
+    if python_type == "Decimal":
+        return f"Decimal({str(initial_value)!r})"
+    if python_type == "int":
+        return str(initial_value) if str(initial_value).lstrip("-").isdigit() else "0"
+    return repr(str(initial_value))
+
+
 def generate_variable_declarations(symbol_table: dict[str, Any], data_layout: dict[str, Any]) -> list[str]:
     lines: list[str] = []
     data_types = collect_data_layout_types(data_layout)
@@ -335,7 +346,7 @@ def generate_variable_declarations(symbol_table: dict[str, Any], data_layout: di
         python_type = symbol_python_type(str(cobol_name), symbol, data_types)
         SYMBOL_TYPES[str(cobol_name).upper()] = python_type
         SYMBOL_META[str(cobol_name).upper()] = symbol
-        lines.append(f"{NAME_MAP[str(cobol_name)]} = {initial_value_for_type(python_type)}")
+        lines.append(f"{NAME_MAP[str(cobol_name)]} = {initial_value_for_symbol(symbol, python_type)}")
     return lines
 
 
@@ -460,13 +471,7 @@ def normalize_paragraph_rules(rules: list[dict[str, Any]]) -> list[dict[str, Any
         if not is_flattened_duplicate(rule, nested_signatures)
     ]
 
-    normalized = move_validation_ifs_after_accepts(deduped)
-    normalized = move_file_updates_late(normalized)
-
-    # If a paragraph has an EVALUATE, trailing flattened PERFORM/DISPLAY cases
-    # should already be removed. Keep STOP/CLOSE after it, but avoid any
-    # accidental unconditional transaction calls after menu dispatch.
-    return normalized
+    return deduped
 
 
 def move_file_updates_late(rules: list[dict[str, Any]]) -> list[dict[str, Any]]:

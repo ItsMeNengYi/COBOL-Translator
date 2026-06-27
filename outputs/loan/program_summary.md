@@ -1,12 +1,12 @@
-# Program Summary: PAYROLL
+# Program Summary: LOAN
 
 ## Overview
 
-`PAYROLL` is a COBOL ATM/account management program. It uses an indexed account file and supports account creation, login, balance inquiry, deposit, withdrawal, and logout.
+`LOAN` is a COBOL ATM/account management program. It uses an indexed account file and supports account creation, login, balance inquiry, deposit, withdrawal, and logout.
 
 ## Program Structure
 
-- Source file: `employee_payroll.cob`
+- Source file: `LOAN.cob`
 - Language: COBOL
 - Dialect: GnuCOBOL
 - Entry point: `MAIN`
@@ -41,8 +41,8 @@
 ## Important Data Fields
 
 - Money fields: 
-- Total variables: 4
-- Total rules extracted: 10
+- Total variables: 3
+- Total rules extracted: 7
 - Control-flow nodes: 2
 - Control-flow edges: 0
 - Loops detected: 0

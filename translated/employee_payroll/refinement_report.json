@@ -1,0 +1,31 @@
+{
+  "cobol_path": "/Users/nicole/CobolTranslator/COBOL-Translator/data/cobol/employee_payroll.cob",
+  "generated_tests": "translated/employee_payroll/generated_tests.json",
+  "max_iterations": 5,
+  "patience": 2,
+  "best_iteration": 1,
+  "total_tests": 1,
+  "best_passed": 1,
+  "best_failed": 0,
+  "best_pass_rate": 1.0,
+  "best_file": "translated/employee_payroll/employee_payroll_best.py",
+  "iterations_used": 1,
+  "status": "passed",
+  "history": [
+    {
+      "iteration": 1,
+      "version_file": "translated/employee_payroll/employee_payroll_v1.py",
+      "total_tests": 1,
+      "passed": 1,
+      "failed": 0,
+      "pass_rate": 1.0,
+      "runtime_errors": 0,
+      "error_messages": [],
+      "kept": true,
+      "latest_accepted": true,
+      "latest_discarded": false,
+      "reason": "initial version"
+    }
+  ],
+  "updated_at": "2026-06-27T15:10:52"
+}

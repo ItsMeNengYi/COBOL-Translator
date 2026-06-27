@@ -1,0 +1,28 @@
+{
+  "cobol_path": "/Users/nicole/CobolTranslator/COBOL-Translator/data/cobol/LOAN.cob",
+  "python_path": "/Users/nicole/CobolTranslator/COBOL-Translator/translated/loan/translated_final.py",
+  "generated_at": "2026-06-27T15:16:56",
+  "metadata": {
+    "method": "deterministic",
+    "actions": [],
+    "prompts": [
+      {
+        "variable": "SALARY",
+        "prompt": "SALARY:"
+      },
+      {
+        "variable": "CREDIT-SCORE",
+        "prompt": "CREDIT SCORE:"
+      }
+    ]
+  },
+  "tests": [
+    {
+      "name": "case_001",
+      "stdin": [
+        "100",
+        "1"
+      ]
+    }
+  ]
+}

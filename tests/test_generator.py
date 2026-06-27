@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import argparse
 import difflib
 import json
@@ -333,6 +335,8 @@ def compile_cobol(cobol_path: str | Path, build_dir: Path) -> dict[str, Any]:
 
 
 def output_diff(cobol_output: str, python_output: str) -> str:
+    cobol_output = normalize_dynamic_output(cobol_output)
+    python_output = normalize_dynamic_output(python_output)
     return "".join(
         difflib.unified_diff(
             cobol_output.splitlines(keepends=True),
@@ -341,6 +345,22 @@ def output_diff(cobol_output: str, python_output: str) -> str:
             tofile="python",
         )
     )
+
+
+def normalize_dynamic_output(output: str) -> str:
+    """Normalize values that are intentionally nondeterministic across runs."""
+    lines = output.splitlines()
+    normalized: list[str] = []
+    previous = ""
+
+    for line in lines:
+        if previous.strip().upper() == "YOUR ACCOUNT NUMBER IS:" and re.fullmatch(r"\d{10}", line.strip()):
+            normalized.append("<ACCOUNT_NUMBER>")
+        else:
+            normalized.append(line)
+        previous = line
+
+    return "\n".join(normalized) + ("\n" if output.endswith("\n") else "")
 
 
 def run_testcases(

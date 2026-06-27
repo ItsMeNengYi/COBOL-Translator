@@ -54,7 +54,7 @@
 
 - Money fields: 
 - Total variables: 13
-- Total rules extracted: 126
+- Total rules extracted: 73
 - Control-flow nodes: 9
 - Control-flow edges: 20
 - Loops detected: 8

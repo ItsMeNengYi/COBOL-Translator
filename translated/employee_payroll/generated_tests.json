@@ -1,0 +1,33 @@
+{
+  "cobol_path": "/Users/nicole/CobolTranslator/COBOL-Translator/data/cobol/employee_payroll.cob",
+  "python_path": "/Users/nicole/CobolTranslator/COBOL-Translator/translated/employee_payroll/translated_final.py",
+  "generated_at": "2026-06-27T15:10:51",
+  "metadata": {
+    "method": "deterministic",
+    "actions": [],
+    "prompts": [
+      {
+        "variable": "EMP-NAME",
+        "prompt": "ENTER EMPLOYEE NAME:"
+      },
+      {
+        "variable": "HOURS-WORKED",
+        "prompt": "ENTER HOURS:"
+      },
+      {
+        "variable": "HOURLY-RATE",
+        "prompt": "ENTER RATE:"
+      }
+    ]
+  },
+  "tests": [
+    {
+      "name": "case_001",
+      "stdin": [
+        "Test User",
+        "1",
+        "1"
+      ]
+    }
+  ]
+}

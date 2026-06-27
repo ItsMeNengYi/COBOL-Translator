@@ -1,0 +1,64 @@
+{
+  "source_file": "/Users/nicole/CobolTranslator/COBOL-Translator/data/cobol/LOAN.cob",
+  "program_name": "LOAN",
+  "entry_point": "MAIN",
+  "overview": {
+    "language": "COBOL",
+    "dialect": "GnuCOBOL",
+    "program_type": "interactive_banking_system",
+    "paragraph_count": 1,
+    "rule_count": 7
+  },
+  "paragraphs": {
+    "MAIN": {
+      "purpose": "Purpose not inferred.",
+      "called_paragraphs": [],
+      "rule_count": 7,
+      "operations": [
+        "DISPLAY",
+        "ACCEPT",
+        "DISPLAY",
+        "ACCEPT",
+        "IF",
+        "IF",
+        "STOP_RUN"
+      ]
+    }
+  },
+  "variables": {
+    "SALARY": {
+      "python_name": "salary",
+      "kind": null,
+      "type": "Decimal",
+      "pic": "9(6)",
+      "scale": 0,
+      "is_money": true
+    },
+    "CREDIT-SCORE": {
+      "python_name": "credit_score",
+      "kind": null,
+      "type": "int",
+      "pic": "999",
+      "scale": 0,
+      "is_money": false
+    },
+    "APPROVED": {
+      "python_name": "approved",
+      "kind": null,
+      "type": "str",
+      "pic": "X",
+      "scale": 0,
+      "is_money": false
+    }
+  },
+  "files": {},
+  "control_flow": {
+    "entry_point": "MAIN",
+    "nodes": [
+      "MAIN",
+      "EXIT_PROGRAM"
+    ],
+    "edges": [],
+    "loops": []
+  }
+}
