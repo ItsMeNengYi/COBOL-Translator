@@ -1,0 +1,377 @@
+{
+  "R001": {
+    "method": "unsupported"
+  },
+  "R002": {
+    "method": "rule_based"
+  },
+  "R003": {
+    "method": "rule_based"
+  },
+  "R004": {
+    "method": "unsupported"
+  },
+  "R005": {
+    "method": "unsupported"
+  },
+  "R006": {
+    "method": "unsupported"
+  },
+  "R007": {
+    "method": "unsupported"
+  },
+  "R008": {
+    "method": "rule_based"
+  },
+  "R009": {
+    "method": "rule_based"
+  },
+  "R010": {
+    "method": "rule_based"
+  },
+  "R011": {
+    "method": "rule_based"
+  },
+  "R012": {
+    "method": "rule_based"
+  },
+  "R013": {
+    "method": "rule_based"
+  },
+  "R014": {
+    "method": "rule_based"
+  },
+  "R015": {
+    "method": "unsupported"
+  },
+  "R016": {
+    "method": "rule_based"
+  },
+  "R017": {
+    "method": "rule_based"
+  },
+  "R018": {
+    "method": "rule_based"
+  },
+  "R019": {
+    "method": "rule_based"
+  },
+  "R020": {
+    "method": "rule_based"
+  },
+  "R021": {
+    "method": "unsupported"
+  },
+  "R022": {
+    "method": "rule_based"
+  },
+  "R023": {
+    "method": "rule_based"
+  },
+  "R024": {
+    "method": "rule_based"
+  },
+  "R025": {
+    "method": "rule_based"
+  },
+  "R026": {
+    "method": "unsupported"
+  },
+  "R027": {
+    "method": "rule_based"
+  },
+  "R028": {
+    "method": "rule_based"
+  },
+  "R029": {
+    "method": "rule_based"
+  },
+  "R030": {
+    "method": "rule_based"
+  },
+  "R031": {
+    "method": "unsupported"
+  },
+  "R032": {
+    "method": "rule_based"
+  },
+  "R033": {
+    "method": "rule_based"
+  },
+  "R034": {
+    "method": "rule_based"
+  },
+  "R035": {
+    "method": "unsupported"
+  },
+  "R036": {
+    "method": "rule_based"
+  },
+  "R037": {
+    "method": "rule_based"
+  },
+  "R038": {
+    "method": "rule_based"
+  },
+  "R039": {
+    "method": "unsupported"
+  },
+  "R040": {
+    "method": "rule_based"
+  },
+  "R041": {
+    "method": "rule_based"
+  },
+  "R042": {
+    "method": "rule_based"
+  },
+  "R043": {
+    "method": "rule_based"
+  },
+  "R044": {
+    "method": "rule_based"
+  },
+  "R045": {
+    "method": "rule_based"
+  },
+  "R046": {
+    "method": "rule_based"
+  },
+  "R047": {
+    "method": "rule_based"
+  },
+  "R048": {
+    "method": "unsupported"
+  },
+  "R049": {
+    "method": "rule_based"
+  },
+  "R050": {
+    "method": "rule_based"
+  },
+  "R051": {
+    "method": "rule_based"
+  },
+  "R052": {
+    "method": "rule_based"
+  },
+  "R053": {
+    "method": "unsupported"
+  },
+  "R054": {
+    "method": "unsupported"
+  },
+  "R055": {
+    "method": "rule_based"
+  },
+  "R056": {
+    "method": "rule_based"
+  },
+  "R057": {
+    "method": "rule_based"
+  },
+  "R058": {
+    "method": "rule_based"
+  },
+  "R059": {
+    "method": "unsupported"
+  },
+  "R060": {
+    "method": "rule_based"
+  },
+  "R061": {
+    "method": "rule_based"
+  },
+  "R062": {
+    "method": "rule_based"
+  },
+  "R063": {
+    "method": "rule_based"
+  },
+  "R064": {
+    "method": "rule_based"
+  },
+  "R065": {
+    "method": "rule_based"
+  },
+  "R066": {
+    "method": "unsupported"
+  },
+  "R067": {
+    "method": "rule_based"
+  },
+  "R068": {
+    "method": "rule_based"
+  },
+  "R069": {
+    "method": "rule_based"
+  },
+  "R070": {
+    "method": "rule_based"
+  },
+  "R071": {
+    "method": "rule_based"
+  },
+  "R072": {
+    "method": "rule_based"
+  },
+  "R073": {
+    "method": "rule_based"
+  },
+  "R074": {
+    "method": "rule_based"
+  },
+  "R075": {
+    "method": "rule_based"
+  },
+  "R076": {
+    "method": "rule_based"
+  },
+  "R077": {
+    "method": "rule_based"
+  },
+  "R078": {
+    "method": "rule_based"
+  },
+  "R079": {
+    "method": "rule_based"
+  },
+  "R080": {
+    "method": "rule_based"
+  },
+  "R081": {
+    "method": "rule_based"
+  },
+  "R082": {
+    "method": "rule_based"
+  },
+  "R083": {
+    "method": "rule_based"
+  },
+  "R084": {
+    "method": "rule_based"
+  },
+  "R085": {
+    "method": "rule_based"
+  },
+  "R086": {
+    "method": "rule_based"
+  },
+  "R087": {
+    "method": "unsupported"
+  },
+  "R088": {
+    "method": "rule_based"
+  },
+  "R089": {
+    "method": "rule_based"
+  },
+  "R090": {
+    "method": "rule_based"
+  },
+  "R091": {
+    "method": "rule_based"
+  },
+  "R092": {
+    "method": "rule_based"
+  },
+  "R093": {
+    "method": "rule_based"
+  },
+  "R094": {
+    "method": "rule_based"
+  },
+  "R095": {
+    "method": "rule_based"
+  },
+  "R096": {
+    "method": "rule_based"
+  },
+  "R097": {
+    "method": "rule_based"
+  },
+  "R098": {
+    "method": "rule_based"
+  },
+  "R099": {
+    "method": "unsupported"
+  },
+  "R100": {
+    "method": "rule_based"
+  },
+  "R101": {
+    "method": "rule_based"
+  },
+  "R102": {
+    "method": "unsupported"
+  },
+  "R103": {
+    "method": "rule_based"
+  },
+  "R104": {
+    "method": "rule_based"
+  },
+  "R105": {
+    "method": "rule_based"
+  },
+  "R106": {
+    "method": "rule_based"
+  },
+  "R107": {
+    "method": "rule_based"
+  },
+  "R108": {
+    "method": "rule_based"
+  },
+  "R109": {
+    "method": "rule_based"
+  },
+  "R110": {
+    "method": "rule_based"
+  },
+  "R111": {
+    "method": "rule_based"
+  },
+  "R112": {
+    "method": "unsupported"
+  },
+  "R113": {
+    "method": "unsupported"
+  },
+  "R114": {
+    "method": "rule_based"
+  },
+  "R115": {
+    "method": "rule_based"
+  },
+  "R116": {
+    "method": "unsupported"
+  },
+  "R117": {
+    "method": "rule_based"
+  },
+  "R118": {
+    "method": "rule_based"
+  },
+  "R119": {
+    "method": "rule_based"
+  },
+  "R120": {
+    "method": "rule_based"
+  },
+  "R121": {
+    "method": "rule_based"
+  },
+  "R122": {
+    "method": "rule_based"
+  },
+  "R123": {
+    "method": "rule_based"
+  },
+  "R124": {
+    "method": "rule_based"
+  },
+  "R125": {
+    "method": "rule_based"
+  }
+}

@@ -218,6 +218,56 @@ def parse_operation_line(line):
     return None
 
 
+def normalize_continuation_lines(lines):
+    """Join simple COBOL continuation statements before operation parsing."""
+    normalized = []
+    i = 0
+    operation_starters = (
+        "DISPLAY ",
+        "ACCEPT ",
+        "MOVE ",
+        "ADD ",
+        "SUBTRACT ",
+        "COMPUTE ",
+        "PERFORM ",
+        "IF ",
+        "EVALUATE ",
+        "READ ",
+        "WRITE ",
+        "REWRITE ",
+        "OPEN ",
+        "CLOSE ",
+        "STOP RUN",
+        "EXIT",
+    )
+
+    while i < len(lines):
+        current = clean_line(lines[i])
+        upper = current.upper()
+
+        if upper.startswith("COMPUTE ") and upper.endswith("="):
+            parts = [current]
+            i += 1
+            while i < len(lines):
+                next_line = clean_line(lines[i])
+                next_upper = next_line.upper()
+                if next_upper.startswith(operation_starters):
+                    i -= 1
+                    break
+                if next_line:
+                    parts.append(next_line)
+                if next_line.endswith("."):
+                    break
+                i += 1
+            normalized.append(" ".join(parts))
+        else:
+            normalized.append(lines[i])
+
+        i += 1
+
+    return normalized
+
+
 def split_if_block(block_lines):
     true_lines = []
     false_lines = []
@@ -430,6 +480,7 @@ def extract_evaluate_blocks(lines):
 
 
 def extract_simple_operations(lines):
+    lines = normalize_continuation_lines(lines)
     operations = []
     skip_keywords = (
         "IF ",
