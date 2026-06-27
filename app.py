@@ -586,6 +586,26 @@ def inject_styles() -> None:
           border-color: #94A3B8;
         }
 
+        div[data-testid="stFileUploader"] button {
+          background: var(--forest);
+          border: 1px solid var(--forest);
+          color: #FFFFFF;
+          font-weight: 800;
+        }
+
+        div[data-testid="stFileUploader"] button:hover,
+        div[data-testid="stFileUploader"] button:focus {
+          background: var(--emerald);
+          border-color: var(--emerald);
+          color: #FFFFFF;
+        }
+
+        div[data-testid="stFileUploader"] button *,
+        div[data-testid="stFileUploader"] button:hover *,
+        div[data-testid="stFileUploader"] button:focus * {
+          color: #FFFFFF;
+        }
+
         div[data-testid="stDownloadButton"] button,
         div[class*="st-key-copy_code"] button,
         div[class*="st-key-clear_source"] button {
