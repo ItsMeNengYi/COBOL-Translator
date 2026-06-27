@@ -1,6 +1,14 @@
 #!/bin/bash
 
 echo "Running your command"
-# Put your command here
+cobc -x LOAN.cob -o LOAN
+./LOAN
+if command -v py >/dev/null 2>&1; then
+  PYTHON_CMD=py
+elif command -v python3 >/dev/null 2>&1; then
+  PYTHON_CMD=python3
+else
+  PYTHON_CMD=python
+fi
 
-streamlit run app.py --server.port=8501 --server.address=0.0.0.0
+$PYTHON_CMD src/parser/parser.py

@@ -1,11 +1,99 @@
 {
-  "EMP-NAME": {
+  "F-DATA": {
     "level": "01",
-    "section": "WORKING-STORAGE",
+    "kind": "record",
+    "section": "FILE SECTION",
+    "children": [
+      "F-ACCOUNT",
+      "F-PIN",
+      "F-BAL",
+      "F-NAME",
+      "F-AGE"
+    ],
+    "semantic_role": null,
+    "semantic_source": "ai_required",
+    "semantic_confidence": null
+  },
+  "F-ACCOUNT": {
+    "level": "02",
+    "section": "FILE SECTION",
+    "pic": "9(10)",
+    "cobol_type": "unsigned_numeric",
+    "python_type": "int",
+    "python_name": "f_account",
+    "initial_value": null,
+    "scale": 0,
+    "semantic_role": null,
+    "semantic_source": "ai_required",
+    "semantic_confidence": null,
+    "ai_enrichment_needed": true,
+    "ai_enrichment_targets": [
+      "semantic_role",
+      "is_money",
+      "business_meaning",
+      "risk_level",
+      "translation_notes",
+      "test_hints"
+    ],
+    "length": 10,
+    "digits": 10,
+    "usage": "record_key"
+  },
+  "F-PIN": {
+    "level": "02",
+    "section": "FILE SECTION",
+    "pic": "9(6)",
+    "cobol_type": "unsigned_numeric",
+    "python_type": "int",
+    "python_name": "f_pin",
+    "initial_value": null,
+    "scale": 0,
+    "semantic_role": null,
+    "semantic_source": "ai_required",
+    "semantic_confidence": null,
+    "ai_enrichment_needed": true,
+    "ai_enrichment_targets": [
+      "semantic_role",
+      "is_money",
+      "business_meaning",
+      "risk_level",
+      "translation_notes",
+      "test_hints"
+    ],
+    "length": 6,
+    "digits": 6
+  },
+  "F-BAL": {
+    "level": "02",
+    "section": "FILE SECTION",
+    "pic": "9(12)",
+    "cobol_type": "unsigned_numeric",
+    "python_type": "int",
+    "python_name": "f_bal",
+    "initial_value": null,
+    "scale": 0,
+    "semantic_role": null,
+    "semantic_source": "ai_required",
+    "semantic_confidence": null,
+    "ai_enrichment_needed": true,
+    "ai_enrichment_targets": [
+      "semantic_role",
+      "is_money",
+      "business_meaning",
+      "risk_level",
+      "translation_notes",
+      "test_hints"
+    ],
+    "length": 12,
+    "digits": 12
+  },
+  "F-NAME": {
+    "level": "02",
+    "section": "FILE SECTION",
     "pic": "X(20)",
     "cobol_type": "alphanumeric",
     "python_type": "str",
-    "python_name": "emp_name",
+    "python_name": "f_name",
     "initial_value": null,
     "scale": 0,
     "semantic_role": null,
@@ -23,13 +111,13 @@
     "length": 20,
     "padding": "right-space"
   },
-  "HOURS-WORKED": {
-    "level": "01",
-    "section": "WORKING-STORAGE",
-    "pic": "9(3)",
+  "F-AGE": {
+    "level": "02",
+    "section": "FILE SECTION",
+    "pic": "99",
     "cobol_type": "unsigned_numeric",
     "python_type": "int",
-    "python_name": "hours_worked",
+    "python_name": "f_age",
     "initial_value": null,
     "scale": 0,
     "semantic_role": null,
@@ -44,18 +132,18 @@
       "translation_notes",
       "test_hints"
     ],
-    "length": 3,
-    "digits": 3
+    "length": 2,
+    "digits": 2
   },
-  "HOURLY-RATE": {
+  "WS-FILE-STATUS": {
     "level": "01",
     "section": "WORKING-STORAGE",
-    "pic": "9(3)V99",
-    "cobol_type": "unsigned_numeric",
-    "python_type": "Decimal",
-    "python_name": "hourly_rate",
+    "pic": "XX",
+    "cobol_type": "alphanumeric",
+    "python_type": "str",
+    "python_name": "ws_file_status",
     "initial_value": null,
-    "scale": 2,
+    "scale": 0,
     "semantic_role": null,
     "semantic_source": "ai_required",
     "semantic_confidence": null,
@@ -68,20 +156,23 @@
       "translation_notes",
       "test_hints"
     ],
-    "length": 5,
-    "digits": 5,
-    "decimal_detection_source": "pic_clause",
-    "note": "Decimal PIC detected from implied decimal scale; use Decimal."
+    "length": 2,
+    "padding": "right-space",
+    "meaning": {
+      "00": "success",
+      "23": "record not found / invalid key",
+      "35": "file not found"
+    }
   },
-  "GROSS-PAY": {
+  "WS-MAIN-CHOICE": {
     "level": "01",
     "section": "WORKING-STORAGE",
-    "pic": "9(5)V99",
+    "pic": "99",
     "cobol_type": "unsigned_numeric",
-    "python_type": "Decimal",
-    "python_name": "gross_pay",
-    "initial_value": null,
-    "scale": 2,
+    "python_type": "int",
+    "python_name": "ws_main_choice",
+    "initial_value": 0,
+    "scale": 0,
     "semantic_role": null,
     "semantic_source": "ai_required",
     "semantic_confidence": null,
@@ -94,9 +185,127 @@
       "translation_notes",
       "test_hints"
     ],
-    "length": 7,
-    "digits": 7,
-    "decimal_detection_source": "pic_clause",
-    "note": "Decimal PIC detected from implied decimal scale; use Decimal."
+    "length": 2,
+    "digits": 2
+  },
+  "WS-CHOICE": {
+    "level": "01",
+    "section": "WORKING-STORAGE",
+    "pic": "99",
+    "cobol_type": "unsigned_numeric",
+    "python_type": "int",
+    "python_name": "ws_choice",
+    "initial_value": 0,
+    "scale": 0,
+    "semantic_role": null,
+    "semantic_source": "ai_required",
+    "semantic_confidence": null,
+    "ai_enrichment_needed": true,
+    "ai_enrichment_targets": [
+      "semantic_role",
+      "is_money",
+      "business_meaning",
+      "risk_level",
+      "translation_notes",
+      "test_hints"
+    ],
+    "length": 2,
+    "digits": 2
+  },
+  "WS-ACCOUNT": {
+    "level": "01",
+    "section": "WORKING-STORAGE",
+    "pic": "9(10)",
+    "cobol_type": "unsigned_numeric",
+    "python_type": "int",
+    "python_name": "ws_account",
+    "initial_value": 0,
+    "scale": 0,
+    "semantic_role": null,
+    "semantic_source": "ai_required",
+    "semantic_confidence": null,
+    "ai_enrichment_needed": true,
+    "ai_enrichment_targets": [
+      "semantic_role",
+      "is_money",
+      "business_meaning",
+      "risk_level",
+      "translation_notes",
+      "test_hints"
+    ],
+    "length": 10,
+    "digits": 10
+  },
+  "WS-PIN": {
+    "level": "01",
+    "section": "WORKING-STORAGE",
+    "pic": "9(6)",
+    "cobol_type": "unsigned_numeric",
+    "python_type": "int",
+    "python_name": "ws_pin",
+    "initial_value": 0,
+    "scale": 0,
+    "semantic_role": null,
+    "semantic_source": "ai_required",
+    "semantic_confidence": null,
+    "ai_enrichment_needed": true,
+    "ai_enrichment_targets": [
+      "semantic_role",
+      "is_money",
+      "business_meaning",
+      "risk_level",
+      "translation_notes",
+      "test_hints"
+    ],
+    "length": 6,
+    "digits": 6
+  },
+  "WS-AMOUNT": {
+    "level": "01",
+    "section": "WORKING-STORAGE",
+    "pic": "9(12)",
+    "cobol_type": "unsigned_numeric",
+    "python_type": "int",
+    "python_name": "ws_amount",
+    "initial_value": 0,
+    "scale": 0,
+    "semantic_role": null,
+    "semantic_source": "ai_required",
+    "semantic_confidence": null,
+    "ai_enrichment_needed": true,
+    "ai_enrichment_targets": [
+      "semantic_role",
+      "is_money",
+      "business_meaning",
+      "risk_level",
+      "translation_notes",
+      "test_hints"
+    ],
+    "length": 12,
+    "digits": 12
+  },
+  "WS-FOUND": {
+    "level": "01",
+    "section": "WORKING-STORAGE",
+    "pic": "X",
+    "cobol_type": "alphanumeric",
+    "python_type": "str",
+    "python_name": "ws_found",
+    "initial_value": "N",
+    "scale": 0,
+    "semantic_role": null,
+    "semantic_source": "ai_required",
+    "semantic_confidence": null,
+    "ai_enrichment_needed": true,
+    "ai_enrichment_targets": [
+      "semantic_role",
+      "is_money",
+      "business_meaning",
+      "risk_level",
+      "translation_notes",
+      "test_hints"
+    ],
+    "length": 1,
+    "padding": "right-space"
   }
 }
