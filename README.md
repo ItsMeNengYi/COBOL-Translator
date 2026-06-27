@@ -10,11 +10,7 @@ python -m src.pipeline data/cobol/employee_payroll.cob
 
 ## How to run test generator
 ```bash
-python3 tests/test_generator.py --generate-only --max-cases 2
-or
-python3 tests/test_generator.py <generated_json>
-or
-python3 tests/test_generator.py --max-cases 2
+python3 tests/test_rule.py --max-testcases 10
 ```
 
 ## How to Run It
